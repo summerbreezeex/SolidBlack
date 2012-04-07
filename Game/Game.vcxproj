@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{E8F68B4E-B75A-4A85-A5A0-71F4EE644DF2}</ProjectGuid>
+    <RootNamespace>Game</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+    <TargetName>SolidBlack_d</TargetName>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Bin\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+    <TargetName>SolidBlack</TargetName>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Engine\Source\;$(SolutionDir)Engine\Dependencies\Boost\Source\;$(SolutionDir)Engine\Dependencies\BtOgre\Source\;$(SolutionDir)Engine\Dependencies\Bullet\Source\;$(SolutionDir)Engine\Dependencies\JsonCPP\Source\;$(SolutionDir)Engine\Dependencies\MyGUI\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Dependencies\Source\;$(SolutionDir)Engine\Dependencies\VLD\Source\</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Boost\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\BtOgre\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Bullet\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\JsonCPP\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\MyGUI\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Ogre\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Ogre\Dependencies\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\VLD\Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;OgreMain_d.lib;OIS_d.lib;JsonCPP.lib;MyGUIEngine_d.lib;MyGUI.OgrePlatform_d.lib;BulletCollision_debug.lib;BulletDynamics_debug.lib;LinearMath_debug.lib;BtOgre_d.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Engine\Source\;$(SolutionDir)Engine\Dependencies\Boost\Source\;$(SolutionDir)Engine\Dependencies\BtOgre\Source\;$(SolutionDir)Engine\Dependencies\Bullet\Source\;$(SolutionDir)Engine\Dependencies\JsonCPP\Source\;$(SolutionDir)Engine\Dependencies\MyGUI\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Dependencies\Source\;$(SolutionDir)Engine\Dependencies\VLD\Source\</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>$(SolutionDir)Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Boost\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\BtOgre\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Bullet\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\JsonCPP\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\MyGUI\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Ogre\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\Ogre\Dependencies\Lib\$(Configuration)\;$(SolutionDir)Engine\Dependencies\VLD\Lib\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Engine.lib;OgreMain.lib;OIS.lib;JsonCPP.lib;MyGUIEngine.lib;MyGUI.OgrePlatform.lib;BulletCollision.lib;BulletDynamics.lib;LinearMath.lib;BtOgre.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Game\Component\Input\ObserverInput.cpp" />
+    <ClCompile Include="Source\Game\Component\SolidBlackComponentModule.cpp" />
+    <ClCompile Include="Source\Game\Component\Logical\ObserverLogic.cpp" />
+    <ClCompile Include="Source\Game\Component\Logical\ProjectileLogic.cpp" />
+    <ClCompile Include="Source\Game\Component\Logical\TestLogic.cpp" />
+    <ClCompile Include="Source\Game\Component\Visual\ObserverCamera.cpp" />
+    <ClCompile Include="Source\Game\Component\Visual\PlanetarySurface.cpp" />
+    <ClCompile Include="Source\Game\Component\Visual\PlanetarySurface\TerrainPatchData.cpp" />
+    <ClCompile Include="Source\Game\Component\Visual\PlanetarySurface\TerrainQuadtree.cpp" />
+    <ClCompile Include="Source\Game\Logic\TestState.cpp" />
+    <ClCompile Include="Source\Main.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Game\Component\Input\ObserverInput.h" />
+    <ClInclude Include="Source\Game\Component\SolidBlackComponentModule.h" />
+    <ClInclude Include="Source\Game\Component\Logical\ObserverLogic.h" />
+    <ClInclude Include="Source\Game\Component\Logical\ProjectileLogic.h" />
+    <ClInclude Include="Source\Game\Component\Logical\TestLogic.h" />
+    <ClInclude Include="Source\Game\Component\Visual\ObserverCamera.h" />
+    <ClInclude Include="Source\Game\Component\Visual\PlanetarySurface.h" />
+    <ClInclude Include="Source\Game\Component\Visual\PlanetarySurface\TerrainPatchData.h" />
+    <ClInclude Include="Source\Game\Component\Visual\PlanetarySurface\TerrainQuadtree.h" />
+    <ClInclude Include="Source\Game\Logic\TestState.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

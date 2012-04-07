@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{B50995C5-C65A-4142-9FC2-991EB6DDBBA0}</ProjectGuid>
+    <RootNamespace>Engine</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)Lib\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)Lib\$(Configuration)\</OutDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IntDir>Intermediate\$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Dependencies\Boost\Source\;$(ProjectDir)Dependencies\BtOgre\Source\;$(ProjectDir)Dependencies\Bullet\Source\;$(ProjectDir)Dependencies\JsonCPP\Source\;$(ProjectDir)Dependencies\MyGUI\Source\;$(ProjectDir)Dependencies\Ogre\Source\;$(ProjectDir)Dependencies\Ogre\Dependencies\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Dependencies\Boost\Source\;$(ProjectDir)Dependencies\BtOgre\Source\;$(ProjectDir)Dependencies\Bullet\Source\;$(ProjectDir)Dependencies\JsonCPP\Source\;$(ProjectDir)Dependencies\MyGUI\Source\;$(ProjectDir)Dependencies\Ogre\Source\;$(ProjectDir)Dependencies\Ogre\Dependencies\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <MinimalRebuild>false</MinimalRebuild>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Source\Engine\Actor\Actor.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Attribute.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Component.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\ComponentCollection.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\ComponentFactory.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\DefaultComponentModule.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Input\InputComponent.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Logical\LogicalComponent.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Physical\PhysicalComponent.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Physical\RigidBody.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Spacial\SpacialComponent.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Spacial\Transform.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\Camera.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\Light\DirectionalLight.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\Light\Light.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\Light\PointLight.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\Light\SpotLight.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\Mesh.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\SkyBox.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Visual\VisualComponent.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Scene.cpp" />
+    <ClCompile Include="Source\Engine\Core\Engine.cpp" />
+    <ClCompile Include="Source\Engine\Core\GeometryUtils.cpp" />
+    <ClCompile Include="Source\Engine\Core\InputHandler.cpp" />
+    <ClCompile Include="Source\Engine\Core\Physics.cpp" />
+    <ClCompile Include="Source\Engine\Core\State.cpp" />
+    <ClCompile Include="Source\Engine\Core\StateManager.cpp" />
+    <ClCompile Include="Source\Engine\Core\TaskPool.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\AmbientLight.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\DeferredLight.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\DeferredLightCompositionPass.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\DeferredLightRenderOperation.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\DeferredShadingSystem.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\GBufferMaterialGenerator.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\GBufferSchemeHandler.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\LightMaterialGenerator.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\ListenerFactoryLogic.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\MaterialGenerator.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\NullSchemeHandler.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\SsaoCompositorLogic.cpp" />
+    <ClCompile Include="Source\Engine\DeferredShading\SsaoListener.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Module\ConstantValue.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Module\FurrowedNoise.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Module\RidgedNoise.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Module\SimplexNoise.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Module\TurbulentNoise.cpp" />
+    <ClCompile Include="Source\Engine\Noise\NoiseModule.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Operator\AddOperator.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Operator\MultiplyOperator.cpp" />
+    <ClCompile Include="Source\Engine\Noise\Operator\SelectOperator.cpp" />
+    <ClCompile Include="Source\Engine\Noise\RandomSequence.cpp" />
+    <ClCompile Include="Source\Engine\Serialization\ActorJsonSerializer.cpp" />
+    <ClCompile Include="Source\Engine\Serialization\ComponentJsonSerializer.cpp" />
+    <ClCompile Include="Source\Engine\Serialization\JsonUtils.cpp" />
+    <ClCompile Include="Source\Engine\Serialization\NoiseFunctionJsonSerializer.cpp" />
+    <ClCompile Include="Source\Engine\UI\CommandHandler.cpp" />
+    <ClCompile Include="Source\Engine\UI\UserInterface.cpp" />
+    <ClCompile Include="Source\Engine\UI\View.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Engine\Actor\Actor.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Attribute.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Component.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\ComponentCollection.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\ComponentFactory.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\ComponentModule.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\DefaultComponentModule.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Input\InputComponent.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Logical\LogicalComponent.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Physical\PhysicalComponent.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Physical\RigidBody.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Spacial\SpacialComponent.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Spacial\Transform.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\Camera.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\Light\DirectionalLight.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\Light\Light.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\Light\PointLight.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\Light\SpotLight.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\Mesh.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\SkyBox.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Visual\VisualComponent.h" />
+    <ClInclude Include="Source\Engine\Actor\Scene.h" />
+    <ClInclude Include="Source\Engine\Core\Engine.h" />
+    <ClInclude Include="Source\Engine\Core\GeometryUtils.h" />
+    <ClInclude Include="Source\Engine\Core\InputHandler.h" />
+    <ClInclude Include="Source\Engine\Core\Physics.h" />
+    <ClInclude Include="Source\Engine\Core\Settings.h" />
+    <ClInclude Include="Source\Engine\Core\State.h" />
+    <ClInclude Include="Source\Engine\Core\StateManager.h" />
+    <ClInclude Include="Source\Engine\Core\Task.h" />
+    <ClInclude Include="Source\Engine\Core\TaskPool.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\AmbientLight.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\DeferredLight.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\DeferredLightCompositionPass.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\DeferredLightRenderOperation.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\DeferredShadingSystem.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\GBufferMaterialGenerator.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\GBufferSchemeHandler.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\LightMaterialGenerator.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\ListenerFactoryLogic.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\MaterialGenerator.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\NullSchemeHandler.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\SsaoCompositorLogic.h" />
+    <ClInclude Include="Source\Engine\DeferredShading\SsaoListener.h" />
+    <ClInclude Include="Source\Engine\Noise\Module\ConstantValue.h" />
+    <ClInclude Include="Source\Engine\Noise\Module\FurrowedNoise.h" />
+    <ClInclude Include="Source\Engine\Noise\Module\RidgedNoise.h" />
+    <ClInclude Include="Source\Engine\Noise\Module\SimplexNoise.h" />
+    <ClInclude Include="Source\Engine\Noise\Module\TurbulentNoise.h" />
+    <ClInclude Include="Source\Engine\Noise\Noise.h" />
+    <ClInclude Include="Source\Engine\Noise\NoiseFunction.h" />
+    <ClInclude Include="Source\Engine\Noise\NoiseModule.h" />
+    <ClInclude Include="Source\Engine\Noise\NoiseOperator.h" />
+    <ClInclude Include="Source\Engine\Noise\Operator\AddOperator.h" />
+    <ClInclude Include="Source\Engine\Noise\Operator\MultiplyOperator.h" />
+    <ClInclude Include="Source\Engine\Noise\Operator\SelectOperator.h" />
+    <ClInclude Include="Source\Engine\Noise\RandomSequence.h" />
+    <ClInclude Include="Source\Engine\Serialization\ActorJsonSerializer.h" />
+    <ClInclude Include="Source\Engine\Serialization\ComponentJsonSerializer.h" />
+    <ClInclude Include="Source\Engine\Serialization\JsonUtils.h" />
+    <ClInclude Include="Source\Engine\Serialization\NoiseFunctionJsonSerializer.h" />
+    <ClInclude Include="Source\Engine\StlCommon.h" />
+    <ClInclude Include="Source\Engine\UI\CommandHandler.h" />
+    <ClInclude Include="Source\Engine\UI\Presenter.h" />
+    <ClInclude Include="Source\Engine\UI\UserInterface.h" />
+    <ClInclude Include="Source\Engine\UI\View.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\Engine\Actor\Actor.inl" />
+    <None Include="Source\Engine\Actor\Component\Attribute.inl" />
+    <None Include="Source\Engine\Actor\Component\Component.inl" />
+    <None Include="Source\Engine\Actor\Component\ComponentFactory.inl" />
+    <None Include="Source\Engine\Core\Task.inl" />
+    <None Include="Source\Engine\Core\TaskPool.inl" />
+    <None Include="Source\Engine\UI\Presenter.inl" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
