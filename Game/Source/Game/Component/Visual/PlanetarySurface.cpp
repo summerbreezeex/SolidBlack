@@ -26,7 +26,7 @@ PlanetarySurface::PlanetarySurface() :
 void PlanetarySurface::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
-    initialiseNoise();
+    initializeNoise();
 
     sceneCamera = scene->getCamera();
 
@@ -88,7 +88,7 @@ const NoiseFunction* PlanetarySurface::getNoiseFunction() const {
     return noiseFunction.get();
 }
 
-void PlanetarySurface::initialiseNoise() {
+void PlanetarySurface::initializeNoise() {
     Json::Value root;
     JsonUtils::readValueFromFile(noiseFunctionName.getValue(), &root);
 

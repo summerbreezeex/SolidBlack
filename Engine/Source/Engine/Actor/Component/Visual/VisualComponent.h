@@ -26,7 +26,10 @@ public:
     const Ogre::Quaternion& getLocalOrientation() const;
 
     Transform* getTransform();
+    const Transform* getTransform() const;
+
     Ogre::SceneNode* getSceneNode();
+    const Ogre::SceneNode* getSceneNode() const;
 
 private:
     Attribute<Ogre::Vector3> localPosition;

@@ -2,7 +2,7 @@
 
 #include <OgrePrerequisites.h>
 
-#include "Engine/Core/Task.h"
+#include "Engine/Threading/Task.h"
 
 #include "Game/Component/Visual/PlanetarySurface/TerrainPatchData.h"
 

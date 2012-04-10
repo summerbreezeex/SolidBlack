@@ -47,7 +47,7 @@ void TurbulentNoise::setPersistance(Ogre::Real persistance) {
     this->persistance = persistance;
 }
 
-void TurbulentNoise::initialise() {
-    NoiseModule::initialise();
-    noise.initialise();
+void TurbulentNoise::initialize() {
+    NoiseModule::initialize();
+    noise.initialize();
 }

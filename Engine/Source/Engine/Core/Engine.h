@@ -1,23 +1,24 @@
 #pragma once
 
+#include <OgrePrerequisites.h>
 #include <OgreWindowEventUtilities.h>
 
+#include "Engine/StlCommon.h"
 #include "Engine/Core/InputHandler.h"
+#include "Engine/Core/Logged.h"
 #include "Engine/Core/StateManager.h"
-#include "Engine/Core/TaskPool.h"
+#include "Engine/Threading/TaskPool.h"
 
 class Engine :
+            public Logged,
             public Ogre::WindowEventListener {
 public:
     Engine();
     ~Engine();
 
-    bool initialise();
+    bool initialize();
 
     void execute();
-
-    void logInfo(const std::string& message);
-    void logWarning(const std::string& message);
 
     Ogre::Root* getRoot();
     Ogre::RenderWindow* getRenderWindow();
@@ -39,6 +40,4 @@ private:
     InputHandler inputHandler;
     StateManager stateManager;
     TaskPool taskPool;
-
-    Ogre::Log* log;
 };

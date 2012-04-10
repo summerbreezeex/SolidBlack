@@ -22,6 +22,13 @@ TaskPool::~TaskPool() {
     }
 }
 
+Task<> TaskPool::schedule(const Action& action) {
+    return queueTask<bool>([action](TaskData<bool>* data) {
+        action();
+        data->result = data->done = true;
+    });
+}
+
 void TaskPool::initializeThreads(int threadCount) {
     for (int i = 0; i < threadCount; ++i) {
         threads.push_back(std::make_shared<boost::thread>([this] { this->threadLoop(); }));

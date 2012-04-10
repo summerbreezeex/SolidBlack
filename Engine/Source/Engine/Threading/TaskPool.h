@@ -5,7 +5,9 @@
 #include <boost/bind.hpp>
 #include <boost/thread.hpp>
 
-#include "Engine/Core/Task.h"
+#include "Engine/Threading/Task.h"
+
+typedef std::function<void()> Action;
 
 class TaskPool {
 public:
@@ -13,10 +15,15 @@ public:
     TaskPool(int threadCount);
     ~TaskPool();
 
+    Task<> schedule(const Action& action);
+
     template <typename T>
-    Task<T> schedule(std::function<T()> const& f);
+    Task<T> schedule(const typename Task<T>::Function& function);
 
 private:
+    template <typename T>
+    Task<T> queueTask(const std::function<void(TaskData<T>*)>& f);
+
     void initializeThreads(int threadCount);
     void threadLoop();
 

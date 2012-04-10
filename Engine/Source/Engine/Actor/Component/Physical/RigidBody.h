@@ -27,11 +27,16 @@ public:
     Ogre::Real getMass() const;
     void setMass(Ogre::Real mass);
 
+    const Ogre::Vector3& getLinearVelocity() const;
+    const Ogre::Vector3& getAngularVelocity() const;
+
 private:
-    void initialise();
-    void deinitialise();
+    void initialize();
+    void deinitialize();
 
     Attribute<Ogre::Real> mass;
+    Attribute<Ogre::Vector3> linearVelocity;
+    Attribute<Ogre::Vector3> angularVelocity;
 
     Transform* transform;
     Mesh* mesh;
@@ -39,5 +44,5 @@ private:
     btCollisionShape* shape;
     btRigidBody* rigidBody;
 
-    bool initialised;
+    bool initialized;
 };

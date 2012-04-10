@@ -1,11 +1,14 @@
 #pragma once
 
+#include <OgrePrerequisites.h>
+
 #include <OISKeyboard.h>
 #include <OISMouse.h>
 
 #include <MyGUI.h>
 #include <MyGUI_OgrePlatform.h>
 
+#include "Engine/StlCommon.h"
 #include "Engine/UI/View.h"
 
 class InputHandler;
@@ -17,7 +20,7 @@ public:
     UserInterface();
     ~UserInterface();
 
-    void initialise(Ogre::RenderWindow* renderWindow, Ogre::SceneManager* sceneManager, InputHandler* inputHandler);
+    void initialize(Ogre::RenderWindow* renderWindow, Ogre::SceneManager* sceneManager, InputHandler* inputHandler);
     void cleanUp();
 
     void addView(const std::string& name, View* view);
@@ -39,7 +42,7 @@ public:
     MyGUI::Gui* getGUI();
 
 private:
-    bool initialised;
+    bool initialized;
 
     MyGUI::Gui* gui;
     MyGUI::OgrePlatform* platform;

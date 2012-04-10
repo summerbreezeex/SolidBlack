@@ -12,7 +12,7 @@ public:
     View(const std::string& layoutName);
     virtual ~View() { }
 
-    virtual void initialise() { }
+    virtual void initialize() { }
     virtual void destroy() { }
 
     virtual void resize(int width, int height) { }

@@ -19,7 +19,7 @@ public:
     Ogre::Real getGain() const;
     void setGain(Ogre::Real gain);
 
-    void initialise();
+    void initialize();
 
 private:
     int octaveCount;

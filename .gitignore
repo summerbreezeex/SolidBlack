@@ -3,3 +3,4 @@ Engine/Dependencies/
 Engine/Intermediate/
 Game/Intermediate/
 ipch/
+*.opensdf

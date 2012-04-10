@@ -6,15 +6,17 @@
 #include "Engine/Actor/Actor.h"
 #include "Engine/Actor/Component/ComponentCollection.h"
 #include "Engine/Actor/Component/ComponentFactory.h"
+#include "Engine/Core/Logged.h"
 #include "Engine/Core/Physics.h"
-#include "Engine/Core/Task.h"
 #include "Engine/DeferredShading/DeferredShadingSystem.h"
+#include "Engine/Threading/Task.h"
 
 class Engine;
 
 typedef std::function<bool(const Actor*)> ActorPredicate;
 
-class Scene {
+class Scene :
+        public Logged {
 public:
     Scene(const std::string& name, Engine* engine);
     ~Scene();
@@ -31,9 +33,6 @@ public:
 
     void logicUpdate(Ogre::Real timeStep);
     void frameUpdate(Ogre::Real frameDelta);
-
-    void logInfo(const std::string& message);
-    void logWarning(const std::string& message);
 
     Actor* getActor(ActorId id);
     const std::vector<Actor*> getActorsWhere(ActorPredicate predicate);
@@ -54,7 +53,6 @@ private:
 
     Engine* engine;
 
-    Ogre::Log* log;
     Ogre::SceneManager* sceneManager;
     Ogre::Camera* camera;
     Ogre::Viewport* viewport;
@@ -62,7 +60,7 @@ private:
     DeferredShadingSystem deferredShadingSystem;
 
     Physics physics;
-    Task<bool> physicsTask;
+    Task<> physicsTask;
 
     ActorId nextActorId;
 

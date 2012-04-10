@@ -15,13 +15,17 @@ std::string RigidBody::typeName = "RigidBody";
 
 RigidBody::RigidBody() :
         mass("mass", 0.0),
+        linearVelocity("linearVelocity", Ogre::Vector3::ZERO),
+        angularVelocity("angularVelocity", Ogre::Vector3::ZERO),
         transform(nullptr),
         mesh(nullptr),
         shape(nullptr),
         rigidBody(nullptr),
-        initialised(false) {
+        initialized(false) {
     addImplementedTypeName(typeName);
     addAttribute(&mass);
+    addAttribute(&linearVelocity);
+    addAttribute(&angularVelocity);
 }
 
 void RigidBody::attachToActor(Actor* actor) {
@@ -42,20 +46,20 @@ void RigidBody::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
     if (mesh) {
-        initialise();
+        initialize();
     }
 }
 
 void RigidBody::leaveScene() {
-    if (initialised) {
-        deinitialise();
+    if (initialized) {
+        deinitialize();
     }
 
     Super::leaveScene();
 }
 
 void RigidBody::logicUpdate(Ogre::Real timeStep) {
-    if (initialised && transform) {
+    if (initialized && transform) {
         transform->setPosition(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getOrigin()));
         transform->setOrientation(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getRotation()));
     }
@@ -69,8 +73,16 @@ void RigidBody::setMass(Ogre::Real mass) {
     this->mass.setValue(mass);
 }
 
-void RigidBody::initialise() {
-    initialised = true;
+const Ogre::Vector3& RigidBody::getLinearVelocity() const {
+    return linearVelocity.getValue();
+}
+
+    const Ogre::Vector3& RigidBody::getAngularVelocity() const {
+        return angularVelocity.getValue();
+    }
+
+void RigidBody::initialize() {
+    initialized = true;
 
     btVector3 localInertia(0.0, 0.0, 0.0);
 
@@ -99,14 +111,17 @@ void RigidBody::initialise() {
     transformation.setRotation(BtOgre::Convert::toBullet(transform->getOrientation()));
     rigidBody->setWorldTransform(transformation);
 
+    rigidBody->setLinearVelocity(BtOgre::Convert::toBullet(getLinearVelocity()));
+    rigidBody->setAngularVelocity(BtOgre::Convert::toBullet(getAngularVelocity()));
+
     getScene()->getPhysics()->addRigidBody(this);
 }
 
-void RigidBody::deinitialise() {
+void RigidBody::deinitialize() {
     getScene()->getPhysics()->removeRigidBody(this);
 
     delete shape;
     delete rigidBody;
 
-    initialised = false;
+    initialized = false;
 }

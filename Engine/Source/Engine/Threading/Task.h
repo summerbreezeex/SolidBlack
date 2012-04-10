@@ -2,7 +2,7 @@
 
 #include "Engine/StlCommon.h"
 
-template <typename T>
+template <typename T = bool>
 struct TaskData {
     TaskData();
 
@@ -11,10 +11,12 @@ struct TaskData {
     T result;
 };
 
-template <typename T>
+template <typename T = bool>
 class Task {
     friend class TaskPool;
 public:
+    typedef std::function<T()> Function;
+
     Task();
 
     T& getResult();

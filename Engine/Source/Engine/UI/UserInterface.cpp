@@ -5,7 +5,7 @@
 #include "UserInterface.h"
 
 UserInterface::UserInterface() :
-        initialised(false),
+        initialized(false),
         gui(nullptr),
         platform(nullptr),
         renderWindow(nullptr),
@@ -13,12 +13,12 @@ UserInterface::UserInterface() :
 }
 
 UserInterface::~UserInterface() {
-    if (initialised) {
+    if (initialized) {
         cleanUp();
     }
 }
 
-void UserInterface::initialise(Ogre::RenderWindow* renderWindow, Ogre::SceneManager* sceneManager, InputHandler* inputHandler) {
+void UserInterface::initialize(Ogre::RenderWindow* renderWindow, Ogre::SceneManager* sceneManager, InputHandler* inputHandler) {
     platform = new MyGUI::OgrePlatform();
     platform->initialise(renderWindow, sceneManager, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME, Settings::myGuiLogFile);
 
@@ -31,7 +31,7 @@ void UserInterface::initialise(Ogre::RenderWindow* renderWindow, Ogre::SceneMana
 
     this->renderWindow = renderWindow;
 
-    initialised = true;
+    initialized = true;
 }
 
 void UserInterface::cleanUp() {
@@ -53,7 +53,7 @@ void UserInterface::cleanUp() {
     inputHandler->unregisterMouseListener(this);
     inputHandler = nullptr;
 
-    initialised = false;
+    initialized = false;
 }
 
 void UserInterface::addView(const std::string& name, View* view) {
@@ -65,7 +65,7 @@ void UserInterface::addView(const std::string& name, View* view) {
     views[name] = ViewPtr(view);
 
     view->loadLayout();
-    view->initialise();
+    view->initialize();
     view->resize(renderWindow->getWidth(), renderWindow->getHeight());
 }
 

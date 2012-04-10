@@ -69,8 +69,8 @@ void FurrowedNoise::setLacunarity(Ogre::Real lacunarity) {
     this->lacunarity = lacunarity;
 }
 
-void FurrowedNoise::initialise() {
-    NoiseModule::initialise();
+void FurrowedNoise::initialize() {
+    NoiseModule::initialize();
 
     coherentNoises.clear();
 
@@ -83,6 +83,6 @@ void FurrowedNoise::initialise() {
 
         // Also add a coherent noise std::function for each octave.
         coherentNoises.push_back(SimplexNoise((getSeed() + i) & 0x7fffffff, 1.0));
-        coherentNoises[i].initialise();
+        coherentNoises[i].initialize();
     }
 }

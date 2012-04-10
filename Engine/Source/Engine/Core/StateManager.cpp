@@ -7,6 +7,7 @@
 #include "StateManager.h"
 
 StateManager::StateManager() :
+        Logged("StateManager"),
         engine(nullptr),
         timeStep(1.0 / 20.0),
         lastFrameUpdate(0.0) {
@@ -46,7 +47,7 @@ void StateManager::queueState(State* state) {
 
 void StateManager::logicUpdate() {
     if (activeState && !activeState->isActive()) {
-        engine->logInfo("Ending state '" + activeState->getName() + "'...");
+        logInfo("Ending state '" + activeState->getName() + "'...");
         activeState->end();
 
         activeState.reset();
@@ -56,7 +57,7 @@ void StateManager::logicUpdate() {
         activeState = stateQueue.front();
         stateQueue.pop();
 
-        engine->logInfo("Beginning state '" + activeState->getName() + "'...");
+        logInfo("Beginning state '" + activeState->getName() + "'...");
         activeState->begin(this);
     }
 

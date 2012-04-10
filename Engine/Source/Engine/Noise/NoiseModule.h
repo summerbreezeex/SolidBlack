@@ -17,7 +17,7 @@ public:
     Ogre::Real getScale() const;
     void setScale(Ogre::Real scale);
 
-    virtual void initialise();
+    virtual void initialize();
 
 protected:
     void invalidate();
@@ -28,5 +28,5 @@ private:
     int seed;
     Ogre::Real scale;
 
-    bool initialised;
+    bool initialized;
 };

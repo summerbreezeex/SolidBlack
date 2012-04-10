@@ -27,7 +27,7 @@ InputHandler::~InputHandler() {
     }
 }
 
-void InputHandler::initialise(Ogre::Root* root, Ogre::RenderWindow* renderWindow) {
+void InputHandler::initialize(Ogre::Root* root, Ogre::RenderWindow* renderWindow) {
     renderWindow->getCustomAttribute("WINDOW", &hWnd);
 
     OIS::ParamList paramList;

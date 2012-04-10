@@ -13,8 +13,6 @@ namespace Settings {
 
     const char* const ogreLogFile = "Logs/Ogre.log";
     const char* const myGuiLogFile = "Logs/MyGui.log";
-    const char* const engineLogFile = "Logs/Engine.log";
-    const char* const sceneLogFilePrefix = "Logs/Scene_";
 
     const char* const ambientLightMaterial = "DeferredShading/AmbientLight";
 }

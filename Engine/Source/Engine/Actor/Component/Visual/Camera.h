@@ -19,8 +19,10 @@ public:
     Ogre::Real getFov() const;
     void setFov(Ogre::Real fov);
 
+    Ogre::Vector3 getDirection() const;
+
 private:
-    void initialiseCamera();
+    void initializeCamera();
 
     Attribute<Ogre::Real> fov;
 

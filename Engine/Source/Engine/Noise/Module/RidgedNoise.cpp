@@ -61,12 +61,12 @@ void RidgedNoise::setGain(Ogre::Real gain) {
     this->gain = gain;
 }
 
-void RidgedNoise::initialise() {
-    NoiseModule::initialise();
+void RidgedNoise::initialize() {
+    NoiseModule::initialize();
 
     noises.clear();
     for (int i = 0; i < octaveCount; ++i) {
         noises.push_back(SimplexNoise((getSeed() + i) & 0x7fffffff, 1.0));
-        noises[i].initialise();
+        noises[i].initialize();
     }
 }

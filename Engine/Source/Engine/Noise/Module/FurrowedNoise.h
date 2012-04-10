@@ -19,7 +19,7 @@ public:
     Ogre::Real getLacunarity() const;
     void setLacunarity(Ogre::Real lacunarity);
 
-    void initialise();
+    void initialize();
 
 private:
     int octaveCount;

@@ -14,7 +14,7 @@ public:
     InputHandler();
     ~InputHandler();
 
-    void initialise(Ogre::Root* root, Ogre::RenderWindow* renderWindow);
+    void initialize(Ogre::Root* root, Ogre::RenderWindow* renderWindow);
 
     void registerMouseListener(OIS::MouseListener* mouseListener);
     void unregisterMouseListener(OIS::MouseListener* mouseListener);

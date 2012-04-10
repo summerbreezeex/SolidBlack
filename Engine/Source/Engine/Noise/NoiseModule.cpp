@@ -3,13 +3,13 @@
 NoiseModule::NoiseModule() :
         seed(0),
         scale(1.0),
-        initialised(false) {
+        initialized(false) {
 }
 
 NoiseModule::NoiseModule(int seed, Ogre::Real scale) :
         seed(seed),
         scale(scale),
-        initialised(false) {
+        initialized(false) {
 }
 
 int NoiseModule::getSeed() const {
@@ -30,14 +30,14 @@ void NoiseModule::setScale(Ogre::Real scale) {
     this->scale = scale;
 }
 
-void NoiseModule::initialise() {
-    initialised = true;
+void NoiseModule::initialize() {
+    initialized = true;
 }
 
 void NoiseModule::invalidate() {
-    initialised = false;
+    initialized = false;
 }
 
 bool NoiseModule::isInitialised() const {
-    return initialised;
+    return initialized;
 }

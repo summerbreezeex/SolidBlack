@@ -68,6 +68,7 @@ void ObserverLogic::debugAction2() {
 
         Component* rigidBody = factory->createComponent("RigidBody");
         rigidBody->setAttributeValue("mass", 10.0);
+        rigidBody->setAttributeValue("linearVelocity", observerCamera->getDirection() * 10.0);
         actor->addComponent(rigidBody);
 
         actor->attachComponents();

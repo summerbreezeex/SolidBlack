@@ -1,3 +1,4 @@
+#include "Engine/StlCommon.h"
 #include "Engine/Noise/Noise.h"
 
 #include "NoiseFunctionJsonSerializer.h"
@@ -46,7 +47,7 @@ NoiseFunction* NoiseFunctionJsonSerializer::deserialize(const Json::Value& jsonV
         f->setOctaveCount(jsonValue.get("octaveCount", f->getOctaveCount()).asInt());
         f->setFrequency(jsonValue.get("frequency", f->getFrequency()).asDouble());
         f->setLacunarity(jsonValue.get("lacunarity", f->getLacunarity()).asDouble());
-        f->initialise();
+        f->initialize();
         return f;
     }
 
@@ -56,7 +57,7 @@ NoiseFunction* NoiseFunctionJsonSerializer::deserialize(const Json::Value& jsonV
         f->setScale(jsonValue.get("scale", f->getScale()).asDouble());
         f->setOctaveCount(jsonValue.get("octaveCount", f->getOctaveCount()).asInt());
         f->setPersistance(jsonValue.get("persistance", f->getPersistance()).asDouble());
-        f->initialise();
+        f->initialize();
         return f;
     }
 
@@ -67,7 +68,7 @@ NoiseFunction* NoiseFunctionJsonSerializer::deserialize(const Json::Value& jsonV
         f->setOctaveCount(jsonValue.get("octaveCount", f->getOctaveCount()).asInt());
         f->setLacunarity(jsonValue.get("lacunarity", f->getLacunarity()).asDouble());
         f->setGain(jsonValue.get("gain", f->getGain()).asDouble());
-        f->initialise();
+        f->initialize();
         return f;
     }
 

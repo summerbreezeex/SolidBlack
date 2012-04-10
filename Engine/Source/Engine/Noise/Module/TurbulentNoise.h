@@ -18,7 +18,7 @@ public:
     Ogre::Real getPersistance() const;
     void setPersistance(Ogre::Real persistance);
 
-    void initialise();
+    void initialize();
 
 private:
     int octaveCount;

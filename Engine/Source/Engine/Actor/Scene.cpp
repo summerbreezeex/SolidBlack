@@ -15,9 +15,9 @@
 #include "Scene.h"
 
 Scene::Scene(const std::string& name, Engine* engine) :
+        Logged("Scene"),
         name(name),
         engine(engine),
-        log(Ogre::LogManager::getSingleton().createLog(std::string(Settings::sceneLogFilePrefix) + name + ".log")),
         sceneManager(engine->getRoot()->createSceneManager(Ogre::ST_INTERIOR)),
         camera(sceneManager->createCamera("Camera")),
         viewport(engine->getRenderWindow()->addViewport(camera)),
@@ -49,11 +49,11 @@ Scene::~Scene() {
 
     engine->getRenderWindow()->removeAllViewports();
     engine->getRoot()->destroySceneManager(sceneManager);
-
-    Ogre::LogManager::getSingleton().destroyLog(log);
 }
 
 void Scene::saveActorsToFile(const std::string& fileName) {
+    logInfo("Saving actors to '" + fileName + "'");
+
     Json::Value jsonValue;
 
     foreach (actorPair, actors) {
@@ -67,6 +67,7 @@ void Scene::saveActorsToFile(const std::string& fileName) {
 }
 
 void Scene::loadActorsFromFile(const std::string& fileName) {
+    logInfo("Loading actors from '" + fileName + "'");
     removeAllActors();
 
     Json::Value jsonValue;
@@ -100,10 +101,10 @@ void Scene::removeActor(Actor* actor) {
 }
 
 void Scene::removeAllActors() {
-    std::vector<Actor*> actorsToRemove;
+    std::vector<Actor*> actorsToRemove = getActorsWhere([](const Actor*) { return true; });
 
-    foreach (actorPair, actors) {
-        actorsToRemove.push_back((*actorPair).second.get());
+    if (actorsToRemove.size() > 0) {
+        logInfo("Removing all actors");
     }
 
     foreach (actor, actorsToRemove) {
@@ -135,34 +136,27 @@ void Scene::logicUpdate(Ogre::Real timeStep) {
     logicalComponents.logicUpdate(timeStep);
     visualComponents.logicUpdate(timeStep);
 
-    ActorPredicate isDeadPredicate = [](const Actor* actor) {
+    auto deadActors = getActorsWhere([](const Actor* actor) {
         return !actor->isAlive();
-    };
+    });
 
-    auto deadActors = getActorsWhere(isDeadPredicate);
     foreach (actor, deadActors) {
         removeActor(*actor);
     }
 
-    auto physicsAction = [this, timeStep]() -> bool {
+    Task<void*>::Function physicsFunc = [this, timeStep]() -> void* {
         physics.logicUpdate(timeStep);
-        return true;
+        return 0;
     };
 
-    physicsTask = getEngine()->getTaskPool()->schedule<bool>(physicsAction);
+    physicsTask = getEngine()->getTaskPool()->schedule([this, timeStep] {
+        physics.logicUpdate(timeStep);
+    });
 }
 
 void Scene::frameUpdate(Ogre::Real frameDelta) {
     spacialComponents.frameUpdate(frameDelta);
     visualComponents.frameUpdate(frameDelta);
-}
-
-void Scene::logInfo(const std::string& message) {
-    log->logMessage(message);
-}
-
-void Scene::logWarning(const std::string& message) {
-    log->logMessage(std::string("WARNING: ") + message);
 }
 
 Actor* Scene::getActor(ActorId id) {

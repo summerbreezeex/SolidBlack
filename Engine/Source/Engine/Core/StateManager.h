@@ -2,11 +2,13 @@
 
 #include <OgreTimer.h>
 
+#include "Engine/Core/Logged.h"
 #include "Engine/Core/State.h"
 
 class Engine;
 
-class StateManager {
+class StateManager :
+        public Logged {
 public:
     StateManager();
 

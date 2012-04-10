@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
     try {
         Engine engine;
 
-        if (engine.initialise()) {
+        if (engine.initialize()) {
             engine.getStateManager()->queueState(new TestState(&engine));
             engine.execute();
         }

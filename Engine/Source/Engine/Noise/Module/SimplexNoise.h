@@ -10,7 +10,7 @@ public:
 
     Ogre::Real getValue(const Ogre::Vector3& position) const;
 
-    void initialise();
+    void initialize();
 
 private:
     static Ogre::Real dot(int g[], Ogre::Real x, Ogre::Real y, Ogre::Real z);

@@ -141,8 +141,8 @@ Ogre::Real SimplexNoise::getValue(const Ogre::Vector3& position) const {
     return 32.0 * (n0 + n1 + n2 + n3);
 }
 
-void SimplexNoise::initialise() {
-    NoiseModule::initialise();
+void SimplexNoise::initialize() {
+    NoiseModule::initialize();
 
     int integers[256]; // Sequence of integers from 0 to 255.
     Ogre::Real reals[256]; // Sequence of real numbers from -1.0 to 1.0

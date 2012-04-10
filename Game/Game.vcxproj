@@ -57,6 +57,8 @@
       <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Engine\Source\;$(SolutionDir)Engine\Dependencies\Boost\Source\;$(SolutionDir)Engine\Dependencies\BtOgre\Source\;$(SolutionDir)Engine\Dependencies\Bullet\Source\;$(SolutionDir)Engine\Dependencies\JsonCPP\Source\;$(SolutionDir)Engine\Dependencies\MyGUI\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Dependencies\Source\;$(SolutionDir)Engine\Dependencies\VLD\Source\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -73,6 +75,9 @@
       <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(SolutionDir)Engine\Source\;$(SolutionDir)Engine\Dependencies\Boost\Source\;$(SolutionDir)Engine\Dependencies\BtOgre\Source\;$(SolutionDir)Engine\Dependencies\Bullet\Source\;$(SolutionDir)Engine\Dependencies\JsonCPP\Source\;$(SolutionDir)Engine\Dependencies\MyGUI\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Source\;$(SolutionDir)Engine\Dependencies\Ogre\Dependencies\Source\;$(SolutionDir)Engine\Dependencies\VLD\Source\</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
+      <DisableSpecificWarnings>
+      </DisableSpecificWarnings>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>

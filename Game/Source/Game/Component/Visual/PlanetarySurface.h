@@ -28,7 +28,7 @@ public:
     const NoiseFunction* getNoiseFunction() const;
 
 private:
-    void initialiseNoise();
+    void initializeNoise();
 
     Attribute<int> diameter;
     Attribute<std::string> noiseFunctionName;

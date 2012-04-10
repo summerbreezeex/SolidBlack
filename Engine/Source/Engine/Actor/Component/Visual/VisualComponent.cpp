@@ -71,6 +71,14 @@ Transform* VisualComponent::getTransform() {
     return transform;
 }
 
+const Transform* VisualComponent::getTransform() const {
+    return transform;
+}
+
 Ogre::SceneNode* VisualComponent::getSceneNode() {
+    return sceneNode;
+}
+
+const Ogre::SceneNode* VisualComponent::getSceneNode() const {
     return sceneNode;
 }

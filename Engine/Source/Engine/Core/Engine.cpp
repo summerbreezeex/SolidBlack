@@ -11,28 +11,24 @@
 #include "Engine.h"
 
 Engine::Engine() :
+        Logged("Engine"),
         root(new Ogre::Root(Settings::pluginsConfigFile, Settings::configFile, Settings::ogreLogFile)),
         renderWindow(nullptr) {
 }
 
 Engine::~Engine() {
-    if (log) {
-        Ogre::LogManager::getSingleton().destroyLog(log);
-        log = nullptr;
-    }
+    Logged::forceDestroy(); // Destroy log before Ogre root is destroyed.
 
     if (renderWindow) {
         Ogre::WindowEventUtilities::removeWindowEventListener(renderWindow, this);
     }
 }
 
-bool Engine::initialise() {
-    log = Ogre::LogManager::getSingleton().createLog(Settings::engineLogFile);
-
+bool Engine::initialize() {
     loadResourcesConfig(Settings::resourcesConfigFile);
 
     if (root->restoreConfig() || root->showConfigDialog()) {
-        renderWindow = root->initialise(true, "SolidBlack");
+        renderWindow = root->initialise(true, "Solid Black");
     } else {
         return false;
     }
@@ -42,28 +38,14 @@ bool Engine::initialise() {
 
     Ogre::WindowEventUtilities::addWindowEventListener(renderWindow, this);
 
-    inputHandler.initialise(root.get(), renderWindow);
+    inputHandler.initialize(root.get(), renderWindow);
     windowResized(renderWindow);
 
     return true;
 }
 
 void Engine::execute() {
-    //stateManager.queueState(new SceneEditorState(this));
-    //stateManager.queueState(new TestState(this));
     stateManager.execute(this);
-}
-
-void Engine::logInfo(const std::string& message) {
-    if (log) {
-        log->logMessage(message);
-    }
-}
-
-void Engine::logWarning(const std::string& message) {
-    if (log) {
-        log->logMessage(std::string("WARNING: ") + message);
-    }
 }
 
 Ogre::Root* Engine::getRoot() {

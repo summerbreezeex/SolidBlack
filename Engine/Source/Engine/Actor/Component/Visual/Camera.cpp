@@ -2,6 +2,7 @@
 #include <OgreSceneManager.h>
 
 #include "Engine/Actor/Scene.h"
+#include "Engine/Actor/Component/Spacial/Transform.h"
 
 #include "Camera.h"
 
@@ -17,7 +18,7 @@ Camera::Camera() :
 void Camera::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
-    initialiseCamera();
+    initializeCamera();
 
     getSceneNode()->attachObject(camera);
 }
@@ -40,7 +41,15 @@ void Camera::setFov(Ogre::Real fov) {
     }
 }
 
-void Camera::initialiseCamera() {
+Ogre::Vector3 Camera::getDirection() const {
+    if (getTransform()) {
+        return getTransform()->getOrientation() * Ogre::Vector3::NEGATIVE_UNIT_Z;
+    } else {
+        return Ogre::Vector3::NEGATIVE_UNIT_Z;
+    }
+}
+
+void Camera::initializeCamera() {
     camera = getScene()->getCamera();
     camera->setFOVy(Ogre::Degree(getFov()));
 }
