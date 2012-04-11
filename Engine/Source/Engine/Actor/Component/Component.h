@@ -3,7 +3,8 @@
 #include <OgrePrerequisites.h>
 
 #include "Engine/StlCommon.h"
-#include "Engine/Actor/Component/Attribute.h"
+#include "Engine/Actor/Component/ComponentAttribute.h"
+#include "Engine/Actor/Component/ComponentDependency.h"
 
 class Actor;
 class Scene;
@@ -38,24 +39,29 @@ public:
     template <typename T>
     const T* getAttributeValue(const std::string& name) const;
 
-    AttributeBase* getAttribute(const std::string& name);
-    const AttributeBase* getAttribute(const std::string& name) const;
+    ComponentAttributeBase* getAttribute(const std::string& name);
+    const ComponentAttributeBase* getAttribute(const std::string& name) const;
 
-    const std::vector<AttributeBase*> getAttributes() const;
+    const std::vector<ComponentAttributeBase*> getAttributes() const;
 
 protected:
-    void addAttribute(AttributeBase* attribute);
+    void addAttribute(ComponentAttributeBase* attribute);
+    void addDependency(ComponentDependencyBase* dependency);
     void addImplementedTypeName(const std::string& implementedTypeName);
 
     void setFamily(const std::string& family);
 
 private:
+    void resolveDependencies();
+    void unresolveDependencies();
+
     Actor* actor;
     Scene* scene;
 
     std::string family;
 
-    std::map<std::string, AttributeBase*> attributes;
+    std::map<std::string, ComponentAttributeBase*> attributes;
+    std::vector<ComponentDependencyBase*> dependencies;
     std::vector<std::string> implementedTypeNames;
 };
 

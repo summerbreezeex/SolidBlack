@@ -5,45 +5,45 @@
 
 #include <json/json.h>
 
-#include "Attribute.h"
+#include "ComponentAttribute.h"
 
-AttributeBase::AttributeBase(const std::string& name) :
+ComponentAttributeBase::ComponentAttributeBase(const std::string& name) :
         name(name) {
 }
 
-const std::string& AttributeBase::getName() const {
+const std::string& ComponentAttributeBase::getName() const {
     return name;
 }
 
 template <>
-void Attribute<bool>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<bool>::serializeToJson(Json::Value* jsonValue) const {
     (*jsonValue) = value;
 }
 
 template <>
-void Attribute<int>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<int>::serializeToJson(Json::Value* jsonValue) const {
     (*jsonValue) = value;
 }
 
 template <>
-void Attribute<Ogre::Real>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<Ogre::Real>::serializeToJson(Json::Value* jsonValue) const {
     (*jsonValue) = value;
 }
 
 template <>
-void Attribute<std::string>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<std::string>::serializeToJson(Json::Value* jsonValue) const {
     (*jsonValue) = value;
 }
 
 template <>
-void Attribute<Ogre::Vector3>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<Ogre::Vector3>::serializeToJson(Json::Value* jsonValue) const {
     jsonValue->append(value.x);
     jsonValue->append(value.y);
     jsonValue->append(value.z);
 }
 
 template <>
-void Attribute<Ogre::Vector4>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<Ogre::Vector4>::serializeToJson(Json::Value* jsonValue) const {
     jsonValue->append(value.x);
     jsonValue->append(value.y);
     jsonValue->append(value.z);
@@ -51,7 +51,7 @@ void Attribute<Ogre::Vector4>::serializeToJson(Json::Value* jsonValue) const {
 }
 
 template <>
-void Attribute<Ogre::ColourValue>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<Ogre::ColourValue>::serializeToJson(Json::Value* jsonValue) const {
     jsonValue->append(value.r);
     jsonValue->append(value.g);
     jsonValue->append(value.b);
@@ -59,7 +59,7 @@ void Attribute<Ogre::ColourValue>::serializeToJson(Json::Value* jsonValue) const
 }
 
 template <>
-void Attribute<Ogre::Quaternion>::serializeToJson(Json::Value* jsonValue) const {
+void ComponentAttribute<Ogre::Quaternion>::serializeToJson(Json::Value* jsonValue) const {
     jsonValue->append(value.x);
     jsonValue->append(value.y);
     jsonValue->append(value.z);
@@ -67,35 +67,35 @@ void Attribute<Ogre::Quaternion>::serializeToJson(Json::Value* jsonValue) const 
 }
 
 template <>
-void Attribute<bool>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<bool>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isBool()) {
         value = jsonValue.asBool();
     }
 }
 
 template <>
-void Attribute<int>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<int>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isInt()) {
         value = jsonValue.asInt();
     }
 }
 
 template <>
-void Attribute<Ogre::Real>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<Ogre::Real>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isDouble()) {
         value = jsonValue.asDouble();
     }
 }
 
 template <>
-void Attribute<std::string>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<std::string>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isString()) {
         value = jsonValue.asString();
     }
 }
 
 template <>
-void Attribute<Ogre::Vector3>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<Ogre::Vector3>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isArray() && jsonValue.size() == 3) {
         value.x = jsonValue[0].asDouble();
         value.y = jsonValue[1].asDouble();
@@ -104,7 +104,7 @@ void Attribute<Ogre::Vector3>::deserializeFromJson(const Json::Value& jsonValue)
 }
 
 template <>
-void Attribute<Ogre::Vector4>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<Ogre::Vector4>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isArray() && jsonValue.size() == 4) {
         value.x = jsonValue[0].asDouble();
         value.y = jsonValue[1].asDouble();
@@ -114,7 +114,7 @@ void Attribute<Ogre::Vector4>::deserializeFromJson(const Json::Value& jsonValue)
 }
 
 template <>
-void Attribute<Ogre::ColourValue>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<Ogre::ColourValue>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isArray() && jsonValue.size() == 3) {
         value.r = (float)jsonValue[0].asDouble();
         value.g = (float)jsonValue[1].asDouble();
@@ -128,7 +128,7 @@ void Attribute<Ogre::ColourValue>::deserializeFromJson(const Json::Value& jsonVa
 }
 
 template <>
-void Attribute<Ogre::Quaternion>::deserializeFromJson(const Json::Value& jsonValue) {
+void ComponentAttribute<Ogre::Quaternion>::deserializeFromJson(const Json::Value& jsonValue) {
     if (jsonValue.isArray() && jsonValue.size() == 4) {
         value.x = jsonValue[0].asDouble();
         value.y = jsonValue[1].asDouble();

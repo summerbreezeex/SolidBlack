@@ -12,13 +12,10 @@ public:
 
     ObserverLogic();
 
-    void attachToActor(Actor* actor);
-    void detachFromActor();
-
     void debugAction1();
     void debugAction2();
     void debugAction3();
 
 private:
-    ObserverCamera* observerCamera;
+    ComponentDependency<ObserverCamera> observerCamera;
 };

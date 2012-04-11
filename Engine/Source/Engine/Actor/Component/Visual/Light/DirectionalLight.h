@@ -16,5 +16,5 @@ public:
 private:
     Ogre::Light* createLight();
 
-    Attribute<Ogre::Vector3> direction;
+    ComponentAttribute<Ogre::Vector3> direction;
 };

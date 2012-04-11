@@ -17,8 +17,6 @@ public:
 
     RigidBody();
 
-    void attachToActor(Actor* actor);
-    void detachFromActor();
     void enterScene(Scene* scene);
     void leaveScene();
 
@@ -34,12 +32,12 @@ private:
     void initialize();
     void deinitialize();
 
-    Attribute<Ogre::Real> mass;
-    Attribute<Ogre::Vector3> linearVelocity;
-    Attribute<Ogre::Vector3> angularVelocity;
+    ComponentAttribute<Ogre::Real> mass;
+    ComponentAttribute<Ogre::Vector3> linearVelocity;
+    ComponentAttribute<Ogre::Vector3> angularVelocity;
 
-    Transform* transform;
-    Mesh* mesh;
+    ComponentDependency<Transform> transform;
+    ComponentDependency<Mesh> mesh;
 
     btCollisionShape* shape;
     btRigidBody* rigidBody;

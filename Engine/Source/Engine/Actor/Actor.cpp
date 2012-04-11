@@ -65,6 +65,17 @@ const std::vector<const Component*> Actor::getComponents() const {
     return resultingComponents;
 }
 
+Component* Actor::findComponentOfType(const std::string& typeName) {
+    auto it = componentImplementedTypes.find(typeName);
+
+    if (it == componentImplementedTypes.end()) {
+        return nullptr;
+    } else {
+        std::vector<Component*> components = (*it).second;
+        return components[0];
+    }
+}
+
 const std::string& Actor::getName() const {
     return name;
 }

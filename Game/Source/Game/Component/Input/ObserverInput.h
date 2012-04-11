@@ -13,9 +13,6 @@ public:
 
     ObserverInput();
 
-    void attachToActor(Actor* actor);
-    void detachFromActor();
-
     bool mouseMoved(const OIS::MouseEvent& event);
     bool mousePressed(const OIS::MouseEvent& event, OIS::MouseButtonID buttonId);
     bool mouseReleased(const OIS::MouseEvent& event, OIS::MouseButtonID buttonId);
@@ -24,6 +21,6 @@ public:
     bool keyReleased(const OIS::KeyEvent& event);
 
 private:
-    ObserverCamera* observerCamera;
-    ObserverLogic* observerLogic;
+    ComponentDependency<ObserverCamera> observerCamera;
+    ComponentDependency<ObserverLogic> observerLogic;
 };

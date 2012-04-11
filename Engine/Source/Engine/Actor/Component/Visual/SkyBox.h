@@ -14,5 +14,5 @@ public:
     void leaveScene();
 
 private:
-    Attribute<std::string> materialName;
+    ComponentAttribute<std::string> materialName;
 };

@@ -42,8 +42,8 @@ public:
     void setOrientation(const Ogre::Quaternion& orientation);
 
 private:
-    Attribute<Ogre::Vector3> position;
-    Attribute<Ogre::Quaternion> orientation;
+    ComponentAttribute<Ogre::Vector3> position;
+    ComponentAttribute<Ogre::Quaternion> orientation;
 
     Ogre::Vector3 lastPosition, interpolatedPosition;
     Ogre::Quaternion lastOrientation, interpolatedOrientation;

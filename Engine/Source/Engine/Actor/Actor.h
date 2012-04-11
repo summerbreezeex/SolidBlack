@@ -21,11 +21,10 @@ public:
 
     const std::vector<const Component*> getComponents() const;
 
-    template <class T>
-    T* findComponentOfType();
+    Component* findComponentOfType(const std::string& typeName);
 
     template <class T>
-    const std::vector<T*> findComponentsOfType();
+    T* findComponentOfType();
 
     const std::string& getName() const;
     const std::string getUniqueName() const;

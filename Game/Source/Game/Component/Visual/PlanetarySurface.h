@@ -30,8 +30,8 @@ public:
 private:
     void initializeNoise();
 
-    Attribute<int> diameter;
-    Attribute<std::string> noiseFunctionName;
+    ComponentAttribute<int> diameter;
+    ComponentAttribute<std::string> noiseFunctionName;
 
     Ogre::Camera* sceneCamera;
 

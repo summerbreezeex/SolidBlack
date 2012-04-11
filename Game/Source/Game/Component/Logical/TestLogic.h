@@ -12,11 +12,8 @@ public:
 
     TestLogic();
 
-    void attachToActor(Actor* actor);
-    void detachFromActor();
-
     void logicUpdate(Ogre::Real timeStep);
 
 private:
-    Transform* transform;
+    ComponentDependency<Transform> transform;
 };

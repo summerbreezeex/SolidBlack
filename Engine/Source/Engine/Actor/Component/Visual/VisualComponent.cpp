@@ -11,31 +11,19 @@ std::string VisualComponent::typeName = "VisualComponent";
 VisualComponent::VisualComponent() :
         localPosition("localPosition", Ogre::Vector3::ZERO),
         localOrientation("localOrientation", Ogre::Quaternion::IDENTITY),
-        transform(nullptr),
         sceneNode(nullptr) {
     setFamily("Visual");
     addImplementedTypeName(typeName);
     addAttribute(&localPosition);
     addAttribute(&localOrientation);
-}
-
-void VisualComponent::attachToActor(Actor* actor) {
-    Super::attachToActor(actor);
-
-    transform = actor->findComponentOfType<Transform>();
-}
-
-void VisualComponent::detachFromActor() {
-    transform = nullptr;
-
-    Super::detachFromActor();
+    addDependency(&transform);
 }
 
 void VisualComponent::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
     if (transform) {
-        sceneNode = transform->getSceneNode()->createChildSceneNode();
+        sceneNode = (*transform)->getSceneNode()->createChildSceneNode();
 
         sceneNode->setPosition(getLocalPosition());
         sceneNode->setOrientation(getLocalOrientation());
@@ -68,11 +56,11 @@ const Ogre::Quaternion& VisualComponent::getLocalOrientation() const {
 }
 
 Transform* VisualComponent::getTransform() {
-    return transform;
+    return *transform;
 }
 
 const Transform* VisualComponent::getTransform() const {
-    return transform;
+    return *transform;
 }
 
 Ogre::SceneNode* VisualComponent::getSceneNode() {

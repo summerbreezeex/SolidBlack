@@ -24,7 +24,7 @@ public:
 private:
     void initializeCamera();
 
-    Attribute<Ogre::Real> fov;
+    ComponentAttribute<Ogre::Real> fov;
 
     Ogre::Camera* camera;
 };

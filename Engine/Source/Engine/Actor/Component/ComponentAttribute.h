@@ -6,9 +6,9 @@ namespace Json {
     class Value;
 }
 
-class AttributeBase {
+class ComponentAttributeBase {
 public:
-    AttributeBase(const std::string& name);
+    ComponentAttributeBase(const std::string& name);
 
     virtual void serializeToJson(Json::Value* jsonValue) const = 0;
     virtual void deserializeFromJson(const Json::Value& jsonValue) = 0;
@@ -20,10 +20,10 @@ private:
 };
 
 template <typename T>
-class Attribute :
-            public AttributeBase {
+class ComponentAttribute :
+            public ComponentAttributeBase {
 public:
-    Attribute(const std::string& name, const T& value);
+    ComponentAttribute(const std::string& name, const T& value);
 
     void serializeToJson(Json::Value* jsonValue) const;
     void deserializeFromJson(const Json::Value& jsonValue);
@@ -35,4 +35,4 @@ private:
     T value;
 };
 
-#include "Attribute.inl"
+#include "ComponentAttribute.inl"

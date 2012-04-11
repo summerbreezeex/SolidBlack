@@ -16,14 +16,13 @@ public:
     ProjectileLogic();
 
     void attachToActor(Actor* actor);
-    void detachFromActor();
 
     void logicUpdate(Ogre::Real timeStep);
 
 private:
-    Attribute<Ogre::Vector3> velocity;
+    ComponentAttribute<Ogre::Vector3> velocity;
 
-    Transform* transform;
+    ComponentDependency<Transform> transform;
 
     Ogre::Timer timer;
 };

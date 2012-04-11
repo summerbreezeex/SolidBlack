@@ -34,10 +34,10 @@ protected:
     virtual Ogre::Light* createLight() = 0;
 
 private:
-    Attribute<bool> enabled;
-    Attribute<Ogre::ColourValue> diffuseColour;
-    Attribute<Ogre::ColourValue> specularColour;
-    Attribute<Ogre::Vector4> attenuation;
+    ComponentAttribute<bool> enabled;
+    ComponentAttribute<Ogre::ColourValue> diffuseColour;
+    ComponentAttribute<Ogre::ColourValue> specularColour;
+    ComponentAttribute<Ogre::Vector4> attenuation;
 
     Ogre::Light* light;
 };

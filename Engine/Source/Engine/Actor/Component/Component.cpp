@@ -19,11 +19,15 @@ void Component::attachToActor(Actor* actor) {
     assert(!this->actor);
 
     this->actor = actor;
+
+    resolveDependencies();
 }
 
 void Component::detachFromActor() {
     assert(actor);
     actor = nullptr;
+
+    unresolveDependencies();
 }
 
 void Component::enterScene(Scene* scene) {
@@ -66,7 +70,7 @@ const std::vector<std::string> Component::getAttributeNames() const {
     return attributeNames;
 }
 
-AttributeBase* Component::getAttribute(const std::string& name) {
+ComponentAttributeBase* Component::getAttribute(const std::string& name) {
     auto it = attributes.find(name);
 
     if (it != attributes.end()) {
@@ -76,7 +80,7 @@ AttributeBase* Component::getAttribute(const std::string& name) {
     }
 }
 
-const AttributeBase* Component::getAttribute(const std::string& name) const {
+const ComponentAttributeBase* Component::getAttribute(const std::string& name) const {
     auto it = attributes.find(name);
 
     if (it != attributes.end()) {
@@ -86,8 +90,8 @@ const AttributeBase* Component::getAttribute(const std::string& name) const {
     }
 }
 
-const std::vector<AttributeBase*> Component::getAttributes() const {
-    std::vector<AttributeBase*> resultAttributes;
+const std::vector<ComponentAttributeBase*> Component::getAttributes() const {
+    std::vector<ComponentAttributeBase*> resultAttributes;
 
     foreach (attributePair, attributes) {
         resultAttributes.push_back((*attributePair).second);
@@ -96,8 +100,12 @@ const std::vector<AttributeBase*> Component::getAttributes() const {
     return resultAttributes;
 }
 
-void Component::addAttribute(AttributeBase* attribute) {
+void Component::addAttribute(ComponentAttributeBase* attribute) {
     attributes[attribute->getName()] = attribute;
+}
+
+void Component::addDependency(ComponentDependencyBase* dependency) {
+    dependencies.push_back(dependency);
 }
 
 void Component::addImplementedTypeName(const std::string& implementedTypeName) {
@@ -106,4 +114,17 @@ void Component::addImplementedTypeName(const std::string& implementedTypeName) {
 
 void Component::setFamily(const std::string& family) {
     this->family = family;
+}
+
+void Component::resolveDependencies() {
+    foreach (dependency, dependencies) {
+        Component* component = actor->findComponentOfType((*dependency)->getTypeName());
+        (*dependency)->setComponent(component);
+    }
+}
+
+void Component::unresolveDependencies() {
+    foreach (dependency, dependencies) {
+        (*dependency)->setComponent(nullptr);
+    }
 }

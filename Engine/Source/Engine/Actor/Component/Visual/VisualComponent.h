@@ -17,8 +17,6 @@ public:
     VisualComponent();
     virtual ~VisualComponent() { }
 
-    void attachToActor(Actor* actor);
-    void detachFromActor();
     void enterScene(Scene* scene);
     void leaveScene();
 
@@ -32,10 +30,10 @@ public:
     const Ogre::SceneNode* getSceneNode() const;
 
 private:
-    Attribute<Ogre::Vector3> localPosition;
-    Attribute<Ogre::Quaternion> localOrientation;
+    ComponentAttribute<Ogre::Vector3> localPosition;
+    ComponentAttribute<Ogre::Quaternion> localOrientation;
 
-    Transform* transform;
+    ComponentDependency<Transform> transform;
 
     Ogre::SceneNode* sceneNode;
 };

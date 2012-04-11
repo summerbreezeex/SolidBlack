@@ -11,21 +11,9 @@
 
 std::string ObserverLogic::typeName = "ObserverLogic";
 
-ObserverLogic::ObserverLogic() :
-        observerCamera(nullptr) {
+ObserverLogic::ObserverLogic() {
     addImplementedTypeName(typeName);
-}
-
-void ObserverLogic::attachToActor(Actor* actor) {
-    Super::attachToActor(actor);
-
-    observerCamera = actor->findComponentOfType<ObserverCamera>();
-}
-
-void ObserverLogic::detachFromActor() {
-    observerCamera = nullptr;
-
-    Super::detachFromActor();
+    addDependency(&observerCamera);
 }
 
 void ObserverLogic::debugAction1() {
@@ -36,8 +24,8 @@ void ObserverLogic::debugAction1() {
         Actor* actor = new Actor("spotLight");
 
         Component* transform = factory->createComponent("Transform");
-        transform->setAttributeValue("position", observerCamera->getTransform()->getPosition());
-        transform->setAttributeValue("orientation", observerCamera->getTransform()->getOrientation());
+        transform->setAttributeValue("position", (*observerCamera)->getTransform()->getPosition());
+        transform->setAttributeValue("orientation", (*observerCamera)->getTransform()->getOrientation());
         actor->addComponent(transform);
 
         Component* spotLight = factory->createComponent("SpotLight");
@@ -58,8 +46,8 @@ void ObserverLogic::debugAction2() {
         Actor* actor = new Actor("observerProjectile");
 
         Component* transform = factory->createComponent("Transform");
-        transform->setAttributeValue("position", observerCamera->getTransform()->getPosition());
-        transform->setAttributeValue("orientation", observerCamera->getTransform()->getOrientation());
+        transform->setAttributeValue("position", (*observerCamera)->getTransform()->getPosition());
+        transform->setAttributeValue("orientation", (*observerCamera)->getTransform()->getOrientation());
         actor->addComponent(transform);
 
         Component* mesh = factory->createComponent("Mesh");
@@ -68,7 +56,7 @@ void ObserverLogic::debugAction2() {
 
         Component* rigidBody = factory->createComponent("RigidBody");
         rigidBody->setAttributeValue("mass", 10.0);
-        rigidBody->setAttributeValue("linearVelocity", observerCamera->getDirection() * 10.0);
+        rigidBody->setAttributeValue("linearVelocity", (*observerCamera)->getDirection() * 10.0);
         actor->addComponent(rigidBody);
 
         actor->attachComponents();

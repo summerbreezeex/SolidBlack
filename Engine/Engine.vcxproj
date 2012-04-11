@@ -79,9 +79,10 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Source\Engine\Actor\Actor.cpp" />
-    <ClCompile Include="Source\Engine\Actor\Component\Attribute.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\ComponentAttribute.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Component.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\ComponentCollection.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\ComponentDependency.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\ComponentFactory.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\DefaultComponentModule.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Input\InputComponent.cpp" />
@@ -141,9 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Engine\Actor\Actor.h" />
-    <ClInclude Include="Source\Engine\Actor\Component\Attribute.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\ComponentAttribute.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Component.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentCollection.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\ComponentDependency.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentFactory.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentModule.h" />
     <ClInclude Include="Source\Engine\Actor\Component\DefaultComponentModule.h" />
@@ -211,8 +213,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Source\Engine\Actor\Actor.inl" />
-    <None Include="Source\Engine\Actor\Component\Attribute.inl" />
+    <None Include="Source\Engine\Actor\Component\ComponentAttribute.inl" />
     <None Include="Source\Engine\Actor\Component\Component.inl" />
+    <None Include="Source\Engine\Actor\Component\ComponentDependency.inl" />
     <None Include="Source\Engine\Actor\Component\ComponentFactory.inl" />
     <None Include="Source\Engine\Threading\Task.inl" />
     <None Include="Source\Engine\Threading\TaskPool.inl" />

@@ -15,7 +15,7 @@ public:
 private:
     Ogre::Light* createLight();
 
-    Attribute<Ogre::Real> innerAngle;
-    Attribute<Ogre::Real> outerAngle;
-    Attribute<Ogre::Real> falloff;
+    ComponentAttribute<Ogre::Real> innerAngle;
+    ComponentAttribute<Ogre::Real> outerAngle;
+    ComponentAttribute<Ogre::Real> falloff;
 };

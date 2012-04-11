@@ -4,7 +4,7 @@
 #include "ComponentJsonSerializer.h"
 
 void ComponentJsonSerializer::serialize(const Component* component, Json::Value* jsonValue) {
-    const std::vector<AttributeBase*> attributes = component->getAttributes();
+    const std::vector<ComponentAttributeBase*> attributes = component->getAttributes();
 
     foreach (attribute, attributes) {
         std::string attributeName = (*attribute)->getName();
@@ -18,7 +18,7 @@ Component* ComponentJsonSerializer::deserialize(ComponentFactory* factory, const
     Json::Value::Members attributeNames = jsonValue.getMemberNames();
     foreach (attributeName, attributeNames) {
         if (*attributeName != "type") {
-            if (AttributeBase* attribute = component->getAttribute(*attributeName)) {
+            if (ComponentAttributeBase* attribute = component->getAttribute(*attributeName)) {
                 attribute->deserializeFromJson(jsonValue[*attributeName]);
             }
         }

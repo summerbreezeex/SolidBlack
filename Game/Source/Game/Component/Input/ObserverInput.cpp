@@ -9,24 +9,10 @@
 
 std::string ObserverInput::typeName = "ObserverInput";
 
-ObserverInput::ObserverInput() :
-        observerCamera(nullptr),
-        observerLogic(nullptr) {
+ObserverInput::ObserverInput() {
     addImplementedTypeName(typeName);
-}
-
-void ObserverInput::attachToActor(Actor* actor) {
-    Super::attachToActor(actor);
-
-    observerCamera = actor->findComponentOfType<ObserverCamera>();
-    observerLogic = actor->findComponentOfType<ObserverLogic>();
-}
-
-void ObserverInput::detachFromActor() {
-    observerCamera = nullptr;
-    observerLogic = nullptr;
-
-    Super::detachFromActor();
+    addDependency(&observerCamera);
+    addDependency(&observerLogic);
 }
 
 bool ObserverInput::mouseMoved(const OIS::MouseEvent& event) {
@@ -34,13 +20,13 @@ bool ObserverInput::mouseMoved(const OIS::MouseEvent& event) {
         return true;
     }
 
-    observerCamera->increaseYawVelocity(event.state.X.rel * -0.0025);
-    observerCamera->increasePitchVelocity(event.state.Y.rel * -0.0025);
+    (*observerCamera)->increaseYawVelocity(event.state.X.rel * -0.0025);
+    (*observerCamera)->increasePitchVelocity(event.state.Y.rel * -0.0025);
 
     if (event.state.Z.rel > 0) {
-        observerCamera->increaseSpeed();
+        (*observerCamera)->increaseSpeed();
     } else if (event.state.Z.rel < 0) {
-        observerCamera->decreaseSpeed();
+        (*observerCamera)->decreaseSpeed();
     }
 
     return true;
@@ -52,15 +38,15 @@ bool ObserverInput::mousePressed(const OIS::MouseEvent& event, OIS::MouseButtonI
     }
 
     if (buttonId == OIS::MB_Left) {
-        observerLogic->debugAction1();
+        (*observerLogic)->debugAction1();
     }
 
     if (buttonId == OIS::MB_Right) {
-        observerLogic->debugAction2();
+        (*observerLogic)->debugAction2();
     }
 
     if (buttonId == OIS::MB_Middle) {
-        observerLogic->debugAction3();
+        (*observerLogic)->debugAction3();
     }
 
     return true;
@@ -75,28 +61,28 @@ bool ObserverInput::keyPressed(const OIS::KeyEvent& event) {
         return true;
     }
 
-    if (observerCamera && event.key == OIS::KC_W) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_Z);
+    if (event.key == OIS::KC_W) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_Z);
     }
 
-    if (observerCamera && event.key == OIS::KC_S) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::UNIT_Z);
+    if (event.key == OIS::KC_S) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::UNIT_Z);
     }
 
-    if (observerCamera && event.key == OIS::KC_A) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_X);
+    if (event.key == OIS::KC_A) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_X);
     }
 
-    if (observerCamera && event.key == OIS::KC_D) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::UNIT_X);
+    if (event.key == OIS::KC_D) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::UNIT_X);
     }
 
-    if (observerCamera && event.key == OIS::KC_Q) {
-        observerCamera->addLocalRollDirection(1.0);
+    if (event.key == OIS::KC_Q) {
+        (*observerCamera)->addLocalRollDirection(1.0);
     }
 
-    if (observerCamera && event.key == OIS::KC_E) {
-        observerCamera->addLocalRollDirection(-1.0);
+    if (event.key == OIS::KC_E) {
+        (*observerCamera)->addLocalRollDirection(-1.0);
     }
 
     return true;
@@ -107,28 +93,28 @@ bool ObserverInput::keyReleased(const OIS::KeyEvent& event) {
         return true;
     }
 
-    if (observerCamera && event.key == OIS::KC_W) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::UNIT_Z);
+    if (event.key == OIS::KC_W) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::UNIT_Z);
     }
 
-    if (observerCamera && event.key == OIS::KC_S) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_Z);
+    if (event.key == OIS::KC_S) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_Z);
     }
 
-    if (observerCamera && event.key == OIS::KC_A) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::UNIT_X);
+    if (event.key == OIS::KC_A) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::UNIT_X);
     }
 
-    if (observerCamera && event.key == OIS::KC_D) {
-        observerCamera->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_X);
+    if (event.key == OIS::KC_D) {
+        (*observerCamera)->addLocalMoveDirection(Ogre::Vector3::NEGATIVE_UNIT_X);
     }
 
-    if (observerCamera && event.key == OIS::KC_Q) {
-        observerCamera->addLocalRollDirection(-1.0);
+    if (event.key == OIS::KC_Q) {
+        (*observerCamera)->addLocalRollDirection(-1.0);
     }
 
-    if (observerCamera && event.key == OIS::KC_E) {
-        observerCamera->addLocalRollDirection(1.0);
+    if (event.key == OIS::KC_E) {
+        (*observerCamera)->addLocalRollDirection(1.0);
     }
 
     return true;

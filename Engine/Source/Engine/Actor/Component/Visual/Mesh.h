@@ -18,8 +18,8 @@ public:
     Ogre::Entity* getEntity();
 
 private:
-    Attribute<std::string> meshName;
-    Attribute<std::string> materialName;
+    ComponentAttribute<std::string> meshName;
+    ComponentAttribute<std::string> materialName;
 
     Ogre::Entity* entity;
     Ogre::Mesh* mesh;

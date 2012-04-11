@@ -5,21 +5,9 @@
 
 std::string TestLogic::typeName = "TestLogic";
 
-TestLogic::TestLogic() :
-        transform(nullptr) {
+TestLogic::TestLogic() {
     addImplementedTypeName(typeName);
-}
-
-void TestLogic::attachToActor(Actor* actor) {
-    Super::attachToActor(actor);
-
-    transform = actor->findComponentOfType<Transform>();
-}
-
-void TestLogic::detachFromActor() {
-    transform = nullptr;
-
-    Super::detachFromActor();
+    addDependency(&transform);
 }
 
 void TestLogic::logicUpdate(Ogre::Real timeStep) {
