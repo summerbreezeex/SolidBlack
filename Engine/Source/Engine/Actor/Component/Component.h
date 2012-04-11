@@ -11,7 +11,7 @@ class Scene;
 
 class Component {
 public:
-    Component();
+    Component(const std::string& family);
     virtual ~Component();
 
     virtual void attachToActor(Actor* actor);
@@ -48,8 +48,6 @@ protected:
     void addAttribute(ComponentAttributeBase* attribute);
     void addDependency(ComponentDependencyBase* dependency);
     void addImplementedTypeName(const std::string& implementedTypeName);
-
-    void setFamily(const std::string& family);
 
 private:
     void resolveDependencies();

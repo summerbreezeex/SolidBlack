@@ -9,10 +9,10 @@
 std::string VisualComponent::typeName = "VisualComponent";
 
 VisualComponent::VisualComponent() :
+        Component("Visual"),
         localPosition("localPosition", Ogre::Vector3::ZERO),
         localOrientation("localOrientation", Ogre::Quaternion::IDENTITY),
         sceneNode(nullptr) {
-    setFamily("Visual");
     addImplementedTypeName(typeName);
     addAttribute(&localPosition);
     addAttribute(&localOrientation);

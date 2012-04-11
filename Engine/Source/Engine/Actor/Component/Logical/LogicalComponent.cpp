@@ -1,5 +1,5 @@
 #include "LogicalComponent.h"
 
-LogicalComponent::LogicalComponent() {
-    setFamily("Logical");
+LogicalComponent::LogicalComponent() :
+        Component("Logical") {
 }

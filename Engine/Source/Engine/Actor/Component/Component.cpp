@@ -4,10 +4,10 @@
 
 #include "Component.h"
 
-Component::Component() :
+Component::Component(const std::string& family) :
         actor(nullptr),
         scene(nullptr),
-        family("None") {
+        family(family) {
 }
 
 Component::~Component() {
@@ -110,10 +110,6 @@ void Component::addDependency(ComponentDependencyBase* dependency) {
 
 void Component::addImplementedTypeName(const std::string& implementedTypeName) {
     implementedTypeNames.push_back(implementedTypeName);
-}
-
-void Component::setFamily(const std::string& family) {
-    this->family = family;
 }
 
 void Component::resolveDependencies() {

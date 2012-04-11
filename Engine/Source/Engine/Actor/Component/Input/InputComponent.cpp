@@ -4,8 +4,8 @@
 
 #include "InputComponent.h"
 
-InputComponent::InputComponent() {
-    setFamily("Input");
+InputComponent::InputComponent() :
+        Component("Input") {
 }
 
 void InputComponent::enterScene(Scene* scene) {

@@ -1,5 +1,5 @@
 #include "SpacialComponent.h"
 
-SpacialComponent::SpacialComponent() {
-    setFamily("Spacial");
+SpacialComponent::SpacialComponent() :
+        Component("Spacial") {
 }
