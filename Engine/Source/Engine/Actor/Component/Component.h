@@ -5,11 +5,16 @@
 #include "Engine/StlCommon.h"
 #include "Engine/Actor/Component/ComponentAttribute.h"
 #include "Engine/Actor/Component/ComponentDependency.h"
+#include "Engine/Core/Logged.h"
 
 class Actor;
+class ComponentFactory;
 class Scene;
+class ScriptInterpreter;
 
-class Component {
+class Component :
+            public Logged {
+    friend class ComponentFactory;
 public:
     Component(const std::string& family);
     virtual ~Component();
@@ -49,9 +54,13 @@ protected:
     void addDependency(ComponentDependencyBase* dependency);
     void addImplementedTypeName(const std::string& implementedTypeName);
 
+    ComponentFactory* getFactory();
+
 private:
     void resolveDependencies();
     void unresolveDependencies();
+
+    ComponentFactory* factory;
 
     Actor* actor;
     Scene* scene;

@@ -5,6 +5,8 @@
 #include "Component.h"
 
 Component::Component(const std::string& family) :
+        Logged("Component"),
+        factory(nullptr),
         actor(nullptr),
         scene(nullptr),
         family(family) {
@@ -110,6 +112,10 @@ void Component::addDependency(ComponentDependencyBase* dependency) {
 
 void Component::addImplementedTypeName(const std::string& implementedTypeName) {
     implementedTypeNames.push_back(implementedTypeName);
+}
+
+ComponentFactory* Component::getFactory() {
+    return factory;
 }
 
 void Component::resolveDependencies() {

@@ -1,5 +1,8 @@
 #pragma once
 
+#include <OgrePrerequisites.h>
+#include <OgreVector3.h>
+
 #include "Engine/Actor/Component/Physical/PhysicalComponent.h"
 
 class btCollisionShape;

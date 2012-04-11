@@ -5,7 +5,9 @@
 #include <map>
 #include <memory>
 #include <queue>
+#include <set>
 #include <string>
+#include <sstream>
 #include <vector>
 
 #define foreach(var, container) \

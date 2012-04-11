@@ -6,7 +6,7 @@
 #include <json/json.h>
 
 #include "Engine/Actor/Actor.h"
-#include "Engine/Actor/Component/DefaultComponentModule.h"
+#include "Engine/Actor/Component/CoreComponentModule.h"
 #include "Engine/Core/Engine.h"
 #include "Engine/Core/Settings.h"
 #include "Engine/Serialization/ActorJsonSerializer.h"
@@ -22,6 +22,8 @@ Scene::Scene(const std::string& name, Engine* engine) :
         camera(sceneManager->createCamera("Camera")),
         viewport(engine->getRenderWindow()->addViewport(camera)),
         deferredShadingSystem(viewport, sceneManager, camera),
+        scriptInterpreter(),
+        componentFactory(&scriptInterpreter),
         nextActorId(1) {
     sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
     sceneManager->setAmbientLight(Ogre::ColourValue(0.04f, 0.04f, 0.04f));
@@ -39,7 +41,7 @@ Scene::Scene(const std::string& name, Engine* engine) :
     familyCollections["Spacial"] = &spacialComponents;
     familyCollections["Visual"] = &visualComponents;
 
-    componentFactory.registerModule<DefaultComponentModule>();
+    componentFactory.registerModule<CoreComponentModule>();
 }
 
 Scene::~Scene() {

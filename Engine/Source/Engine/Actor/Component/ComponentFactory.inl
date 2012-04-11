@@ -4,6 +4,7 @@ template <class T>
 void ComponentFactory::registerModule() {
     T module;
     module.registerComponents(this);
+    module.registerCode(scriptInterpreter);
 }
 
 template <class T>

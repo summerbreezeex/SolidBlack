@@ -84,9 +84,10 @@
     <ClCompile Include="Source\Engine\Actor\Component\ComponentCollection.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\ComponentDependency.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\ComponentFactory.cpp" />
-    <ClCompile Include="Source\Engine\Actor\Component\DefaultComponentModule.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\CoreComponentModule.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Input\InputComponent.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Logical\LogicalComponent.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\Logical\Script.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Physical\PhysicalComponent.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Physical\RigidBody.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Spacial\SpacialComponent.cpp" />
@@ -105,7 +106,8 @@
     <ClCompile Include="Source\Engine\Core\InputHandler.cpp" />
     <ClCompile Include="Source\Engine\Core\Logged.cpp" />
     <ClCompile Include="Source\Engine\Core\Physics.cpp" />
-    <ClCompile Include="Source\Engine\Core\ScriptInterpreter.cpp" />
+    <ClCompile Include="Source\Engine\Scripting\CoreScriptModule.cpp" />
+    <ClCompile Include="Source\Engine\Scripting\ScriptInterpreter.cpp" />
     <ClCompile Include="Source\Engine\Core\State.cpp" />
     <ClCompile Include="Source\Engine\Core\StateManager.cpp" />
     <ClCompile Include="Source\Engine\Threading\TaskPool.cpp" />
@@ -148,9 +150,10 @@
     <ClInclude Include="Source\Engine\Actor\Component\ComponentDependency.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentFactory.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentModule.h" />
-    <ClInclude Include="Source\Engine\Actor\Component\DefaultComponentModule.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\CoreComponentModule.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Input\InputComponent.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Logical\LogicalComponent.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\Logical\Script.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Physical\PhysicalComponent.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Physical\RigidBody.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Spacial\SpacialComponent.h" />
@@ -169,10 +172,12 @@
     <ClInclude Include="Source\Engine\Core\InputHandler.h" />
     <ClInclude Include="Source\Engine\Core\Logged.h" />
     <ClInclude Include="Source\Engine\Core\Physics.h" />
-    <ClInclude Include="Source\Engine\Core\ScriptInterpreter.h" />
+    <ClInclude Include="Source\Engine\Scripting\CoreScriptModule.h" />
+    <ClInclude Include="Source\Engine\Scripting\ScriptInterpreter.h" />
     <ClInclude Include="Source\Engine\Core\Settings.h" />
     <ClInclude Include="Source\Engine\Core\State.h" />
     <ClInclude Include="Source\Engine\Core\StateManager.h" />
+    <ClInclude Include="Source\Engine\Scripting\ScriptModule.h" />
     <ClInclude Include="Source\Engine\Threading\Task.h" />
     <ClInclude Include="Source\Engine\Threading\TaskPool.h" />
     <ClInclude Include="Source\Engine\DeferredShading\AmbientLight.h" />
@@ -217,6 +222,7 @@
     <None Include="Source\Engine\Actor\Component\Component.inl" />
     <None Include="Source\Engine\Actor\Component\ComponentDependency.inl" />
     <None Include="Source\Engine\Actor\Component\ComponentFactory.inl" />
+    <None Include="Source\Engine\Scripting\ScriptInterpreter.inl" />
     <None Include="Source\Engine\Threading\Task.inl" />
     <None Include="Source\Engine\Threading\TaskPool.inl" />
     <None Include="Source\Engine\UI\Presenter.inl" />

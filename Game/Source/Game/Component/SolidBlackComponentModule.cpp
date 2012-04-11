@@ -22,3 +22,7 @@ void SolidBlackComponentModule::registerComponents(ComponentFactory* factory) {
     factory->registerComponent<ObserverCamera>();
     factory->registerComponent<PlanetarySurface>();
 }
+
+void SolidBlackComponentModule::registerCode(ScriptInterpreter* interpreter) {
+
+}

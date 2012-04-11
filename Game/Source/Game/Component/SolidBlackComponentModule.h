@@ -6,4 +6,5 @@ class SolidBlackComponentModule :
             public ComponentModule {
 public:
     void registerComponents(ComponentFactory* factory);
+    void registerCode(ScriptInterpreter* interpreter);
 };

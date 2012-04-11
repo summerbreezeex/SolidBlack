@@ -5,7 +5,6 @@
 #include <OgreResourceGroupManager.h>
 #include <OgreRoot.h>
 
-#include "Engine/Actor/Component/DefaultComponentModule.h"
 #include "Engine/Core/Settings.h"
 
 #include "Engine.h"

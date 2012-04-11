@@ -2,8 +2,9 @@
 
 #include "Engine/Actor/Component/ComponentModule.h"
 
-class DefaultComponentModule :
+class CoreComponentModule :
             public ComponentModule {
 public:
     void registerComponents(ComponentFactory* factory);
+    void registerCode(ScriptInterpreter* interpreter);
 };
