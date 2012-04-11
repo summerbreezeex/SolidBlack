@@ -7,16 +7,11 @@ Attribute<T>::Attribute(const std::string& name, const T& value) :
 }
 
 template <typename T>
-void Attribute<T>::setValue(const T& value) {
-    this->value = value;
-}
-
-template <typename T>
-T& Attribute<T>::getValue() {
+T& Attribute<T>::operator*() {
     return value;
 }
 
 template <typename T>
-const T& Attribute<T>::getValue() const {
+const T& Attribute<T>::operator*() const {
     return value;
 }

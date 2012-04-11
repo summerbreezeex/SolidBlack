@@ -28,7 +28,7 @@ void ProjectileLogic::detachFromActor() {
 
 void ProjectileLogic::logicUpdate(Ogre::Real timeStep) {
     if (transform) {
-        transform->translate(velocity.getValue() * timeStep);
+        transform->translate((*velocity) * timeStep);
     }
 
     if (timer.getMilliseconds() > 5000) {

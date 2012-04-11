@@ -52,7 +52,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Dependencies\Boost\Source\;$(ProjectDir)Dependencies\BtOgre\Source\;$(ProjectDir)Dependencies\Bullet\Source\;$(ProjectDir)Dependencies\JsonCPP\Source\;$(ProjectDir)Dependencies\MyGUI\Source\;$(ProjectDir)Dependencies\Ogre\Source\;$(ProjectDir)Dependencies\Ogre\Dependencies\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Dependencies\Boost\Source\;$(ProjectDir)Dependencies\BtOgre\Source\;$(ProjectDir)Dependencies\Bullet\Source\;$(ProjectDir)Dependencies\JsonCPP\Source\;$(ProjectDir)Dependencies\MyGUI\Source\;$(ProjectDir)Dependencies\Ogre\Source\;$(ProjectDir)Dependencies\Ogre\Dependencies\Source\;$(ProjectDir)Dependencies\Lua\Source\;$(ProjectDir)Dependencies\LuaBind\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
     </ClCompile>
@@ -66,7 +66,7 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Dependencies\Boost\Source\;$(ProjectDir)Dependencies\BtOgre\Source\;$(ProjectDir)Dependencies\Bullet\Source\;$(ProjectDir)Dependencies\JsonCPP\Source\;$(ProjectDir)Dependencies\MyGUI\Source\;$(ProjectDir)Dependencies\Ogre\Source\;$(ProjectDir)Dependencies\Ogre\Dependencies\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir)Source\;$(ProjectDir)Dependencies\Boost\Source\;$(ProjectDir)Dependencies\BtOgre\Source\;$(ProjectDir)Dependencies\Bullet\Source\;$(ProjectDir)Dependencies\JsonCPP\Source\;$(ProjectDir)Dependencies\MyGUI\Source\;$(ProjectDir)Dependencies\Ogre\Source\;$(ProjectDir)Dependencies\Ogre\Dependencies\Source\;$(ProjectDir)Dependencies\Lua\Source\;$(ProjectDir)Dependencies\LuaBind\Source\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
       <MinimalRebuild>false</MinimalRebuild>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
@@ -104,6 +104,7 @@
     <ClCompile Include="Source\Engine\Core\InputHandler.cpp" />
     <ClCompile Include="Source\Engine\Core\Logged.cpp" />
     <ClCompile Include="Source\Engine\Core\Physics.cpp" />
+    <ClCompile Include="Source\Engine\Core\ScriptInterpreter.cpp" />
     <ClCompile Include="Source\Engine\Core\State.cpp" />
     <ClCompile Include="Source\Engine\Core\StateManager.cpp" />
     <ClCompile Include="Source\Engine\Threading\TaskPool.cpp" />
@@ -166,6 +167,7 @@
     <ClInclude Include="Source\Engine\Core\InputHandler.h" />
     <ClInclude Include="Source\Engine\Core\Logged.h" />
     <ClInclude Include="Source\Engine\Core\Physics.h" />
+    <ClInclude Include="Source\Engine\Core\ScriptInterpreter.h" />
     <ClInclude Include="Source\Engine\Core\Settings.h" />
     <ClInclude Include="Source\Engine\Core\State.h" />
     <ClInclude Include="Source\Engine\Core\StateManager.h" />

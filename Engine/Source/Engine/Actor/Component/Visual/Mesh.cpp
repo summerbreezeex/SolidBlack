@@ -21,17 +21,17 @@ Mesh::Mesh() :
 void Mesh::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
-    mesh = Ogre::MeshManager::getSingleton().load(meshName.getValue(), Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).get();
+    mesh = Ogre::MeshManager::getSingleton().load(*meshName, Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).get();
 
     unsigned short src, dest;
     if (!mesh->suggestTangentVectorBuildParams(Ogre::VES_TANGENT, src, dest))
         mesh->buildTangentVectors(Ogre::VES_TANGENT, src, dest);
 
-    entity = scene->getSceneManager()->createEntity(meshName.getValue());
+    entity = scene->getSceneManager()->createEntity(*meshName);
     entity->setCastShadows(true);
 
-    if (materialName.getValue() != "") {
-        entity->setMaterialName(materialName.getValue());
+    if ((*materialName) != "") {
+        entity->setMaterialName(*materialName);
     }
 
     getSceneNode()->attachObject(entity);

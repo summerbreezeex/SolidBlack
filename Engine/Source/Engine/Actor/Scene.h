@@ -8,6 +8,7 @@
 #include "Engine/Actor/Component/ComponentFactory.h"
 #include "Engine/Core/Logged.h"
 #include "Engine/Core/Physics.h"
+#include "Engine/Core/ScriptInterpreter.h"
 #include "Engine/DeferredShading/DeferredShadingSystem.h"
 #include "Engine/Threading/Task.h"
 
@@ -58,6 +59,8 @@ private:
     Ogre::Viewport* viewport;
 
     DeferredShadingSystem deferredShadingSystem;
+
+    ScriptInterpreter scriptInterpreter;
 
     Physics physics;
     Task<> physicsTask;

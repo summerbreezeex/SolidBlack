@@ -11,7 +11,7 @@ void Component::setAttributeValue(const std::string& name, const T& value) {
     Attribute<T>* attribute = dynamic_cast<Attribute<T>*>(attributes[name]);
 
     if (attribute) {
-        attribute->setValue(value);
+        **attribute = value;
     }
 }
 
@@ -20,7 +20,7 @@ const T* Component::getAttributeValue(const std::string& name) const {
     Attribute<T>* attribute = dynamic_cast<Attribute<T>*>(attributes[name]);
 
     if (attribute) {
-        return &attribute->getValue();
+        return &**attribute;
     } else {
         return 0;
     }

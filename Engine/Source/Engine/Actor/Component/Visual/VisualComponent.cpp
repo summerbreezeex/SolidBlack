@@ -60,11 +60,11 @@ void VisualComponent::leaveScene() {
 }
 
 const Ogre::Vector3& VisualComponent::getLocalPosition() const {
-    return localPosition.getValue();
+    return *localPosition;
 }
 
 const Ogre::Quaternion& VisualComponent::getLocalOrientation() const {
-    return localOrientation.getValue();
+    return *localOrientation;
 }
 
 Transform* VisualComponent::getTransform() {

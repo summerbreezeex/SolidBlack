@@ -30,14 +30,14 @@ void Camera::leaveScene() {
 }
 
 Ogre::Real Camera::getFov() const {
-    return fov.getValue();
+    return *fov;
 }
 
 void Camera::setFov(Ogre::Real fov) {
-    this->fov.setValue(fov);
+    *this->fov = fov;
 
     if (camera) {
-        camera->setFOVy(Ogre::Degree(getFov()));
+        camera->setFOVy(Ogre::Degree(fov));
     }
 }
 

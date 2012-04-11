@@ -15,7 +15,7 @@ DirectionalLight::DirectionalLight() :
 Ogre::Light* DirectionalLight::createLight() {
     Ogre::Light* light = getScene()->getSceneManager()->createLight();
     light->setType(Ogre::Light::LT_DIRECTIONAL);
-    light->setDirection(direction.getValue().normalisedCopy());
+    light->setDirection((*direction).normalisedCopy());
 
     return light;
 }

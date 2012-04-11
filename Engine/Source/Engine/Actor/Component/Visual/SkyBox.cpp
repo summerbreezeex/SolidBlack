@@ -15,7 +15,7 @@ SkyBox::SkyBox() :
 void SkyBox::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
-    getScene()->getSceneManager()->setSkyBox(true, materialName.getValue());
+    getScene()->getSceneManager()->setSkyBox(true, *materialName);
 }
 
 void SkyBox::leaveScene() {

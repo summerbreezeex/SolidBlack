@@ -20,9 +20,9 @@ Ogre::Light* SpotLight::createLight() {
     Ogre::Light* light = getScene()->getSceneManager()->createLight();
     light->setType(Ogre::Light::LT_SPOTLIGHT);
 
-    light->setSpotlightInnerAngle(Ogre::Degree(innerAngle.getValue()));
-    light->setSpotlightOuterAngle(Ogre::Degree(outerAngle.getValue()));
-    light->setSpotlightFalloff(falloff.getValue());
+    light->setSpotlightInnerAngle(Ogre::Degree(*innerAngle));
+    light->setSpotlightOuterAngle(Ogre::Degree(*outerAngle));
+    light->setSpotlightFalloff(*falloff);
     light->setDirection(Ogre::Vector3::NEGATIVE_UNIT_Z);
 
     light->setCastShadows(true);

@@ -66,20 +66,20 @@ void RigidBody::logicUpdate(Ogre::Real timeStep) {
 }
 
 Ogre::Real RigidBody::getMass() const {
-    return mass.getValue();
+    return *mass;
 }
 
 void RigidBody::setMass(Ogre::Real mass) {
-    this->mass.setValue(mass);
+    *this->mass = mass;
 }
 
 const Ogre::Vector3& RigidBody::getLinearVelocity() const {
-    return linearVelocity.getValue();
+    return *linearVelocity;
 }
 
-    const Ogre::Vector3& RigidBody::getAngularVelocity() const {
-        return angularVelocity.getValue();
-    }
+const Ogre::Vector3& RigidBody::getAngularVelocity() const {
+    return *angularVelocity;
+}
 
 void RigidBody::initialize() {
     initialized = true;

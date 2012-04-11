@@ -87,7 +87,7 @@ Ogre::SceneNode* Transform::getSceneNode() {
 }
 
 const Ogre::Vector3& Transform::getPosition() const {
-    return position.getValue();
+    return *position;
 }
 
 const Ogre::Vector3& Transform::getInterpolatedPosition() const {
@@ -95,11 +95,11 @@ const Ogre::Vector3& Transform::getInterpolatedPosition() const {
 }
 
 void Transform::setPosition(const Ogre::Vector3& position) {
-    this->position.setValue(position);
+    *this->position = position;
 }
 
 const Ogre::Quaternion& Transform::getOrientation() const {
-    return orientation.getValue();
+    return *orientation;
 }
 
 const Ogre::Quaternion& Transform::getInterpolatedOrientation() const {
@@ -107,5 +107,5 @@ const Ogre::Quaternion& Transform::getInterpolatedOrientation() const {
 }
 
 void Transform::setOrientation(const Ogre::Quaternion& orientation) {
-    this->orientation.setValue(orientation);
+    *this->orientation = orientation;
 }
