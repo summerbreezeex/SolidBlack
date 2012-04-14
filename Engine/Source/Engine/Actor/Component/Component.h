@@ -14,10 +14,12 @@ class ScriptInterpreter;
 
 class Component :
             public Logged {
-    friend class ComponentFactory;
 public:
     Component(const std::string& family);
     virtual ~Component();
+
+    virtual void preInitialize(ComponentFactory* factory);
+    virtual void initialize() { }
 
     virtual void attachToActor(Actor* actor);
     virtual void detachFromActor();
@@ -70,6 +72,8 @@ private:
     std::map<std::string, ComponentAttributeBase*> attributes;
     std::vector<ComponentDependencyBase*> dependencies;
     std::vector<std::string> implementedTypeNames;
+
+    std::list<std::shared_ptr<ComponentAttributeBase>> addedAttributes;
 };
 
 typedef Component*(*ComponentConstructor)();

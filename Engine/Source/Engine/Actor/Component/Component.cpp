@@ -16,6 +16,10 @@ Component::~Component() {
     assert(!scene);
 }
 
+void Component::preInitialize(ComponentFactory* factory) {
+    this->factory = factory;
+}
+
 void Component::attachToActor(Actor* actor) {
     assert(actor);
     assert(!this->actor);

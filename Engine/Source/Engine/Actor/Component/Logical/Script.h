@@ -11,6 +11,8 @@ public:
     static std::string typeName;
 
     Script();
+
+    void initialize();
     
     void attachToActor(Actor* actor);
     void detachFromActor();

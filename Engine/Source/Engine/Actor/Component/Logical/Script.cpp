@@ -14,14 +14,27 @@ Script::Script() :
     addAttribute(&scriptName);
 }
 
-void Script::attachToActor(Actor* actor) {
-    Super::attachToActor(actor);
+void Script::initialize() {
+    Super::initialize();
 
     scriptInterpreter = getFactory()->getScriptInterpreter();
     scriptInterpreter->loadScript(*scriptName);
 
     scriptObject = luabind::call_function<luabind::object>(scriptInterpreter->getLuaState(), (*scriptName).c_str());
-    //scriptObject["internalComponent"] = this;
+    scriptObject["scriptWrapper"] = this;
+
+    for (luabind::iterator it(scriptObject["dependencies"]), end; it != end; ++it) {
+        luabind::object member = *it;
+        auto castedMember = luabind::object_cast_nothrow<ComponentDependencyBase*>(member);
+        if (castedMember) {
+            addDependency(*castedMember);
+        }
+    }
+}
+
+void Script::attachToActor(Actor* actor) {
+    Super::attachToActor(actor);
+
     luabind::call_member<luabind::object>(scriptObject, "attachToActor", actor);
 }
 
@@ -45,5 +58,5 @@ void Script::leaveScene() {
 }
 
 void Script::logicUpdate(Ogre::Real timeStep) {
-
+    luabind::call_member<luabind::object>(scriptObject, "logicUpdate", timeStep);
 }

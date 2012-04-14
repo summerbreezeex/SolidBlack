@@ -12,6 +12,11 @@ void ComponentDependency<T>::setComponent(Component* component) {
 }
 
 template <typename T>
+Component* ComponentDependency<T>::getComponent() {
+    return component;
+}
+
+template <typename T>
 T* ComponentDependency<T>::operator*() {
     return component;
 }

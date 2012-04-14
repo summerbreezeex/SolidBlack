@@ -50,6 +50,8 @@ void Actor::kill() {
 }
 
 void Actor::addComponent(Component* component) {
+    component->initialize();
+
     ComponentPtr componentPtr(component);
     components.push_back(componentPtr);
     registerImplementedTypes(component);

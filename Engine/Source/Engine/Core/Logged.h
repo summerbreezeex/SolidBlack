@@ -7,12 +7,10 @@
 class Logged {
 public:
     Logged(const std::string& logName);
-    virtual ~Logged();
+    virtual ~Logged() { }
 
     void logInfo(const std::string& message);
     void logWarning(const std::string& message);
-
-    void forceDestroy();
 
 private:
     void ensureInitialized();
@@ -22,6 +20,8 @@ private:
     bool initialized;
     std::string logName;
     Ogre::Log* log;
+
+    static std::map<std::string, Ogre::Log*> logs;
 
     static bool globalLogInitialized;
     static Ogre::Log* globalLog;    

@@ -2,6 +2,8 @@
 
 #include "Logged.h"
 
+std::map<std::string, Ogre::Log*> Logged::logs;
+
 bool Logged::globalLogInitialized = false;
 Ogre::Log* Logged::globalLog = nullptr;
 
@@ -9,12 +11,6 @@ Logged::Logged(const std::string& logName) :
         initialized(false),
         logName(logName),
         log(nullptr) {
-}
-
-Logged::~Logged() {
-    if (initialized) {
-        forceDestroy();
-    }
 }
 
 void Logged::logInfo(const std::string& message) {
@@ -43,13 +39,6 @@ void Logged::logWarning(const std::string& message) {
     }
 }
 
-void Logged::forceDestroy() {
-    initialized = false;
-    if (log) {
-        Ogre::LogManager::getSingleton().destroyLog(log);
-    }
-}
-
 void Logged::ensureInitialized() {
     if (!initialized) {
         initializeLog();
@@ -62,7 +51,15 @@ void Logged::ensureInitialized() {
 
 void Logged::initializeLog() {
     initialized = true;
-    log = Ogre::LogManager::getSingleton().createLog(std::string("Logs/") + logName + ".log");
+
+    auto it = logs.find(logName);
+
+    if (it != logs.end()) {
+        log = (*it).second;
+    } else {
+        log = Ogre::LogManager::getSingleton().createLog(std::string("Logs/") + logName + ".log");
+        logs[logName] = log;
+    }
 }
 
 void Logged::initializeGlobalLog() {

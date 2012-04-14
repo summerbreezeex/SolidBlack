@@ -16,8 +16,6 @@ Engine::Engine() :
 }
 
 Engine::~Engine() {
-    Logged::forceDestroy(); // Destroy log before Ogre root is destroyed.
-
     if (renderWindow) {
         Ogre::WindowEventUtilities::removeWindowEventListener(renderWindow, this);
     }

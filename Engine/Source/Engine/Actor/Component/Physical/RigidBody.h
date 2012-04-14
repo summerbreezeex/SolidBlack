@@ -32,8 +32,8 @@ public:
     const Ogre::Vector3& getAngularVelocity() const;
 
 private:
-    void initialize();
-    void deinitialize();
+    void initializeRigidBody();
+    void deinitializeRigidBody();
 
     ComponentAttribute<Ogre::Real> mass;
     ComponentAttribute<Ogre::Vector3> linearVelocity;

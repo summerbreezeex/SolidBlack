@@ -32,13 +32,13 @@ void RigidBody::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
     if (mesh) {
-        initialize();
+        initializeRigidBody();
     }
 }
 
 void RigidBody::leaveScene() {
     if (initialized) {
-        deinitialize();
+        deinitializeRigidBody();
     }
 
     Super::leaveScene();
@@ -67,7 +67,7 @@ const Ogre::Vector3& RigidBody::getAngularVelocity() const {
     return *angularVelocity;
 }
 
-void RigidBody::initialize() {
+void RigidBody::initializeRigidBody() {
     initialized = true;
 
     btVector3 localInertia(0.0, 0.0, 0.0);
@@ -103,7 +103,7 @@ void RigidBody::initialize() {
     getScene()->getPhysics()->addRigidBody(this);
 }
 
-void RigidBody::deinitialize() {
+void RigidBody::deinitializeRigidBody() {
     getScene()->getPhysics()->removeRigidBody(this);
 
     delete shape;

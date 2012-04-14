@@ -24,6 +24,7 @@ public:
     ComponentDependency();
 
     void setComponent(Component* component);
+    Component* getComponent();
 
     T* operator*();
     const T* operator*() const;

@@ -36,8 +36,13 @@ void CoreComponentModule::registerComponents(ComponentFactory* factory) {
 void CoreComponentModule::registerCode(ScriptInterpreter* interpreter) {
     using namespace luabind;
 
-    //module(interpreter->getLuaState()) [
-    //    class_<Script>("Script")
-    //        .def("logInfo", &Script::logInfo)
-    //];
+    module(interpreter->getLuaState()) [
+        class_<Script, Component>("ScriptWrapper"),
+
+        class_<Transform, Component>("Transform")
+            .def("rotate", (void(Transform::*)(const Ogre::Vector3&, const Ogre::Radian&))&Transform::rotate),
+        class_<ComponentDependency<Transform>, ComponentDependencyBase>("TransformDependency")
+            .def(constructor<>())
+            .property("component", &ComponentDependency<Transform>::getComponent)
+    ];
 }
