@@ -5,17 +5,14 @@
 #include "ActorJsonSerializer.h"
 
 void ActorJsonSerializer::serialize(const Actor* actor, Json::Value* jsonValue) {
-    (*jsonValue)["name"] = actor->getName();
+    Json::Value& value = *jsonValue;
+    value["name"] = actor->getName();
 
     auto components = actor->getComponents();
-
     foreach (component, components) {
-        Json::Value value;
-        value["type"] = (*component)->getImplementedTypeNames().back();
-
-        ComponentJsonSerializer::serialize(*component, &value);
-
-        (*jsonValue)["components"].append(value);
+        Json::Value componentValue;
+        ComponentJsonSerializer::serialize(*component, &componentValue);
+        value["components"].append(componentValue);
     }
 }
 

@@ -20,6 +20,5 @@ function Test:logicUpdate(timeStep)
 	
 	local axis = self.axis.value
 	local angle = self.rotationSpeed.value * timeStep
-	
 	self.transform.component : rotate(axis, Radian(angle))
 end

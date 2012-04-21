@@ -3,6 +3,7 @@
 #include <luabind/luabind.hpp>
 
 #include "Engine/Actor/Component/Logical/LogicalComponent.h"
+#include "Engine/Scripting/ScriptInterpreter.h"
 
 class Script :
             public LogicalComponent {
@@ -21,6 +22,12 @@ public:
 
     void logicUpdate(Ogre::Real timeStep);
 
+    template <typename Ret>
+    Ret invokeMethod(const std::string& methodName);
+
+    template <typename Ret, typename T0>
+    Ret invokeMethod(const std::string& methodName, const T0& a0);
+
 private:
     ComponentAttribute<std::string> scriptName;
 
@@ -28,3 +35,5 @@ private:
 
     luabind::object scriptObject;
 };
+
+#include "Script.inl"

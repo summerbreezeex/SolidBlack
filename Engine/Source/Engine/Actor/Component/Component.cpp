@@ -16,10 +16,6 @@ Component::~Component() {
     assert(!scene);
 }
 
-void Component::preInitialize(ComponentFactory* factory) {
-    this->factory = factory;
-}
-
 void Component::attachToActor(Actor* actor) {
     assert(actor);
     assert(!this->actor);
@@ -120,6 +116,10 @@ void Component::addImplementedTypeName(const std::string& implementedTypeName) {
 
 ComponentFactory* Component::getFactory() {
     return factory;
+}
+
+void Component::setFactory(ComponentFactory* factory) {
+    this->factory = factory;
 }
 
 void Component::resolveDependencies() {

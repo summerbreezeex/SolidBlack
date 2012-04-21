@@ -222,6 +222,7 @@
     <None Include="Source\Engine\Actor\Component\Component.inl" />
     <None Include="Source\Engine\Actor\Component\ComponentDependency.inl" />
     <None Include="Source\Engine\Actor\Component\ComponentFactory.inl" />
+    <None Include="Source\Engine\Actor\Component\Logical\Script.inl" />
     <None Include="Source\Engine\Scripting\ScriptInterpreter.inl" />
     <None Include="Source\Engine\Threading\Task.inl" />
     <None Include="Source\Engine\Threading\TaskPool.inl" />

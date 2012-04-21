@@ -18,6 +18,8 @@ public:
 
     lua_State* getLuaState();
 
+    std::string getErrorMessage();
+
 private:
     lua_State* luaState;
 

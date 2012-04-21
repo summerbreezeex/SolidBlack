@@ -24,20 +24,30 @@ ScriptInterpreter::~ScriptInterpreter() {
 
 void ScriptInterpreter::execute(const std::string& code) {
     if (luaL_dostring(luaState, code.c_str())) {
-        throw std::runtime_error("Script error");
+        throw std::runtime_error(getErrorMessage());
     }
 }
 
 void ScriptInterpreter::loadScript(const std::string scriptName) {
-    std::string fileName = scriptName + ".lua";
-    if (loadedScripts.find(fileName) == loadedScripts.end()) {
-        std::string code = Ogre::ResourceGroupManager::getSingleton().openResource(fileName)->getAsString();
-        execute(code);
+    if (loadedScripts.find(scriptName) == loadedScripts.end()) {
+        std::string code = Ogre::ResourceGroupManager::getSingleton().openResource(scriptName)->getAsString();
 
-        loadedScripts.insert(fileName);
+        try {
+            execute(code);
+        } catch (const std::runtime_error& e) {
+            throw std::runtime_error("Failed to load script '" + scriptName + "': " + e.what());
+        }
+
+        loadedScripts.insert(scriptName);
     }
 }
 
 lua_State* ScriptInterpreter::getLuaState() {
     return luaState;
+}
+
+std::string ScriptInterpreter::getErrorMessage() {
+    const char* errorMessage = lua_tostring(luaState, -1);
+    lua_pop(luaState, 1); 
+    return std::string(errorMessage);
 }

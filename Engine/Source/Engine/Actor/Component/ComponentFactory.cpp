@@ -15,6 +15,6 @@ Component* ComponentFactory::createComponent(const std::string& typeName) {
     }
 
     Component* component = (*it).second();
-    component->preInitialize(this);
+    component->setFactory(this);
     return component;
 }
