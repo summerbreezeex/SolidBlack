@@ -19,8 +19,6 @@ public:
     Component(const std::string& family);
     virtual ~Component();
 
-    virtual void initialize() { }
-
     virtual void attachToActor(Actor* actor);
     virtual void detachFromActor();
     virtual void enterScene(Scene* scene);

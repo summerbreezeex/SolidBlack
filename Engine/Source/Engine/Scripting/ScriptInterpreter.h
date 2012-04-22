@@ -4,6 +4,8 @@
 
 #include "Engine/StlCommon.h"
 
+typedef luabind::object LuaObject;
+
 class ScriptInterpreter {
 public:
     ScriptInterpreter();

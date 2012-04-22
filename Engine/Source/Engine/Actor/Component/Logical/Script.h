@@ -1,7 +1,5 @@
 #pragma once
 
-#include <luabind/luabind.hpp>
-
 #include "Engine/Actor/Component/Logical/LogicalComponent.h"
 #include "Engine/Scripting/ScriptInterpreter.h"
 
@@ -13,7 +11,7 @@ public:
 
     Script();
 
-    void initialize();
+    void initializeScript();
     
     void attachToActor(Actor* actor);
     void detachFromActor();
@@ -23,17 +21,22 @@ public:
     void logicUpdate(Ogre::Real timeStep);
 
     template <typename Ret>
-    Ret invokeMethod(const std::string& methodName);
-
-    template <typename Ret, typename T0>
-    Ret invokeMethod(const std::string& methodName, const T0& a0);
+    Ret invokeFunction(const std::string& functionName);
 
 private:
+    void throwMethodError(const std::string& methodName);
+
     ComponentAttribute<std::string> scriptName;
 
     ScriptInterpreter* scriptInterpreter;
 
-    luabind::object scriptObject;
+    LuaObject scriptObject;
+
+    LuaObject attachToActorMethod;
+    LuaObject detachFromActorMethod;
+    LuaObject enterSceneMethod;
+    LuaObject leaveSceneMethod;
+    LuaObject logicUpdateMethod;
 };
 
 #include "Script.inl"
