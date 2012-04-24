@@ -11,7 +11,7 @@
 
 #include "RigidBody.h"
 
-std::string RigidBody::typeName = "RigidBody";
+ComponentClassDef(RigidBody)
 
 RigidBody::RigidBody() :
         mass("mass", 0.0),
@@ -20,20 +20,17 @@ RigidBody::RigidBody() :
         shape(nullptr),
         rigidBody(nullptr),
         initialized(false) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&mass);
     addAttribute(&linearVelocity);
     addAttribute(&angularVelocity);
     addDependency(&transform);
-    addDependency(&mesh);
 }
 
 void RigidBody::enterScene(Scene* scene) {
     Super::enterScene(scene);
-
-    if (mesh) {
-        initializeRigidBody();
-    }
+    
+    initializeRigidBody();
 }
 
 void RigidBody::leaveScene() {
@@ -73,16 +70,27 @@ void RigidBody::initializeRigidBody() {
 
     btVector3 localInertia(0.0, 0.0, 0.0);
 
-    auto meshComponent = mesh.getComponent();
     auto transformComponent = transform.getComponent();
 
     if (getMass() > 0.0) {
-        BtOgre::StaticMeshToShapeConverter converter(meshComponent->getEntity());
+        BtOgre::StaticMeshToShapeConverter converter;
+
+        auto meshComponents = getActor()->findComponentsOfType<Mesh>();
+        foreach (meshComponent, meshComponents) {
+            converter.addEntity((*meshComponent)->getEntity());
+        }
+
         shape = converter.createConvex();
 
         shape->calculateLocalInertia(getMass(), localInertia);
     } else {
-        BtOgre::StaticMeshToShapeConverter converter(meshComponent->getEntity());
+        BtOgre::StaticMeshToShapeConverter converter;
+
+        auto meshComponents = getActor()->findComponentsOfType<Mesh>();
+        foreach (meshComponent, meshComponents) {
+            converter.addEntity((*meshComponent)->getEntity());
+        }
+
         shape = converter.createTrimesh();
     }
 

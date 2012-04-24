@@ -4,13 +4,13 @@
 
 #include "SpotLight.h"
 
-std::string SpotLight::typeName = "SpotLight";
+ComponentClassDef(SpotLight)
 
 SpotLight::SpotLight() :
         innerAngle("innerAngle", 25.0),
         outerAngle("outerAngle", 60.0),
         falloff("falloff", 1.0) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&innerAngle);
     addAttribute(&outerAngle);
     addAttribute(&falloff);

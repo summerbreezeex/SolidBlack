@@ -84,6 +84,7 @@
     <ClCompile Include="Source\Engine\Actor\Component\ComponentCollection.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\ComponentDependency.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\ComponentFactory.cpp" />
+    <ClCompile Include="Source\Engine\Actor\Component\ComponentTypeData.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\CoreComponentModule.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Input\InputComponent.cpp" />
     <ClCompile Include="Source\Engine\Actor\Component\Logical\LogicalComponent.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="Source\Engine\Actor\Component\ComponentDependency.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentFactory.h" />
     <ClInclude Include="Source\Engine\Actor\Component\ComponentModule.h" />
+    <ClInclude Include="Source\Engine\Actor\Component\ComponentTypeData.h" />
     <ClInclude Include="Source\Engine\Actor\Component\CoreComponentModule.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Input\InputComponent.h" />
     <ClInclude Include="Source\Engine\Actor\Component\Logical\LogicalComponent.h" />

@@ -8,7 +8,7 @@ class ObserverCamera :
             public Camera {
     typedef Camera Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     ObserverCamera();
 

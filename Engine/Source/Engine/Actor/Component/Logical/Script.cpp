@@ -4,12 +4,12 @@
 
 #include "Script.h"
 
-std::string Script::typeName = "Script";
+ComponentClassDef(Script)
 
 Script::Script() :
         scriptName("scriptName", ""),
         scriptInterpreter(nullptr) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&scriptName);
 }
 

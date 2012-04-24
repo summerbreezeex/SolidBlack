@@ -6,7 +6,8 @@
 class Scene;
 class ScriptInterpreter;
 
-class ComponentFactory {
+class ComponentFactory :
+            Logged {
 public:
     ComponentFactory(Scene* scene);
 

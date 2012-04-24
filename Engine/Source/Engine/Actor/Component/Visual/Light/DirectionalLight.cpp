@@ -4,11 +4,11 @@
 
 #include "DirectionalLight.h"
 
-std::string DirectionalLight::typeName = "DirectionalLight";
+ComponentClassDef(DirectionalLight)
 
 DirectionalLight::DirectionalLight() :
         direction("direction", Ogre::Vector3::UNIT_X) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&direction);
 }
 

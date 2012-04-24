@@ -70,13 +70,22 @@ const std::vector<const Component*> Actor::getComponents() const {
 }
 
 Component* Actor::findComponentOfType(const std::string& typeName) {
+    auto components = findComponentsOfType(typeName);
+    
+    if (components.size() < 0) {
+        return nullptr;
+    } else {
+        return components[0];
+    }
+}
+
+const std::vector<Component*> Actor::findComponentsOfType(const std::string& typeName) {
     auto it = componentImplementedTypes.find(typeName);
 
     if (it == componentImplementedTypes.end()) {
-        return nullptr;
+        return std::vector<Component*>();
     } else {
-        std::vector<Component*> components = (*it).second;
-        return components[0];
+        return (*it).second;
     }
 }
 
@@ -106,7 +115,7 @@ Scene* Actor::getScene() {
 }
 
 void Actor::registerImplementedTypes(Component* component) {
-    const std::vector<std::string>& implementedTypeNames = component->getImplementedTypeNames();
+    auto implementedTypeNames = component->getTypeData()->getImplementedTypeNames();
 
     foreach (typeName, implementedTypeNames) {
         auto it = componentImplementedTypes.find(*typeName);

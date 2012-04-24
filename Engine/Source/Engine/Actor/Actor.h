@@ -22,9 +22,13 @@ public:
     const std::vector<const Component*> getComponents() const;
 
     Component* findComponentOfType(const std::string& typeName);
+    const std::vector<Component*> findComponentsOfType(const std::string& typeName);
 
     template <class T>
     T* findComponentOfType();
+
+    template <class T>
+    const std::vector<T*> findComponentsOfType();
 
     const std::string& getName() const;
     const std::string getUniqueName() const;

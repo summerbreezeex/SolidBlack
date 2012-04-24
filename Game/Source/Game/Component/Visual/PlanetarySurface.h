@@ -11,7 +11,7 @@ class PlanetarySurface :
             public VisualComponent {
     typedef VisualComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     PlanetarySurface();
 

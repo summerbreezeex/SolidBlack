@@ -9,10 +9,10 @@
 
 #include "ObserverLogic.h"
 
-std::string ObserverLogic::typeName = "ObserverLogic";
+ComponentClassDef(ObserverLogic)
 
 ObserverLogic::ObserverLogic() {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addDependency(&observerCamera);
 }
 

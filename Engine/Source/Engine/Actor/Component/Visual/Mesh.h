@@ -8,7 +8,7 @@ class Mesh :
             public VisualComponent {
     typedef VisualComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     Mesh();
 

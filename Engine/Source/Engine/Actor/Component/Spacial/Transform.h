@@ -9,7 +9,7 @@ class Transform :
             public SpacialComponent {
     typedef SpacialComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     Transform();
 

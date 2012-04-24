@@ -6,14 +6,14 @@
 
 #include "VisualComponent.h"
 
-std::string VisualComponent::typeName = "VisualComponent";
+ComponentClassDef(VisualComponent)
 
 VisualComponent::VisualComponent() :
-        Component("Visual"),
+        Component(ComponentFamily::Visual),
         localPosition("localPosition", Ogre::Vector3::ZERO),
         localOrientation("localOrientation", Ogre::Quaternion::IDENTITY),
         sceneNode(nullptr) {
-    addImplementedTypeName(typeName);
+    getTypeData()->addBaseTypeName(typeName);
     addAttribute(&localPosition);
     addAttribute(&localOrientation);
     addDependency(&transform);

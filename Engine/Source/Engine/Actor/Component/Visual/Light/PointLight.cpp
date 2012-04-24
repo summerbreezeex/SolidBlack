@@ -4,10 +4,10 @@
 
 #include "PointLight.h"
 
-std::string PointLight::typeName = "PointLight";
+ComponentClassDef(PointLight)
 
 PointLight::PointLight() {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
 }
 
 Ogre::Light* PointLight::createLight() {

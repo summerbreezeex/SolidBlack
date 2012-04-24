@@ -7,10 +7,10 @@
 
 #include "ObserverInput.h"
 
-std::string ObserverInput::typeName = "ObserverInput";
+ComponentClassDef(ObserverInput)
 
 ObserverInput::ObserverInput() {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addDependency(&observerCamera);
     addDependency(&observerLogic);
 }

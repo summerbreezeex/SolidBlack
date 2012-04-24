@@ -3,11 +3,11 @@
 
 #include "ProjectileLogic.h"
 
-std::string ProjectileLogic::typeName = "ProjectileLogic";
+ComponentClassDef(ProjectileLogic)
 
 ProjectileLogic::ProjectileLogic() :
         velocity("velocity", Ogre::Vector3::ZERO) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&velocity);
     addDependency(&transform);
 }

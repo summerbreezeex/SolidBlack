@@ -3,6 +3,7 @@
 #include "ComponentFactory.h"
 
 ComponentFactory::ComponentFactory(Scene* scene) :
+        Logged("ComponentFactory"),
         scene(scene),
         scriptInterpreter(scene->getScriptInterpreter()) {
 }

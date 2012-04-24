@@ -9,7 +9,7 @@ class ObserverInput :
             public InputComponent {
     typedef InputComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     ObserverInput();
 

@@ -6,14 +6,14 @@
 
 #include "Mesh.h"
 
-std::string Mesh::typeName = "Mesh";
+ComponentClassDef(Mesh)
 
 Mesh::Mesh() :
         meshName("meshName", ""),
         materialName("materialName", ""),
         entity(nullptr),
         mesh(nullptr) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&meshName);
     addAttribute(&materialName);
 }

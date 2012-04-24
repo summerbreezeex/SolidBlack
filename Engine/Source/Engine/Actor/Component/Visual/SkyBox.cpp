@@ -4,11 +4,11 @@
 
 #include "SkyBox.h"
 
-std::string SkyBox::typeName = "SkyBox";
+ComponentClassDef(SkyBox)
 
 SkyBox::SkyBox() :
         materialName("materialName", "") {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&materialName);
 }
 

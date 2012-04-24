@@ -6,12 +6,12 @@
 
 #include "Camera.h"
 
-std::string Camera::typeName = "Camera";
+ComponentClassDef(Camera)
 
 Camera::Camera() :
         fov("fov", 70.0),
         camera(nullptr) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&fov);
 }
 

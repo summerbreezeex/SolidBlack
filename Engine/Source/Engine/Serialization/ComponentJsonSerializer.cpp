@@ -6,7 +6,7 @@
 
 void ComponentJsonSerializer::serialize(const Component* component, Json::Value* jsonValue) {
     Json::Value& value = *jsonValue;
-    value["type"] = component->getImplementedTypeNames().back();
+    value["type"] = component->getTypeData()->getDerivedTypeName();
 
     auto attributes = component->getAttributes();
     foreach (attribute, attributes) {

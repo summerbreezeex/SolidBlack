@@ -4,7 +4,7 @@
 
 #include "Component.h"
 
-Component::Component(const std::string& family) :
+Component::Component(ComponentFamily::Enum family) :
         Logged("Component"),
         factory(nullptr),
         actor(nullptr),
@@ -55,12 +55,16 @@ Scene* Component::getScene() const {
     return scene;
 }
 
-const std::string& Component::getFamily() const {
+const ComponentFamily::Enum Component::getFamily() const {
     return family;
 }
 
-const std::vector<std::string>& Component::getImplementedTypeNames() const {
-    return implementedTypeNames;
+ComponentTypeData* Component::getTypeData() {
+    return &typeData;
+}
+
+const ComponentTypeData* Component::getTypeData() const {
+    return &typeData;
 }
 
 const std::vector<std::string> Component::getAttributeNames() const {
@@ -115,10 +119,6 @@ void Component::addDependency(ComponentDependencyBase* dependency) {
     dependencies.push_back(dependency);
 }
 
-void Component::addImplementedTypeName(const std::string& implementedTypeName) {
-    implementedTypeNames.push_back(implementedTypeName);
-}
-
 ComponentFactory* Component::getFactory() {
     return factory;
 }
@@ -136,7 +136,7 @@ void Component::resolveDependencies() {
 
         if (!component) {
             validFlag = false;
-            logError("Component type '" + implementedTypeNames.back() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
+            logError("Component type '" + typeData.getDerivedTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
         }
     }
 }

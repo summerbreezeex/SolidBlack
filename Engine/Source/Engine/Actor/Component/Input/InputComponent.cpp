@@ -5,7 +5,7 @@
 #include "InputComponent.h"
 
 InputComponent::InputComponent() :
-        Component("Input") {
+        Component(ComponentFamily::Input) {
 }
 
 void InputComponent::enterScene(Scene* scene) {

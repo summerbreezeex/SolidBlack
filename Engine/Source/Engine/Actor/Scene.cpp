@@ -35,11 +35,11 @@ Scene::Scene(const std::string& name, Engine* engine) :
     deferredShadingSystem.initialize();
     deferredShadingSystem.setSsao(true);
 
-    familyCollections["Input"] = &inputComponents;
-    familyCollections["Logical"] = &logicalComponents;
-    familyCollections["Physical"] = &physicalComponents;
-    familyCollections["Spacial"] = &spacialComponents;
-    familyCollections["Visual"] = &visualComponents;
+    familyCollections[ComponentFamily::Input] = &inputComponents;
+    familyCollections[ComponentFamily::Logical] = &logicalComponents;
+    familyCollections[ComponentFamily::Physical] = &physicalComponents;
+    familyCollections[ComponentFamily::Spacial] = &spacialComponents;
+    familyCollections[ComponentFamily::Visual] = &visualComponents;
 
     componentFactory.registerModule<CoreComponentModule>();
 }

@@ -3,7 +3,7 @@
 
 #include "ObserverCamera.h"
 
-std::string ObserverCamera::typeName = "ObserverCamera";
+ComponentClassDef(ObserverCamera)
 
 ObserverCamera::ObserverCamera() :
         localMoveDirection(Ogre::Vector3::ZERO),
@@ -13,7 +13,7 @@ ObserverCamera::ObserverCamera() :
         yawVelocity(0.0),
         pitchVelocity(0.0),
         speedMultiplier(1) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
 }
 
 void ObserverCamera::logicUpdate(Ogre::Real timeStep) {

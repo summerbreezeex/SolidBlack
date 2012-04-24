@@ -6,7 +6,7 @@ class SkyBox :
             public VisualComponent {
     typedef VisualComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     SkyBox();
 

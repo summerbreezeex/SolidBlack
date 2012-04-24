@@ -4,7 +4,7 @@
 
 #include "Light.h"
 
-std::string Light::typeName = "Light";
+ComponentClassDef(Light)
 
 Light::Light() :
         enabled("enabled", true),
@@ -12,7 +12,7 @@ Light::Light() :
         specularColour("specularColour", Ogre::ColourValue::White),
         attenuation("attenuation", Ogre::Vector4(7.0, 1.0, 0.7, 1.8)),
         light(nullptr) {
-    addImplementedTypeName(typeName);
+    getTypeData()->addBaseTypeName(typeName);
     addAttribute(&enabled);
     addAttribute(&diffuseColour);
     addAttribute(&specularColour);

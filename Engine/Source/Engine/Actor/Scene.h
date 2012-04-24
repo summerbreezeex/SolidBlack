@@ -77,7 +77,7 @@ private:
     ComponentCollection spacialComponents;
     ComponentCollection visualComponents;
 
-    std::map<std::string, ComponentCollection*> familyCollections;
+    std::map<ComponentFamily::Enum, ComponentCollection*> familyCollections;
 
     std::map<ActorId, ActorPtr> actors;
 };

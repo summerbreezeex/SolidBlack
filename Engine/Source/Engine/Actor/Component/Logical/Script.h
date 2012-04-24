@@ -7,7 +7,7 @@ class Script :
             public LogicalComponent {
     typedef LogicalComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     Script();
 

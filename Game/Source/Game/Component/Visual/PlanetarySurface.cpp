@@ -6,7 +6,7 @@
 
 #include "PlanetarySurface.h"
 
-std::string PlanetarySurface::typeName = "PlanetarySurface";
+ComponentClassDef(PlanetarySurface)
 
 PlanetarySurface::PlanetarySurface() :
         diameter("diameter", 0),
@@ -18,7 +18,7 @@ PlanetarySurface::PlanetarySurface() :
         tessellation(64)
 #endif
 {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&diameter);
     addAttribute(&noiseFunctionName);
 }

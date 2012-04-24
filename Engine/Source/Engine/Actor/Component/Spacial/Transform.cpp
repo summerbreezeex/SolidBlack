@@ -4,7 +4,7 @@
 
 #include "Transform.h"
 
-std::string Transform::typeName = "Transform";
+ComponentClassDef(Transform)
 
 Transform::Transform() :
         position("position", Ogre::Vector3::ZERO),
@@ -13,7 +13,7 @@ Transform::Transform() :
         interpolatedPosition(getPosition()),
         lastOrientation(getOrientation()),
         interpolatedOrientation(getOrientation()) {
-    addImplementedTypeName(typeName);
+    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&position);
     addAttribute(&orientation);
 }

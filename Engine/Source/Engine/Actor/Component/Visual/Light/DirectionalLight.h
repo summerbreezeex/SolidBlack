@@ -9,7 +9,7 @@ class DirectionalLight :
             public Light {
     typedef Light Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     DirectionalLight();
 

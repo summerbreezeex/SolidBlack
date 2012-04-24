@@ -1,5 +1,5 @@
 #include "LogicalComponent.h"
 
 LogicalComponent::LogicalComponent() :
-        Component("Logical") {
+        Component(ComponentFamily::Logical) {
 }

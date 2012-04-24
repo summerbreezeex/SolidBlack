@@ -16,7 +16,7 @@ class RigidBody :
     typedef PhysicalComponent Super;
     friend class Physics;
 public:
-    static std::string typeName;
+    ComponentClass
 
     RigidBody();
 
@@ -40,7 +40,6 @@ private:
     ComponentAttribute<Ogre::Vector3> angularVelocity;
 
     ComponentDependency<Transform> transform;
-    ComponentDependency<Mesh> mesh;
 
     btCollisionShape* shape;
     btRigidBody* rigidBody;

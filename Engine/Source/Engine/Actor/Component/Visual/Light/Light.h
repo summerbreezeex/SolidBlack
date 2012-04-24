@@ -10,7 +10,7 @@ class Light :
             public VisualComponent {
     typedef VisualComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     Light();
     virtual ~Light() { }

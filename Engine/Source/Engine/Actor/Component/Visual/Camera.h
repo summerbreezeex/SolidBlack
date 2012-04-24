@@ -8,7 +8,7 @@ class Camera :
             public VisualComponent {
     typedef VisualComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     Camera();
     virtual ~Camera() { }

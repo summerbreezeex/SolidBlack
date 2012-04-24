@@ -8,7 +8,7 @@ class PointLight :
             public Light {
     typedef Light Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     PointLight();
 

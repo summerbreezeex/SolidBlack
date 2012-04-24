@@ -8,7 +8,7 @@ class ObserverLogic :
             public LogicalComponent {
     typedef LogicalComponent Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     ObserverLogic();
 

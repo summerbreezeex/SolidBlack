@@ -1,5 +1,5 @@
 #include "PhysicalComponent.h"
 
 PhysicalComponent::PhysicalComponent() :
-        Component("Physical") {
+        Component(ComponentFamily::Physical) {
 }

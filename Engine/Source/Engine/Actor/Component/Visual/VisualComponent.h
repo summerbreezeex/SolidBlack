@@ -12,7 +12,7 @@ class VisualComponent :
             public Component {
     typedef Component Super;
 public:
-    static std::string typeName;
+    ComponentClass
 
     VisualComponent();
     virtual ~VisualComponent() { }
