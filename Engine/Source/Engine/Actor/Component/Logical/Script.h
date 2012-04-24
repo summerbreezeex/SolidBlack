@@ -23,20 +23,18 @@ public:
     template <typename Ret>
     Ret invokeFunction(const std::string& functionName);
 
-private:
-    void throwMethodError(const std::string& methodName);
+    template <typename Ret>
+    Ret invokeMethod(const std::string& methodName);
 
+    template <typename Ret, typename T0>
+    Ret invokeMethod(const std::string& methodName, const T0& a0);
+
+private:
     ComponentAttribute<std::string> scriptName;
 
     ScriptInterpreter* scriptInterpreter;
 
     LuaObject scriptObject;
-
-    LuaObject attachToActorMethod;
-    LuaObject detachFromActorMethod;
-    LuaObject enterSceneMethod;
-    LuaObject leaveSceneMethod;
-    LuaObject logicUpdateMethod;
 };
 
 #include "Script.inl"

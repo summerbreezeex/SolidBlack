@@ -3,7 +3,7 @@
 template <typename T>
 bool Component::attributeIsType(const std::string& name) const {
     ComponentAttribute<T>* attribute = dynamic_cast<ComponentAttribute<T>*>(attributes[name]);
-    return attribute != 0;
+    return attribute != nullptr;
 }
 
 template <typename T>
@@ -11,7 +11,7 @@ void Component::setAttributeValue(const std::string& name, const T& value) {
     ComponentAttribute<T>* attribute = dynamic_cast<ComponentAttribute<T>*>(attributes[name]);
 
     if (attribute) {
-        **attribute = value;
+        attribute->setValue(value);
     }
 }
 
@@ -20,8 +20,8 @@ const T* Component::getAttributeValue(const std::string& name) const {
     ComponentAttribute<T>* attribute = dynamic_cast<ComponentAttribute<T>*>(attributes[name]);
 
     if (attribute) {
-        return &**attribute;
+        return &attribute->getValue();
     } else {
-        return 0;
+        return nullptr;
     }
 }

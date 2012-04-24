@@ -18,12 +18,16 @@ void ComponentCollection::removeComponent(Component* component) {
 
 void ComponentCollection::logicUpdate(Ogre::Real timeStep) {
     foreach (component, components) {
-        (*component)->logicUpdate(timeStep);
+        if ((*component)->isValid()) {
+            (*component)->logicUpdate(timeStep);
+        }
     }
 }
 
 void ComponentCollection::frameUpdate(Ogre::Real frameDelta) {
     foreach (component, components) {
-        (*component)->frameUpdate(frameDelta);
+        if ((*component)->isValid()) {
+            (*component)->frameUpdate(frameDelta);
+        }
     }
 }

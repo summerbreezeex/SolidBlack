@@ -23,7 +23,7 @@ Scene::Scene(const std::string& name, Engine* engine) :
         viewport(engine->getRenderWindow()->addViewport(camera)),
         deferredShadingSystem(viewport, sceneManager, camera),
         scriptInterpreter(),
-        componentFactory(&scriptInterpreter),
+        componentFactory(this),
         nextActorId(1) {
     sceneManager->setShadowTechnique(Ogre::SHADOWTYPE_TEXTURE_ADDITIVE);
     sceneManager->setAmbientLight(Ogre::ColourValue(0.04f, 0.04f, 0.04f));
@@ -203,6 +203,10 @@ Ogre::Camera* Scene::getCamera() {
 
 Physics* Scene::getPhysics() {
     return &physics;
+}
+
+ScriptInterpreter* Scene::getScriptInterpreter() {
+    return &scriptInterpreter;
 }
 
 ComponentFactory* Scene::getComponentFactory() {

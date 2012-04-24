@@ -9,7 +9,8 @@ Component::Component(const std::string& family) :
         factory(nullptr),
         actor(nullptr),
         scene(nullptr),
-        family(family) {
+        family(family),
+        validFlag(true) {
 }
 
 Component::~Component() {
@@ -102,6 +103,10 @@ const std::vector<ComponentAttributeBase*> Component::getAttributes() const {
     return resultAttributes;
 }
 
+bool Component::isValid() const {
+    return validFlag;
+}
+
 void Component::addAttribute(ComponentAttributeBase* attribute) {
     attributes[attribute->getName()] = attribute;
 }
@@ -124,8 +129,15 @@ void Component::setFactory(ComponentFactory* factory) {
 
 void Component::resolveDependencies() {
     foreach (dependency, dependencies) {
-        Component* component = actor->findComponentOfType((*dependency)->getTypeName());
+        auto typeName = (*dependency)->getTypeName();
+
+        Component* component = actor->findComponentOfType(typeName);
         (*dependency)->setComponent(component);
+
+        if (!component) {
+            validFlag = false;
+            logError("Component type '" + implementedTypeNames.back() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
+        }
     }
 }
 

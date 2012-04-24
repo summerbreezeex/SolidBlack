@@ -24,10 +24,10 @@ public:
     ComponentDependency();
 
     void setComponent(Component* component);
-    Component* getComponent();
+    T* getComponent();
+    const T* getComponent() const;
 
-    T* operator*();
-    const T* operator*() const;
+    Component* getBaseComponent();
 
     operator bool() const;
 

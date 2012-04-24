@@ -47,6 +47,8 @@ public:
 
     Physics* getPhysics();
 
+    ScriptInterpreter* getScriptInterpreter();
+
     ComponentFactory* getComponentFactory();
 
 private:

@@ -31,9 +31,6 @@ public:
     const T& getValue() const;
     void setValue(const T& value);
 
-    T& operator*();
-    const T& operator*() const;
-
 private:
     T value;
 };

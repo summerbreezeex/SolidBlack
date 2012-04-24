@@ -3,9 +3,12 @@
 #include "Engine/StlCommon.h"
 #include "Engine/Actor/Component/Component.h"
 
+class Scene;
+class ScriptInterpreter;
+
 class ComponentFactory {
 public:
-    ComponentFactory(ScriptInterpreter* scriptInterpreter);
+    ComponentFactory(Scene* scene);
 
     template <class T>
     void registerModule();
@@ -15,12 +18,13 @@ public:
 
     Component* createComponent(const std::string& typeName);
 
-    ScriptInterpreter* getScriptInterpreter();
+    Scene* getScene();
 
 private:
     template <class T>
     static T* newComponent();
 
+    Scene* scene;
     ScriptInterpreter* scriptInterpreter;
 
     std::map<std::string, ComponentConstructor> constructors;

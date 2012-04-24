@@ -15,13 +15,3 @@ template <typename T>
 void ComponentAttribute<T>::setValue(const T& value) {
     this->value = value;
 }
-
-template <typename T>
-T& ComponentAttribute<T>::operator*() {
-    return value;
-}
-
-template <typename T>
-const T& ComponentAttribute<T>::operator*() const {
-    return value;
-}

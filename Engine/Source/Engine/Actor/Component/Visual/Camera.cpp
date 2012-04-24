@@ -30,11 +30,11 @@ void Camera::leaveScene() {
 }
 
 Ogre::Real Camera::getFov() const {
-    return *fov;
+    return fov.getValue();
 }
 
 void Camera::setFov(Ogre::Real fov) {
-    *this->fov = fov;
+    this->fov.setValue(fov);
 
     if (camera) {
         camera->setFOVy(Ogre::Degree(fov));
@@ -42,8 +42,9 @@ void Camera::setFov(Ogre::Real fov) {
 }
 
 Ogre::Vector3 Camera::getDirection() const {
-    if (getTransform()) {
-        return getTransform()->getOrientation() * Ogre::Vector3::NEGATIVE_UNIT_Z;
+    auto transformComponent = getTransform();
+    if (transformComponent) {
+        return transformComponent->getOrientation() * Ogre::Vector3::NEGATIVE_UNIT_Z;
     } else {
         return Ogre::Vector3::NEGATIVE_UNIT_Z;
     }

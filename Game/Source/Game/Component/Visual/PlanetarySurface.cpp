@@ -50,7 +50,7 @@ void PlanetarySurface::enterScene(Scene* scene) {
 
     for (int i = 0; i < 6; ++i) {
         Ogre::SceneNode* treeSceneNode = getSceneNode()->createChildSceneNode(positions[i], orientations[i]);
-        terrainPatchTrees.push_back(std::make_shared<TerrainQuadtree>(this, treeSceneNode, *diameter));
+        terrainPatchTrees.push_back(std::make_shared<TerrainQuadtree>(this, treeSceneNode, getDiameter()));
     }
 }
 
@@ -73,7 +73,7 @@ void PlanetarySurface::logicUpdate(Ogre::Real timeStep) {
 }
 
 int PlanetarySurface::getDiameter() const {
-    return *diameter;
+    return diameter.getValue();
 }
 
 int PlanetarySurface::getRadius() const {
@@ -90,7 +90,7 @@ const NoiseFunction* PlanetarySurface::getNoiseFunction() const {
 
 void PlanetarySurface::initializeNoise() {
     Json::Value root;
-    JsonUtils::readValueFromFile(*noiseFunctionName, &root);
+    JsonUtils::readValueFromFile(noiseFunctionName.getValue(), &root);
 
     NoiseFunction* n = NoiseFunctionJsonSerializer::deserialize(root);
     noiseFunction = NoiseFunctionPtr(n);

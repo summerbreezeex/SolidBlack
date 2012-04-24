@@ -45,26 +45,27 @@ void RigidBody::leaveScene() {
 }
 
 void RigidBody::logicUpdate(Ogre::Real timeStep) {
-    if (initialized && transform) {
-        (*transform)->setPosition(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getOrigin()));
-        (*transform)->setOrientation(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getRotation()));
+    if (initialized) {
+        auto transformComponent = transform.getComponent();
+        transformComponent->setPosition(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getOrigin()));
+        transformComponent->setOrientation(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getRotation()));
     }
 }
 
 Ogre::Real RigidBody::getMass() const {
-    return *mass;
+    return mass.getValue();
 }
 
 void RigidBody::setMass(Ogre::Real mass) {
-    *this->mass = mass;
+    this->mass.setValue(mass);
 }
 
 const Ogre::Vector3& RigidBody::getLinearVelocity() const {
-    return *linearVelocity;
+    return linearVelocity.getValue();
 }
 
 const Ogre::Vector3& RigidBody::getAngularVelocity() const {
-    return *angularVelocity;
+    return angularVelocity.getValue();
 }
 
 void RigidBody::initializeRigidBody() {
@@ -72,13 +73,16 @@ void RigidBody::initializeRigidBody() {
 
     btVector3 localInertia(0.0, 0.0, 0.0);
 
+    auto meshComponent = mesh.getComponent();
+    auto transformComponent = transform.getComponent();
+
     if (getMass() > 0.0) {
-        BtOgre::StaticMeshToShapeConverter converter((*mesh)->getEntity());
+        BtOgre::StaticMeshToShapeConverter converter(meshComponent->getEntity());
         shape = converter.createConvex();
 
         shape->calculateLocalInertia(getMass(), localInertia);
     } else {
-        BtOgre::StaticMeshToShapeConverter converter((*mesh)->getEntity());
+        BtOgre::StaticMeshToShapeConverter converter(meshComponent->getEntity());
         shape = converter.createTrimesh();
     }
 
@@ -93,8 +97,8 @@ void RigidBody::initializeRigidBody() {
     rigidBody->setRestitution(0.0);
 
     btTransform transformation;
-    transformation.setOrigin(BtOgre::Convert::toBullet((*transform)->getPosition()));
-    transformation.setRotation(BtOgre::Convert::toBullet((*transform)->getOrientation()));
+    transformation.setOrigin(BtOgre::Convert::toBullet(transformComponent->getPosition()));
+    transformation.setRotation(BtOgre::Convert::toBullet(transformComponent->getOrientation()));
     rigidBody->setWorldTransform(transformation);
 
     rigidBody->setLinearVelocity(BtOgre::Convert::toBullet(getLinearVelocity()));

@@ -41,39 +41,39 @@ void Light::leaveScene() {
 }
 
 bool Light::isEnabled() const {
-    return *enabled;
+    return enabled.getValue();
 }
 
 void Light::setEnabled(bool enabled) {
     if (light) {
         light->setVisible(enabled);
-        *this->enabled = enabled;
+        this->enabled.setValue(enabled);
     }
 }
 
 const Ogre::ColourValue& Light::getDiffuseColour() const {
-    return *diffuseColour;
+    return diffuseColour.getValue();
 }
 
 void Light::setDiffuseColour(const Ogre::ColourValue& colour) {
     light->setDiffuseColour(colour);
-    *diffuseColour = colour;
+    diffuseColour.setValue(colour);
 }
 
 const Ogre::ColourValue& Light::getSpecularColour() const {
-    return *specularColour;
+    return specularColour.getValue();
 }
 
 void Light::setSpecularColour(const Ogre::ColourValue& colour) {
     light->setSpecularColour(colour);
-    *specularColour = colour;
+    specularColour.setValue(colour);
 }
 
 const Ogre::Vector4& Light::getAttenuation() const {
-    return *attenuation;
+    return attenuation.getValue();
 }
 
 void Light::setAttenuation(const Ogre::Vector4& attenuation) {
     light->setAttenuation(attenuation.x, attenuation.y, attenuation.z, attenuation.w);
-    *this->attenuation = attenuation;
+    this->attenuation.setValue(attenuation);
 }

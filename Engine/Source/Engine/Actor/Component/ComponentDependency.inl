@@ -12,17 +12,17 @@ void ComponentDependency<T>::setComponent(Component* component) {
 }
 
 template <typename T>
-Component* ComponentDependency<T>::getComponent() {
-    return component;
+T* ComponentDependency<T>::getComponent() {
+    return (T*)component;
 }
 
 template <typename T>
-T* ComponentDependency<T>::operator*() {
-    return component;
+const T* ComponentDependency<T>::getComponent() const {
+    return (T*)component;
 }
 
 template <typename T>
-const T* ComponentDependency<T>::operator*() const {
+Component* ComponentDependency<T>::getBaseComponent() {
     return component;
 }
 

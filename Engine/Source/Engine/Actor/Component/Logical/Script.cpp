@@ -14,10 +14,12 @@ Script::Script() :
 }
 
 void Script::initializeScript() {
-    scriptInterpreter = getFactory()->getScriptInterpreter();
-    scriptInterpreter->loadScript(*scriptName);
+    auto scriptNameValue = scriptName.getValue();
 
-    std::string constructorName = (*scriptName).substr(0, (*scriptName).size() - 4);
+    scriptInterpreter = getFactory()->getScene()->getScriptInterpreter();
+    scriptInterpreter->loadScript(scriptNameValue);
+
+    std::string constructorName = scriptNameValue.substr(0, scriptNameValue.size() - 4);
 
     // Construct the script object.
     scriptObject = invokeFunction<LuaObject>(constructorName);
@@ -40,32 +42,16 @@ void Script::initializeScript() {
             addAttribute(*casted);
         }
     }
-
-    // Get the script methods.
-    attachToActorMethod = scriptObject["attachToActor"];
-    detachFromActorMethod = scriptObject["detachFromActor"];
-    enterSceneMethod = scriptObject["enterScene"];
-    leaveSceneMethod = scriptObject["leaveScene"];
-    logicUpdateMethod = scriptObject["logicUpdate"];
 }
 
 void Script::attachToActor(Actor* actor) {
     Super::attachToActor(actor);
 
-    try {
-        attachToActorMethod(scriptObject, actor);
-    } catch (const luabind::error&) {
-        throwMethodError("attachToActor");
-    }
+    invokeMethod<LuaObject>("attachToActor", actor);
 }
 
 void Script::detachFromActor() {
-    try {
-        detachFromActorMethod(scriptObject);
-    } catch (const luabind::error&) {
-        throwMethodError("detachFromActor");
-    }
-
+    invokeMethod<LuaObject>("detachFromActor");
     scriptObject = LuaObject();
 
     Super::detachFromActor();
@@ -74,31 +60,15 @@ void Script::detachFromActor() {
 void Script::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
-    try {
-        enterSceneMethod(scriptObject, scene);
-    } catch (const luabind::error&) {
-        throwMethodError("enterScene");
-    }
+    invokeMethod<LuaObject>("enterScene", scene);
 }
 
 void Script::leaveScene() {
-    try {
-        leaveSceneMethod(scriptObject);
-    } catch (const luabind::error&) {
-        throwMethodError("leaveScene");
-    }
+    invokeMethod<LuaObject>("leaveScene");
 
     Super::leaveScene();
 }
 
 void Script::logicUpdate(Ogre::Real timeStep) {
-    try {
-        logicUpdateMethod(scriptObject, timeStep);
-    } catch (const luabind::error&) {
-        throwMethodError("logicUpdate");
-    }
-}
-
-void Script::throwMethodError(const std::string& methodName) {
-    throw new std::runtime_error("Error occurred in method '" + methodName + "' in '" + *scriptName + "': " + scriptInterpreter->getErrorMessage());
+    invokeMethod<LuaObject>("logicUpdate", timeStep);
 }

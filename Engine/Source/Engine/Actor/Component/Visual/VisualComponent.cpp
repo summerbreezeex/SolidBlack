@@ -22,45 +22,43 @@ VisualComponent::VisualComponent() :
 void VisualComponent::enterScene(Scene* scene) {
     Super::enterScene(scene);
 
-    if (transform) {
-        sceneNode = (*transform)->getSceneNode()->createChildSceneNode();
+    auto transformComponent = transform.getComponent();
 
-        sceneNode->setPosition(getLocalPosition());
-        sceneNode->setOrientation(getLocalOrientation());
-    }
+    sceneNode = transformComponent->getSceneNode()->createChildSceneNode();
+
+    sceneNode->setPosition(getLocalPosition());
+    sceneNode->setOrientation(getLocalOrientation());
 }
 
 void VisualComponent::leaveScene() {
-    if (sceneNode) {
-        if (sceneNode->numAttachedObjects() > 0) {
-            getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached objects.");
-        }
-
-        if (sceneNode->numChildren() > 0) {
-            getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached child nodes.");
-        }
-
-        getScene()->getSceneManager()->destroySceneNode(sceneNode);
-        sceneNode = nullptr;
+    if (sceneNode->numAttachedObjects() > 0) {
+        getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached objects.");
     }
+
+    if (sceneNode->numChildren() > 0) {
+        getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached child nodes.");
+    }
+
+    getScene()->getSceneManager()->destroySceneNode(sceneNode);
+    sceneNode = nullptr;
 
     Super::leaveScene();
 }
 
 const Ogre::Vector3& VisualComponent::getLocalPosition() const {
-    return *localPosition;
+    return localPosition.getValue();
 }
 
 const Ogre::Quaternion& VisualComponent::getLocalOrientation() const {
-    return *localOrientation;
+    return localOrientation.getValue();
 }
 
 Transform* VisualComponent::getTransform() {
-    return *transform;
+    return transform.getComponent();
 }
 
 const Transform* VisualComponent::getTransform() const {
-    return *transform;
+    return transform.getComponent();
 }
 
 Ogre::SceneNode* VisualComponent::getSceneNode() {

@@ -17,10 +17,6 @@ function Test:__init()
 end
 
 function Test:logicUpdate(timeStep)
-	if not self.transform.component then
-		return
-	end
-	
 	local axis = self.axis.value
 	local angle = self.rotationSpeed.value * timeStep
 	

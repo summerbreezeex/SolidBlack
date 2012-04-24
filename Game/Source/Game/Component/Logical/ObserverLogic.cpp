@@ -18,14 +18,16 @@ ObserverLogic::ObserverLogic() {
 
 void ObserverLogic::debugAction1() {
     if (observerCamera) {
+        auto observerCameraComponent = observerCamera.getComponent();
+
         Scene* scene = getScene();
         ComponentFactory* factory = scene->getComponentFactory();
 
         Actor* actor = new Actor("spotLight");
 
         Component* transform = factory->createComponent("Transform");
-        transform->setAttributeValue("position", (*observerCamera)->getTransform()->getPosition());
-        transform->setAttributeValue("orientation", (*observerCamera)->getTransform()->getOrientation());
+        transform->setAttributeValue("position", observerCameraComponent->getTransform()->getPosition());
+        transform->setAttributeValue("orientation", observerCameraComponent->getTransform()->getOrientation());
         actor->addComponent(transform);
 
         Component* spotLight = factory->createComponent("SpotLight");
@@ -40,14 +42,16 @@ void ObserverLogic::debugAction1() {
 
 void ObserverLogic::debugAction2() {
     if (observerCamera) {
+        auto observerCameraComponent = observerCamera.getComponent();
+
         Scene* scene = getScene();
         ComponentFactory* factory = scene->getComponentFactory();
 
         Actor* actor = new Actor("observerProjectile");
 
         Component* transform = factory->createComponent("Transform");
-        transform->setAttributeValue("position", (*observerCamera)->getTransform()->getPosition());
-        transform->setAttributeValue("orientation", (*observerCamera)->getTransform()->getOrientation());
+        transform->setAttributeValue("position", observerCameraComponent->getTransform()->getPosition());
+        transform->setAttributeValue("orientation", observerCameraComponent->getTransform()->getOrientation());
         actor->addComponent(transform);
 
         Component* mesh = factory->createComponent("Mesh");
@@ -56,7 +60,7 @@ void ObserverLogic::debugAction2() {
 
         Component* rigidBody = factory->createComponent("RigidBody");
         rigidBody->setAttributeValue("mass", 100.0);
-        rigidBody->setAttributeValue("linearVelocity", (*observerCamera)->getDirection() * 10.0);
+        rigidBody->setAttributeValue("linearVelocity", observerCameraComponent->getDirection() * 10.0);
         actor->addComponent(rigidBody);
 
         actor->attachComponents();

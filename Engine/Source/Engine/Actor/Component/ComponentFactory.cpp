@@ -1,11 +1,14 @@
+#include "Engine/Actor/Scene.h"
+
 #include "ComponentFactory.h"
 
-ComponentFactory::ComponentFactory(ScriptInterpreter* scriptInterpreter) :
-        scriptInterpreter(scriptInterpreter) {
+ComponentFactory::ComponentFactory(Scene* scene) :
+        scene(scene),
+        scriptInterpreter(scene->getScriptInterpreter()) {
 }
 
-ScriptInterpreter* ComponentFactory::getScriptInterpreter() {
-    return scriptInterpreter;
+Scene* ComponentFactory::getScene() {
+    return scene;
 }
 
 Component* ComponentFactory::createComponent(const std::string& typeName) {

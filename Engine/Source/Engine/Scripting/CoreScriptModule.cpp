@@ -20,7 +20,8 @@ void CoreScriptModule::registerCode(ScriptInterpreter* interpreter) {
     module(interpreter->getLuaState()) [
         class_<Logged>("Logged")
             .def("logInfo", &Logged::logInfo)
-            .def("logWarning", &Logged::logWarning),
+            .def("logWarning", &Logged::logWarning)
+            .def("logError", &Logged::logError),
 
         class_<Vector3>("Vector3")
             .def(constructor<Real, Real, Real>())
@@ -123,6 +124,10 @@ void CoreScriptModule::registerCode(ScriptInterpreter* interpreter) {
 
         "function Script:logWarning(message)\n"
         "    self.scriptWrapper:logWarning(message)\n"
+        "end\n"
+
+        "function Script:logError(message)\n"
+        "    self.scriptWrapper:logError(message)\n"
         "end\n";
 
     interpreter->execute(scriptClass);

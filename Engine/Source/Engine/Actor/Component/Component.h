@@ -48,6 +48,8 @@ public:
     const ComponentAttributeBase* getAttribute(const std::string& name) const;
 
     const std::vector<ComponentAttributeBase*> getAttributes() const;
+
+    bool isValid() const;
     
 protected:
     void addAttribute(ComponentAttributeBase* attribute);
@@ -72,7 +74,7 @@ private:
     std::vector<ComponentDependencyBase*> dependencies;
     std::vector<std::string> implementedTypeNames;
 
-    std::list<std::shared_ptr<ComponentAttributeBase>> addedAttributes;
+    bool validFlag;
 };
 
 typedef Component*(*ComponentConstructor)();

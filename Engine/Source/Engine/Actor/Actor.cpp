@@ -24,7 +24,9 @@ void Actor::enterScene(Scene* scene) {
     this->scene = scene;
 
     foreach (component, components) {
-        (*component)->enterScene(scene);
+        if ((*component)->isValid()) {
+            (*component)->enterScene(scene);
+        }
         scene->addComponent((*component).get());
     }
 
@@ -35,7 +37,9 @@ void Actor::leaveScene() {
     assert(scene);
 
     foreach (component, components) {
-        (*component)->leaveScene();
+        if ((*component)->isValid()) {
+            (*component)->leaveScene();
+        }
         scene->removeComponent((*component).get());
     }
 

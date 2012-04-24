@@ -13,6 +13,8 @@ public:
 
     DirectionalLight();
 
+    const Ogre::Vector3& getDirection() const;
+
 private:
     Ogre::Light* createLight();
 

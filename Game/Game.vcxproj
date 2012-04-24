@@ -92,7 +92,6 @@
     <ClCompile Include="Source\Game\Component\SolidBlackComponentModule.cpp" />
     <ClCompile Include="Source\Game\Component\Logical\ObserverLogic.cpp" />
     <ClCompile Include="Source\Game\Component\Logical\ProjectileLogic.cpp" />
-    <ClCompile Include="Source\Game\Component\Logical\TestLogic.cpp" />
     <ClCompile Include="Source\Game\Component\Visual\ObserverCamera.cpp" />
     <ClCompile Include="Source\Game\Component\Visual\PlanetarySurface.cpp" />
     <ClCompile Include="Source\Game\Component\Visual\PlanetarySurface\TerrainPatchData.cpp" />
@@ -105,7 +104,6 @@
     <ClInclude Include="Source\Game\Component\SolidBlackComponentModule.h" />
     <ClInclude Include="Source\Game\Component\Logical\ObserverLogic.h" />
     <ClInclude Include="Source\Game\Component\Logical\ProjectileLogic.h" />
-    <ClInclude Include="Source\Game\Component\Logical\TestLogic.h" />
     <ClInclude Include="Source\Game\Component\Visual\ObserverCamera.h" />
     <ClInclude Include="Source\Game\Component\Visual\PlanetarySurface.h" />
     <ClInclude Include="Source\Game\Component\Visual\PlanetarySurface\TerrainPatchData.h" />

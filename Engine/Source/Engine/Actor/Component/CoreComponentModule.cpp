@@ -43,6 +43,6 @@ void CoreComponentModule::registerCode(ScriptInterpreter* interpreter) {
             .def("rotate", (void(Transform::*)(const Ogre::Vector3&, const Ogre::Radian&))&Transform::rotate),
         class_<ComponentDependency<Transform>, ComponentDependencyBase>("TransformDependency")
             .def(constructor<>())
-            .property("component", &ComponentDependency<Transform>::getComponent)
+            .property("component", &ComponentDependency<Transform>::getBaseComponent)
     ];
 }

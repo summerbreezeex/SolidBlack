@@ -19,9 +19,8 @@ void ProjectileLogic::attachToActor(Actor* actor) {
 }
 
 void ProjectileLogic::logicUpdate(Ogre::Real timeStep) {
-    if (transform) {
-        (*transform)->translate((*velocity) * timeStep);
-    }
+    auto transformComponent = transform.getComponent();
+    transformComponent->translate(velocity.getValue() * timeStep);
 
     if (timer.getMilliseconds() > 5000) {
         //getActor()->kill();
