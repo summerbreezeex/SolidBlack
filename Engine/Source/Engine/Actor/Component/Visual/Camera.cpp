@@ -8,15 +8,15 @@
 
 ComponentClassDef(Camera)
 
-Camera::Camera() :
+Camera::Camera(ComponentFactory* factory) :
+        VisualComponent(factory),
         fov("fov", 70.0),
         camera(nullptr) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&fov);
 }
 
 void Camera::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    VisualComponent::enterScene(scene);
 
     initializeCamera();
 
@@ -26,7 +26,7 @@ void Camera::enterScene(Scene* scene) {
 void Camera::leaveScene() {
     getSceneNode()->detachObject(camera);
 
-    Super::leaveScene();
+    VisualComponent::leaveScene();
 }
 
 Ogre::Real Camera::getFov() const {

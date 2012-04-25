@@ -6,9 +6,9 @@
 
 ComponentClassDef(DirectionalLight)
 
-DirectionalLight::DirectionalLight() :
+DirectionalLight::DirectionalLight(ComponentFactory* factory) :
+        Light(factory),
         direction("direction", Ogre::Vector3::UNIT_X) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&direction);
 }
 

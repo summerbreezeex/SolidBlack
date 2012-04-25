@@ -8,11 +8,10 @@
 
 class Light :
             public VisualComponent {
-    typedef VisualComponent Super;
 public:
     ComponentClass
 
-    Light();
+    Light(ComponentFactory* factory);
     virtual ~Light() { }
 
     void enterScene(Scene* scene);

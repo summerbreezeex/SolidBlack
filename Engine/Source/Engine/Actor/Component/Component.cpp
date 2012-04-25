@@ -4,12 +4,12 @@
 
 #include "Component.h"
 
-Component::Component(ComponentFamily::Enum family) :
+Component::Component(ComponentFactory* factory, ComponentFamily::Enum family) :
         Logged("Component"),
-        factory(nullptr),
+        factory(factory),
         actor(nullptr),
         scene(nullptr),
-        family(family),
+        typeData(nullptr),
         validFlag(true) {
 }
 
@@ -55,16 +55,12 @@ Scene* Component::getScene() const {
     return scene;
 }
 
-const ComponentFamily::Enum Component::getFamily() const {
-    return family;
-}
-
 ComponentTypeData* Component::getTypeData() {
-    return &typeData;
+    return typeData;
 }
 
 const ComponentTypeData* Component::getTypeData() const {
-    return &typeData;
+    return typeData;
 }
 
 const std::vector<std::string> Component::getAttributeNames() const {
@@ -123,10 +119,6 @@ ComponentFactory* Component::getFactory() {
     return factory;
 }
 
-void Component::setFactory(ComponentFactory* factory) {
-    this->factory = factory;
-}
-
 void Component::resolveDependencies() {
     foreach (dependency, dependencies) {
         auto typeName = (*dependency)->getTypeName();
@@ -136,7 +128,7 @@ void Component::resolveDependencies() {
 
         if (!component) {
             validFlag = false;
-            logError("Component type '" + typeData.getDerivedTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
+            logError("Component type '" + typeData->getDerivedTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
         }
     }
 }

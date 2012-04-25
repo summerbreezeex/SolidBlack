@@ -6,10 +6,10 @@
 
 ComponentClassDef(Script)
 
-Script::Script() :
+Script::Script(ComponentFactory* factory) :
+        LogicalComponent(factory),
         scriptName("scriptName", ""),
         scriptInterpreter(nullptr) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&scriptName);
 }
 
@@ -45,7 +45,7 @@ void Script::initializeScript() {
 }
 
 void Script::attachToActor(Actor* actor) {
-    Super::attachToActor(actor);
+    LogicalComponent::attachToActor(actor);
 
     invokeMethod<LuaObject>("attachToActor", actor);
 }
@@ -54,11 +54,11 @@ void Script::detachFromActor() {
     invokeMethod<LuaObject>("detachFromActor");
     scriptObject = LuaObject();
 
-    Super::detachFromActor();
+    LogicalComponent::detachFromActor();
 }
 
 void Script::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    LogicalComponent::enterScene(scene);
 
     invokeMethod<LuaObject>("enterScene", scene);
 }
@@ -66,7 +66,7 @@ void Script::enterScene(Scene* scene) {
 void Script::leaveScene() {
     invokeMethod<LuaObject>("leaveScene");
 
-    Super::leaveScene();
+    LogicalComponent::leaveScene();
 }
 
 void Script::logicUpdate(Ogre::Real timeStep) {

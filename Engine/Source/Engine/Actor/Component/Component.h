@@ -13,21 +13,11 @@ class ComponentFactory;
 class Scene;
 class ScriptInterpreter;
 
-struct ComponentFamily {
-    enum Enum {
-        Input,
-        Logical,
-        Physical,
-        Spacial,
-        Visual
-    };
-};
-
 class Component :
             public Logged {
     friend class ComponentFactory;
 public:
-    Component(ComponentFamily::Enum family);
+    Component(ComponentFactory* factory, ComponentFamily::Enum family);
     virtual ~Component();
 
     virtual void attachToActor(Actor* actor);
@@ -40,8 +30,6 @@ public:
 
     Actor* getActor() const;
     Scene* getScene() const;
-
-    const ComponentFamily::Enum getFamily() const;
 
     ComponentTypeData* getTypeData();
     const ComponentTypeData* getTypeData() const;
@@ -69,7 +57,6 @@ protected:
     void addDependency(ComponentDependencyBase* dependency);
 
     ComponentFactory* getFactory();
-    void setFactory(ComponentFactory* factory);
 
 private:
     void resolveDependencies();
@@ -80,8 +67,7 @@ private:
     Actor* actor;
     Scene* scene;
 
-    ComponentFamily::Enum family;
-    ComponentTypeData typeData;
+    ComponentTypeData* typeData;
 
     std::map<std::string, ComponentAttributeBase*> attributes;
     std::vector<ComponentDependencyBase*> dependencies;
@@ -89,7 +75,6 @@ private:
     bool validFlag;
 };
 
-typedef Component*(*ComponentConstructor)();
 typedef std::shared_ptr<Component> ComponentPtr;
 
 #define ComponentClass \

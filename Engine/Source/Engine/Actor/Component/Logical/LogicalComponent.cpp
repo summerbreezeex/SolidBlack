@@ -1,5 +1,7 @@
 #include "LogicalComponent.h"
 
-LogicalComponent::LogicalComponent() :
-        Component(ComponentFamily::Logical) {
+ComponentClassDef(LogicalComponent)
+
+LogicalComponent::LogicalComponent(ComponentFactory* factory) :
+        Component(factory, ComponentFamily::Logical) {
 }

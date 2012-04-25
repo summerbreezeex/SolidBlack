@@ -8,19 +8,18 @@
 
 ComponentClassDef(VisualComponent)
 
-VisualComponent::VisualComponent() :
-        Component(ComponentFamily::Visual),
+VisualComponent::VisualComponent(ComponentFactory* factory) :
+        Component(factory, ComponentFamily::Visual),
         localPosition("localPosition", Ogre::Vector3::ZERO),
         localOrientation("localOrientation", Ogre::Quaternion::IDENTITY),
         sceneNode(nullptr) {
-    getTypeData()->addBaseTypeName(typeName);
     addAttribute(&localPosition);
     addAttribute(&localOrientation);
     addDependency(&transform);
 }
 
 void VisualComponent::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    Component::enterScene(scene);
 
     auto transformComponent = transform.getComponent();
 
@@ -42,7 +41,7 @@ void VisualComponent::leaveScene() {
     getScene()->getSceneManager()->destroySceneNode(sceneNode);
     sceneNode = nullptr;
 
-    Super::leaveScene();
+    Component::leaveScene();
 }
 
 const Ogre::Vector3& VisualComponent::getLocalPosition() const {

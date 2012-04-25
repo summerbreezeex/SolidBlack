@@ -6,11 +6,10 @@ class ObserverCamera;
 
 class ObserverLogic :
             public LogicalComponent {
-    typedef LogicalComponent Super;
 public:
     ComponentClass
 
-    ObserverLogic();
+    ObserverLogic(ComponentFactory* factory);
 
     void debugAction1();
     void debugAction2();

@@ -6,11 +6,10 @@
 
 class PointLight :
             public Light {
-    typedef Light Super;
 public:
     ComponentClass
 
-    PointLight();
+    PointLight(ComponentFactory* factory);
 
 private:
     Ogre::Light* createLight();

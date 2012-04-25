@@ -6,11 +6,10 @@
 
 class Mesh :
             public VisualComponent {
-    typedef VisualComponent Super;
 public:
     ComponentClass
 
-    Mesh();
+    Mesh(ComponentFactory* factory);
 
     void enterScene(Scene* scene);
     void leaveScene();

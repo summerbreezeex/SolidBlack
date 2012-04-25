@@ -6,14 +6,14 @@
 
 ComponentClassDef(SkyBox)
 
-SkyBox::SkyBox() :
+SkyBox::SkyBox(ComponentFactory* factory) :
+        VisualComponent(factory),
         materialName("materialName", "") {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&materialName);
 }
 
 void SkyBox::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    VisualComponent::enterScene(scene);
 
     getScene()->getSceneManager()->setSkyBox(true, materialName.getValue());
 }
@@ -21,5 +21,5 @@ void SkyBox::enterScene(Scene* scene) {
 void SkyBox::leaveScene() {
     getScene()->getSceneManager()->setSkyBoxEnabled(false);
 
-    Super::leaveScene();
+    VisualComponent::leaveScene();
 }

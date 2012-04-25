@@ -8,7 +8,8 @@
 
 ComponentClassDef(PlanetarySurface)
 
-PlanetarySurface::PlanetarySurface() :
+PlanetarySurface::PlanetarySurface(ComponentFactory* factory) :
+        VisualComponent(factory),
         diameter("diameter", 0),
         noiseFunctionName("noiseFunctionName", ""),
         sceneCamera(nullptr),
@@ -18,13 +19,12 @@ PlanetarySurface::PlanetarySurface() :
         tessellation(64)
 #endif
 {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&diameter);
     addAttribute(&noiseFunctionName);
 }
 
 void PlanetarySurface::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    VisualComponent::enterScene(scene);
 
     initializeNoise();
 
@@ -61,11 +61,11 @@ void PlanetarySurface::leaveScene() {
     getSceneNode()->removeAndDestroyAllChildren();
     getScene()->getSceneManager()->destroySceneNode(getSceneNode());
 
-    Super::leaveScene();
+    VisualComponent::leaveScene();
 }
 
 void PlanetarySurface::logicUpdate(Ogre::Real timeStep) {
-    Super::logicUpdate(timeStep);
+    VisualComponent::logicUpdate(timeStep);
 
     foreach (tree, terrainPatchTrees) {
         (*tree)->update(sceneCamera);

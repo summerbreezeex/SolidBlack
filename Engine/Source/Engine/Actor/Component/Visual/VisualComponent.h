@@ -10,11 +10,10 @@ class Transform;
 
 class VisualComponent :
             public Component {
-    typedef Component Super;
 public:
     ComponentClass
 
-    VisualComponent();
+    VisualComponent(ComponentFactory* factory);
     virtual ~VisualComponent() { }
 
     void enterScene(Scene* scene);

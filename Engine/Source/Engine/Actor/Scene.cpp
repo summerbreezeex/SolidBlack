@@ -117,14 +117,16 @@ void Scene::removeAllActors() {
 }
 
 void Scene::addComponent(Component* component) {
-    auto it = familyCollections.find(component->getFamily());
+    auto typeData = component->getTypeData();
+    auto it = familyCollections.find(typeData->getFamily());
     assert(it != familyCollections.end());
 
     (*it).second->addComponent(component);
 }
 
 void Scene::removeComponent(Component* component) {
-    auto it = familyCollections.find(component->getFamily());
+    auto typeData = component->getTypeData();
+    auto it = familyCollections.find(typeData->getFamily());
     assert(it != familyCollections.end());
 
     (*it).second->removeComponent(component);

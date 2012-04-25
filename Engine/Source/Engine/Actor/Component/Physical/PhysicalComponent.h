@@ -5,6 +5,8 @@
 class PhysicalComponent :
             public Component {
 public:
-    PhysicalComponent();
+    ComponentClass
+
+    PhysicalComponent(ComponentFactory* factory);
     virtual ~PhysicalComponent() { }
 };

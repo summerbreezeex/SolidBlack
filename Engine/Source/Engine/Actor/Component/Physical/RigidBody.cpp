@@ -13,22 +13,24 @@
 
 ComponentClassDef(RigidBody)
 
-RigidBody::RigidBody() :
+RigidBody::RigidBody(ComponentFactory* factory) :
+        PhysicalComponent(factory),
         mass("mass", 0.0),
         linearVelocity("linearVelocity", Ogre::Vector3::ZERO),
         angularVelocity("angularVelocity", Ogre::Vector3::ZERO),
+        collisionShape("collisionShape", "ConvexHull"),
         shape(nullptr),
         rigidBody(nullptr),
         initialized(false) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&mass);
     addAttribute(&linearVelocity);
     addAttribute(&angularVelocity);
+    addAttribute(&collisionShape);
     addDependency(&transform);
 }
 
 void RigidBody::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    PhysicalComponent::enterScene(scene);
     
     initializeRigidBody();
 }
@@ -38,7 +40,7 @@ void RigidBody::leaveScene() {
         deinitializeRigidBody();
     }
 
-    Super::leaveScene();
+    PhysicalComponent::leaveScene();
 }
 
 void RigidBody::logicUpdate(Ogre::Real timeStep) {
@@ -72,26 +74,26 @@ void RigidBody::initializeRigidBody() {
 
     auto transformComponent = transform.getComponent();
 
-    if (getMass() > 0.0) {
-        BtOgre::StaticMeshToShapeConverter converter;
+    BtOgre::StaticMeshToShapeConverter converter;
+    auto meshComponents = getActor()->findComponentsOfType<Mesh>();
+    foreach (meshComponent, meshComponents) {
+        converter.addEntity((*meshComponent)->getEntity());
+    }
 
-        auto meshComponents = getActor()->findComponentsOfType<Mesh>();
-        foreach (meshComponent, meshComponents) {
-            converter.addEntity((*meshComponent)->getEntity());
-        }
-
+    if (collisionShape.getValue() == "ConvexHull") {
         shape = converter.createConvex();
-
-        shape->calculateLocalInertia(getMass(), localInertia);
-    } else {
-        BtOgre::StaticMeshToShapeConverter converter;
-
-        auto meshComponents = getActor()->findComponentsOfType<Mesh>();
-        foreach (meshComponent, meshComponents) {
-            converter.addEntity((*meshComponent)->getEntity());
-        }
-
+    } else if (collisionShape.getValue() == "TriangleMesh") {
         shape = converter.createTrimesh();
+    } else if (collisionShape.getValue() == "Box") {
+        shape = converter.createBox();
+    } else if (collisionShape.getValue() == "Sphere") {
+        shape = converter.createSphere();
+    } else {
+        throw std::runtime_error("Unknown collision shape '" + collisionShape.getValue() + "'");
+    }
+
+    if (getMass() > 0.0) {
+        shape->calculateLocalInertia(getMass(), localInertia);
     }
 
     btRigidBody::btRigidBodyConstructionInfo info(getMass(), 0, shape, localInertia);
@@ -101,8 +103,6 @@ void RigidBody::initializeRigidBody() {
         rigidBody->setCollisionFlags(btCollisionObject::CF_STATIC_OBJECT);
         rigidBody->setFriction(1.0);
     }
-
-    rigidBody->setRestitution(0.0);
 
     btTransform transformation;
     transformation.setOrigin(BtOgre::Convert::toBullet(transformComponent->getPosition()));

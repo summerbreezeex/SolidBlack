@@ -13,12 +13,11 @@ class Mesh;
 
 class RigidBody :
             public PhysicalComponent {
-    typedef PhysicalComponent Super;
     friend class Physics;
 public:
     ComponentClass
 
-    RigidBody();
+    RigidBody(ComponentFactory* factory);
 
     void enterScene(Scene* scene);
     void leaveScene();
@@ -38,6 +37,7 @@ private:
     ComponentAttribute<Ogre::Real> mass;
     ComponentAttribute<Ogre::Vector3> linearVelocity;
     ComponentAttribute<Ogre::Vector3> angularVelocity;
+    ComponentAttribute<std::string> collisionShape;
 
     ComponentDependency<Transform> transform;
 

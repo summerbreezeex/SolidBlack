@@ -9,7 +9,7 @@
 StateManager::StateManager() :
         Logged("StateManager"),
         engine(nullptr),
-        timeStep(1.0 / 20.0),
+        timeStep(1.0 / 30.0),
         lastFrameUpdate(0.0) {
 }
 

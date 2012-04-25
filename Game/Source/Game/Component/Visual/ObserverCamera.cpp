@@ -5,7 +5,8 @@
 
 ComponentClassDef(ObserverCamera)
 
-ObserverCamera::ObserverCamera() :
+ObserverCamera::ObserverCamera(ComponentFactory* factory) :
+        Camera(factory),
         localMoveDirection(Ogre::Vector3::ZERO),
         localRollDirection(0.0),
         velocity(Ogre::Vector3::ZERO),
@@ -13,10 +14,11 @@ ObserverCamera::ObserverCamera() :
         yawVelocity(0.0),
         pitchVelocity(0.0),
         speedMultiplier(1) {
-    getTypeData()->setDerivedTypeName(typeName);
 }
 
 void ObserverCamera::logicUpdate(Ogre::Real timeStep) {
+    Camera::logicUpdate(timeStep);
+
     Ogre::Real speed = speedMultiplier;
     Ogre::Real rollSpeed = 0.5;
 

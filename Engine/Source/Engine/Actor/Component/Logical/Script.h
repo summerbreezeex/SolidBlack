@@ -5,11 +5,10 @@
 
 class Script :
             public LogicalComponent {
-    typedef LogicalComponent Super;
 public:
     ComponentClass
 
-    Script();
+    Script(ComponentFactory* factory);
 
     void initializeScript();
     

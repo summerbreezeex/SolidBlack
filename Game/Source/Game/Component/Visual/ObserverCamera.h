@@ -6,11 +6,10 @@
 
 class ObserverCamera :
             public Camera {
-    typedef Camera Super;
 public:
     ComponentClass
 
-    ObserverCamera();
+    ObserverCamera(ComponentFactory* factory);
 
     void logicUpdate(Ogre::Real timeStep);
 

@@ -7,11 +7,10 @@
 
 class DirectionalLight :
             public Light {
-    typedef Light Super;
 public:
     ComponentClass
 
-    DirectionalLight();
+    DirectionalLight(ComponentFactory* factory);
 
     const Ogre::Vector3& getDirection() const;
 

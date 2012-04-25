@@ -6,11 +6,10 @@
 
 class Camera :
             public VisualComponent {
-    typedef VisualComponent Super;
 public:
     ComponentClass
 
-    Camera();
+    Camera(ComponentFactory* factory);
     virtual ~Camera() { }
 
     void enterScene(Scene* scene);

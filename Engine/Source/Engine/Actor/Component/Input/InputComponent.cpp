@@ -4,12 +4,14 @@
 
 #include "InputComponent.h"
 
-InputComponent::InputComponent() :
-        Component(ComponentFamily::Input) {
+ComponentClassDef(InputComponent)
+
+InputComponent::InputComponent(ComponentFactory* factory) :
+        Component(factory, ComponentFamily::Input) {
 }
 
 void InputComponent::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    Component::enterScene(scene);
 
     InputHandler* inputHandler = scene->getEngine()->getInputHandler();
     inputHandler->registerKeyListener(this);
@@ -23,7 +25,7 @@ void InputComponent::leaveScene() {
     inputHandler->unregisterKeyListener(this);
     inputHandler->unregisterMouseListener(this);
 
-    Super::leaveScene();
+    Component::leaveScene();
 }
 
 bool InputComponent::mouseMoved(const OIS::MouseEvent& event) {

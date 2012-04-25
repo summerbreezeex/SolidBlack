@@ -11,8 +11,8 @@
 
 ComponentClassDef(ObserverLogic)
 
-ObserverLogic::ObserverLogic() {
-    getTypeData()->setDerivedTypeName(typeName);
+ObserverLogic::ObserverLogic(ComponentFactory* factory) :
+        LogicalComponent(factory) {
     addDependency(&observerCamera);
 }
 
@@ -61,6 +61,7 @@ void ObserverLogic::debugAction2() {
         Component* rigidBody = factory->createComponent("RigidBody");
         rigidBody->setAttributeValue("mass", 100.0);
         rigidBody->setAttributeValue("linearVelocity", observerCameraComponent->getDirection() * 10.0);
+        rigidBody->setAttributeValue("collisionShape", std::string("Box"));
         actor->addComponent(rigidBody);
 
         actor->attachComponents();

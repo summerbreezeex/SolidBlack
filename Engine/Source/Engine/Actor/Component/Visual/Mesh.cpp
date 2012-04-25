@@ -8,18 +8,18 @@
 
 ComponentClassDef(Mesh)
 
-Mesh::Mesh() :
+Mesh::Mesh(ComponentFactory* factory) :
+        VisualComponent(factory),
         meshName("meshName", ""),
         materialName("materialName", ""),
         entity(nullptr),
         mesh(nullptr) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&meshName);
     addAttribute(&materialName);
 }
 
 void Mesh::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    VisualComponent::enterScene(scene);
 
     mesh = Ogre::MeshManager::getSingleton().load(meshName.getValue(), Ogre::ResourceGroupManager::DEFAULT_RESOURCE_GROUP_NAME).get();
 
@@ -44,7 +44,7 @@ void Mesh::leaveScene() {
 
     mesh = nullptr;
 
-    Super::leaveScene();
+    VisualComponent::leaveScene();
 }
 
 Ogre::Entity* Mesh::getEntity() {

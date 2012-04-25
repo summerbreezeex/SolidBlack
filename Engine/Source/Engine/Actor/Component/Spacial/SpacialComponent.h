@@ -5,6 +5,8 @@
 class SpacialComponent :
             public Component {
 public:
-    SpacialComponent();
+    ComponentClass
+
+    SpacialComponent(ComponentFactory* factory);
     virtual ~SpacialComponent() { }
 };

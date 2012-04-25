@@ -6,8 +6,8 @@
 
 ComponentClassDef(PointLight)
 
-PointLight::PointLight() {
-    getTypeData()->setDerivedTypeName(typeName);
+PointLight::PointLight(ComponentFactory* factory) :
+        Light(factory) {
 }
 
 Ogre::Light* PointLight::createLight() {

@@ -9,8 +9,8 @@
 
 ComponentClassDef(ObserverInput)
 
-ObserverInput::ObserverInput() {
-    getTypeData()->setDerivedTypeName(typeName);
+ObserverInput::ObserverInput(ComponentFactory* factory) :
+        InputComponent(factory) {
     addDependency(&observerCamera);
     addDependency(&observerLogic);
 }

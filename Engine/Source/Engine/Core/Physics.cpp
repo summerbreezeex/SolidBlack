@@ -15,7 +15,12 @@ Physics::Physics() :
 }
 
 void Physics::logicUpdate(Ogre::Real timeStep) {
-    dynamicsWorld->stepSimulation(timeStep, 0);
+    int subStepCount = 4;
+    Ogre::Real subStepDenominator = subStepCount;
+
+    for (int i = 0; i < subStepCount; ++i) {
+        dynamicsWorld->stepSimulation(timeStep / subStepDenominator, 0);
+    }
 }
 
 void Physics::addRigidBody(RigidBody* rigidBody) {

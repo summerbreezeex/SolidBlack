@@ -4,11 +4,10 @@
 
 class SkyBox :
             public VisualComponent {
-    typedef VisualComponent Super;
 public:
     ComponentClass
 
-    SkyBox();
+    SkyBox(ComponentFactory* factory);
 
     void enterScene(Scene* scene);
     void leaveScene();

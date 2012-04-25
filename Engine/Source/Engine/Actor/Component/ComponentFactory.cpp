@@ -15,10 +15,15 @@ Scene* ComponentFactory::getScene() {
 Component* ComponentFactory::createComponent(const std::string& typeName) {
     auto it = constructors.find(typeName);
     if (it == constructors.end()) {
-        throw std::runtime_error(std::string("No registered component type '") + typeName + "'.");
+        throw std::runtime_error("No registered component type '" + typeName + "'.");
     }
 
-    Component* component = (*it).second();
-    component->setFactory(this);
+    auto component = (*it).second();
+    component->typeData = getTypeData(typeName);
+
     return component;
+}
+
+ComponentTypeData* ComponentFactory::getTypeData(const std::string& typeName) {
+    return typeDataMap[typeName].get();
 }

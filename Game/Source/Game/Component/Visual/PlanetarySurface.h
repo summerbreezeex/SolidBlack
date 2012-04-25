@@ -9,11 +9,10 @@
 
 class PlanetarySurface :
             public VisualComponent {
-    typedef VisualComponent Super;
 public:
     ComponentClass
 
-    PlanetarySurface();
+    PlanetarySurface(ComponentFactory* factory);
 
     void enterScene(Scene* scene);
     void leaveScene();

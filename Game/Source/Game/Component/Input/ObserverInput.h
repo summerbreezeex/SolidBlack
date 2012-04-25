@@ -7,11 +7,10 @@ class ObserverLogic;
 
 class ObserverInput :
             public InputComponent {
-    typedef InputComponent Super;
 public:
     ComponentClass
 
-    ObserverInput();
+    ObserverInput(ComponentFactory* factory);
 
     bool mouseMoved(const OIS::MouseEvent& event);
     bool mousePressed(const OIS::MouseEvent& event, OIS::MouseButtonID buttonId);

@@ -6,13 +6,13 @@
 
 ComponentClassDef(Light)
 
-Light::Light() :
+Light::Light(ComponentFactory* factory) :
+        VisualComponent(factory),
         enabled("enabled", true),
         diffuseColour("diffuseColour", Ogre::ColourValue::White),
         specularColour("specularColour", Ogre::ColourValue::White),
         attenuation("attenuation", Ogre::Vector4(7.0, 1.0, 0.7, 1.8)),
         light(nullptr) {
-    getTypeData()->addBaseTypeName(typeName);
     addAttribute(&enabled);
     addAttribute(&diffuseColour);
     addAttribute(&specularColour);
@@ -20,7 +20,7 @@ Light::Light() :
 }
 
 void Light::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    VisualComponent::enterScene(scene);
 
     light = createLight();
 
@@ -37,7 +37,7 @@ void Light::leaveScene() {
     getScene()->getSceneManager()->destroyLight(light);
     light = nullptr;
 
-    Super::leaveScene();
+    VisualComponent::leaveScene();
 }
 
 bool Light::isEnabled() const {

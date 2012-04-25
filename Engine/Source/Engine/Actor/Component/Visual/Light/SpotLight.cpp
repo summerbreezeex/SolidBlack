@@ -6,11 +6,11 @@
 
 ComponentClassDef(SpotLight)
 
-SpotLight::SpotLight() :
+SpotLight::SpotLight(ComponentFactory* factory) :
+        Light(factory),
         innerAngle("innerAngle", 25.0),
         outerAngle("outerAngle", 60.0),
         falloff("falloff", 1.0) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&innerAngle);
     addAttribute(&outerAngle);
     addAttribute(&falloff);

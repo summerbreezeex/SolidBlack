@@ -2,7 +2,6 @@
 
 #include "Game/Component/Input/ObserverInput.h"
 #include "Game/Component/Logical/ObserverLogic.h"
-#include "Game/Component/Logical/ProjectileLogic.h"
 #include "Game/Component/Visual/ObserverCamera.h"
 #include "Game/Component/Visual/PlanetarySurface.h"
 
@@ -10,15 +9,14 @@
 
 void SolidBlackComponentModule::registerComponents(ComponentFactory* factory) {
     // Input
-    factory->registerComponent<ObserverInput>();
+    factory->registerComponent<ObserverInput, InputComponent>();
 
     // Logical
-    factory->registerComponent<ObserverLogic>();
-    factory->registerComponent<ProjectileLogic>();
+    factory->registerComponent<ObserverLogic, LogicalComponent>();
 
     // Visual
-    factory->registerComponent<ObserverCamera>();
-    factory->registerComponent<PlanetarySurface>();
+    factory->registerComponent<ObserverCamera, Camera>();
+    factory->registerComponent<PlanetarySurface, VisualComponent>();
 }
 
 void SolidBlackComponentModule::registerCode(ScriptInterpreter* interpreter) {

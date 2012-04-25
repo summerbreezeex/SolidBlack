@@ -6,6 +6,8 @@
 class Scene;
 class ScriptInterpreter;
 
+typedef std::function<Component*()> ComponentConstructor;
+
 class ComponentFactory :
             Logged {
 public:
@@ -14,21 +16,27 @@ public:
     template <class T>
     void registerModule();
 
-    template <class T>
+    template <class T, class B>
     void registerComponent();
 
+    template <class T>
+    void registerBaseComponent(ComponentFamily::Enum family);
+
+    template <class T, class B>
+    void registerAbstractComponent();
+
     Component* createComponent(const std::string& typeName);
+
+    ComponentTypeData* getTypeData(const std::string& typeName);
 
     Scene* getScene();
 
 private:
-    template <class T>
-    static T* newComponent();
-
     Scene* scene;
     ScriptInterpreter* scriptInterpreter;
 
     std::map<std::string, ComponentConstructor> constructors;
+    std::map<std::string, std::shared_ptr<ComponentTypeData>> typeDataMap;
 };
 
 #include "ComponentFactory.inl"

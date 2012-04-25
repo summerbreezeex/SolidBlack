@@ -1,5 +1,7 @@
 #include "PhysicalComponent.h"
 
-PhysicalComponent::PhysicalComponent() :
-        Component(ComponentFamily::Physical) {
+ComponentClassDef(PhysicalComponent)
+
+PhysicalComponent::PhysicalComponent(ComponentFactory* factory) :
+        Component(factory, ComponentFamily::Physical) {
 }

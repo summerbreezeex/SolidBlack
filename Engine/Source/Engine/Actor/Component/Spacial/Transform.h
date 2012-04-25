@@ -7,11 +7,10 @@
 
 class Transform :
             public SpacialComponent {
-    typedef SpacialComponent Super;
 public:
     ComponentClass
 
-    Transform();
+    Transform(ComponentFactory* factory);
 
     void enterScene(Scene* scene);
     void leaveScene();
@@ -42,6 +41,8 @@ public:
     void setOrientation(const Ogre::Quaternion& orientation);
 
 private:
+    static Ogre::Quaternion interpolate(const Ogre::Quaternion& a, const Ogre::Quaternion& b, Ogre::Real delta);
+
     ComponentAttribute<Ogre::Vector3> position;
     ComponentAttribute<Ogre::Quaternion> orientation;
 

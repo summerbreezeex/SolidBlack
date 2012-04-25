@@ -9,9 +9,10 @@ class InputComponent :
             public Component,
             public OIS::KeyListener,
             public OIS::MouseListener {
-    typedef Component Super;
 public:
-    InputComponent();
+    ComponentClass
+
+    InputComponent(ComponentFactory* factory);
     virtual ~InputComponent() { }
 
     virtual void enterScene(Scene* scene);

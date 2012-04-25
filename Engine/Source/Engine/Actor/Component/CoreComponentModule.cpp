@@ -1,4 +1,5 @@
 #include "Engine/Actor/Component/ComponentFactory.h"
+#include "Engine/Actor/Component/Input/InputComponent.h"
 #include "Engine/Actor/Component/Logical/Script.h"
 #include "Engine/Actor/Component/Physical/RigidBody.h"
 #include "Engine/Actor/Component/Spacial/Transform.h"
@@ -13,24 +14,32 @@
 #include "CoreComponentModule.h"
 
 void CoreComponentModule::registerComponents(ComponentFactory* factory) {
+    // Input
+    factory->registerBaseComponent<InputComponent>(ComponentFamily::Input);
+
     // Logical
-    factory->registerComponent<Script>();
+    factory->registerBaseComponent<LogicalComponent>(ComponentFamily::Logical);
+    factory->registerComponent<Script, LogicalComponent>();
 
     // Physical
-    factory->registerComponent<RigidBody>();
+    factory->registerBaseComponent<PhysicalComponent>(ComponentFamily::Physical);
+    factory->registerComponent<RigidBody, PhysicalComponent>();
 
     // Spacial
-    factory->registerComponent<Transform>();
-
-    // Visual/Light
-    factory->registerComponent<DirectionalLight>();
-    factory->registerComponent<PointLight>();
-    factory->registerComponent<SpotLight>();
+    factory->registerBaseComponent<SpacialComponent>(ComponentFamily::Spacial);
+    factory->registerComponent<Transform, SpacialComponent>();
 
     // Visual
-    factory->registerComponent<Camera>();
-    factory->registerComponent<Mesh>();
-    factory->registerComponent<SkyBox>();
+    factory->registerBaseComponent<VisualComponent>(ComponentFamily::Visual);
+    factory->registerComponent<Camera, VisualComponent>();
+    factory->registerComponent<Mesh, VisualComponent>();
+    factory->registerComponent<SkyBox, VisualComponent>();
+
+    // Visual -> Light
+    factory->registerAbstractComponent<Light, VisualComponent>();
+    factory->registerComponent<DirectionalLight, Light>();
+    factory->registerComponent<PointLight, Light>();
+    factory->registerComponent<SpotLight, Light>();    
 }
 
 void CoreComponentModule::registerCode(ScriptInterpreter* interpreter) {

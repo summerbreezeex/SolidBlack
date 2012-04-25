@@ -6,20 +6,20 @@
 
 ComponentClassDef(Transform)
 
-Transform::Transform() :
+Transform::Transform(ComponentFactory* factory) :
+        SpacialComponent(factory),
         position("position", Ogre::Vector3::ZERO),
         orientation("orientation", Ogre::Quaternion::IDENTITY),
         lastPosition(getPosition()),
         interpolatedPosition(getPosition()),
         lastOrientation(getOrientation()),
         interpolatedOrientation(getOrientation()) {
-    getTypeData()->setDerivedTypeName(typeName);
     addAttribute(&position);
     addAttribute(&orientation);
 }
 
 void Transform::enterScene(Scene* scene) {
-    Super::enterScene(scene);
+    SpacialComponent::enterScene(scene);
 
     sceneNode = scene->getSceneManager()->getRootSceneNode()->createChildSceneNode();
 
@@ -30,7 +30,7 @@ void Transform::enterScene(Scene* scene) {
 void Transform::leaveScene() {
     sceneNode = nullptr;
 
-    Super::leaveScene();
+    SpacialComponent::leaveScene();
 }
 
 void Transform::logicUpdate(Ogre::Real timeStep) {
@@ -43,7 +43,8 @@ void Transform::logicUpdate(Ogre::Real timeStep) {
 
 void Transform::frameUpdate(Ogre::Real frameDelta) {
     interpolatedPosition = lastPosition + (getPosition() - lastPosition) * frameDelta;
-    interpolatedOrientation = Ogre::Quaternion::Slerp(frameDelta, lastOrientation, getOrientation());
+
+    interpolatedOrientation = interpolate(lastOrientation, getOrientation(), frameDelta);
 
     sceneNode->setPosition(interpolatedPosition);
     sceneNode->setOrientation(interpolatedOrientation);
@@ -108,4 +109,36 @@ const Ogre::Quaternion& Transform::getInterpolatedOrientation() const {
 
 void Transform::setOrientation(const Ogre::Quaternion& orientation) {
     this->orientation.setValue(orientation);
+}
+
+Ogre::Quaternion Transform::interpolate(const Ogre::Quaternion& a, const Ogre::Quaternion& b, Ogre::Real delta) {
+    Ogre::Real w1, w2;
+
+    Ogre::Real dotProduct = a.Dot(b);
+
+    Ogre::Quaternion b1;
+
+    if (dotProduct < 0.0f) {
+        b1 = -b;
+    } else {
+        b1 = b;
+    }
+
+    dotProduct = a.Dot(b1);
+
+    Ogre::Real theta = (Ogre::Real)acos(dotProduct);
+    Ogre::Real sindoubleheta = (Ogre::Real)sin(theta);
+
+    if (sindoubleheta > 0.01f) {
+        w1 = Ogre::Math::Sin((1.0f - delta) * theta) / sindoubleheta;
+        w2 = Ogre::Math::Sin(delta * theta) / sindoubleheta;
+    } else {
+        w1 = 1.0f - delta;
+        w2 = delta;
+    }
+
+    Ogre::Quaternion result(a * w1 + b1 * w2);
+    result.normalise();
+
+    return result;
 }
