@@ -3,5 +3,5 @@
 ComponentClassDef(SpacialComponent)
 
 SpacialComponent::SpacialComponent(ComponentFactory* factory) :
-        Component(factory, ComponentFamily::Spacial) {
+        Component(factory) {
 }

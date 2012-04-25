@@ -7,7 +7,7 @@
 ComponentClassDef(InputComponent)
 
 InputComponent::InputComponent(ComponentFactory* factory) :
-        Component(factory, ComponentFamily::Input) {
+        Component(factory) {
 }
 
 void InputComponent::enterScene(Scene* scene) {

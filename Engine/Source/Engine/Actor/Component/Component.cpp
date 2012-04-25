@@ -4,12 +4,12 @@
 
 #include "Component.h"
 
-Component::Component(ComponentFactory* factory, ComponentFamily::Enum family) :
+Component::Component(ComponentFactory* factory) :
         Logged("Component"),
         factory(factory),
         actor(nullptr),
         scene(nullptr),
-        typeData(nullptr),
+        typeData(nullptr), // Set by ComponentFactory after constructor is invoked.
         validFlag(true) {
 }
 
@@ -128,7 +128,7 @@ void Component::resolveDependencies() {
 
         if (!component) {
             validFlag = false;
-            logError("Component type '" + typeData->getDerivedTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
+            logError("Component type '" + typeData->getTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
         }
     }
 }

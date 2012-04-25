@@ -9,20 +9,7 @@ void ComponentFactory::registerModule() {
 
 template <class T, class B>
 void ComponentFactory::registerComponent() {
-    assert(constructors.find(T::typeName) == constructors.end());
-
-    auto typeData = new ComponentTypeData();
-    auto baseTypeData = typeDataMap[B::typeName];
-    typeData->setFamily(baseTypeData->getFamily());
-
-    foreach (baseTypeName, baseTypeData->getBaseTypeNames()) {
-        typeData->addBaseTypeName(*baseTypeName);
-    }
-
-    typeData->setDerivedTypeName(T::typeName);
-
-    typeDataMap[T::typeName] = std::shared_ptr<ComponentTypeData>(typeData);
-
+    registerAbstractComponent<T, B>();
     constructors[T::typeName] = [this] { return new T(this); };
 }
 
@@ -30,26 +17,13 @@ template <class T>
 void ComponentFactory::registerBaseComponent(ComponentFamily::Enum family) {
     assert(constructors.find(T::typeName) == constructors.end());
 
-    auto typeData = new ComponentTypeData();
-    typeData->setFamily(family);
-    typeData->addBaseTypeName(T::typeName);
-
-    typeDataMap[T::typeName] = std::shared_ptr<ComponentTypeData>(typeData);
+    typeDataMap[T::typeName] = std::make_shared<ComponentTypeData>(T::typeName, family);
 }
 
 template <class T, class B>
 void ComponentFactory::registerAbstractComponent() {
     assert(constructors.find(T::typeName) == constructors.end());
 
-    auto typeData = new ComponentTypeData();
-    auto baseTypeData = typeDataMap[B::typeName];
-    typeData->setFamily(baseTypeData->getFamily());
-
-    foreach (baseTypeName, baseTypeData->getBaseTypeNames()) {
-        typeData->addBaseTypeName(*baseTypeName);
-    }
-
-    typeData->addBaseTypeName(T::typeName);
-
-    typeDataMap[T::typeName] = std::shared_ptr<ComponentTypeData>(typeData);
+    auto superTypeData = typeDataMap[B::typeName].get();
+    typeDataMap[T::typeName] = std::make_shared<ComponentTypeData>(T::typeName, superTypeData);
 }

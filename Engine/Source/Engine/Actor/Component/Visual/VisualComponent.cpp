@@ -9,7 +9,7 @@
 ComponentClassDef(VisualComponent)
 
 VisualComponent::VisualComponent(ComponentFactory* factory) :
-        Component(factory, ComponentFamily::Visual),
+        Component(factory),
         localPosition("localPosition", Ogre::Vector3::ZERO),
         localOrientation("localOrientation", Ogre::Quaternion::IDENTITY),
         sceneNode(nullptr) {

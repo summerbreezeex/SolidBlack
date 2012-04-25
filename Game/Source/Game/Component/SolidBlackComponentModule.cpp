@@ -8,13 +8,10 @@
 #include "SolidBlackComponentModule.h"
 
 void SolidBlackComponentModule::registerComponents(ComponentFactory* factory) {
-    // Input
     factory->registerComponent<ObserverInput, InputComponent>();
 
-    // Logical
     factory->registerComponent<ObserverLogic, LogicalComponent>();
 
-    // Visual
     factory->registerComponent<ObserverCamera, Camera>();
     factory->registerComponent<PlanetarySurface, VisualComponent>();
 }

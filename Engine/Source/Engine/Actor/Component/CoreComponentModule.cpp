@@ -14,28 +14,21 @@
 #include "CoreComponentModule.h"
 
 void CoreComponentModule::registerComponents(ComponentFactory* factory) {
-    // Input
     factory->registerBaseComponent<InputComponent>(ComponentFamily::Input);
 
-    // Logical
     factory->registerBaseComponent<LogicalComponent>(ComponentFamily::Logical);
     factory->registerComponent<Script, LogicalComponent>();
 
-    // Physical
     factory->registerBaseComponent<PhysicalComponent>(ComponentFamily::Physical);
     factory->registerComponent<RigidBody, PhysicalComponent>();
 
-    // Spacial
     factory->registerBaseComponent<SpacialComponent>(ComponentFamily::Spacial);
     factory->registerComponent<Transform, SpacialComponent>();
 
-    // Visual
     factory->registerBaseComponent<VisualComponent>(ComponentFamily::Visual);
     factory->registerComponent<Camera, VisualComponent>();
     factory->registerComponent<Mesh, VisualComponent>();
     factory->registerComponent<SkyBox, VisualComponent>();
-
-    // Visual -> Light
     factory->registerAbstractComponent<Light, VisualComponent>();
     factory->registerComponent<DirectionalLight, Light>();
     factory->registerComponent<PointLight, Light>();

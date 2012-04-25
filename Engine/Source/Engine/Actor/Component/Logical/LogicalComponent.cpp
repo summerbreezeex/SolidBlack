@@ -3,5 +3,5 @@
 ComponentClassDef(LogicalComponent)
 
 LogicalComponent::LogicalComponent(ComponentFactory* factory) :
-        Component(factory, ComponentFamily::Logical) {
+        Component(factory) {
 }

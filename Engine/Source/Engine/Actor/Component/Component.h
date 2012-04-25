@@ -17,7 +17,7 @@ class Component :
             public Logged {
     friend class ComponentFactory;
 public:
-    Component(ComponentFactory* factory, ComponentFamily::Enum family);
+    Component(ComponentFactory* factory);
     virtual ~Component();
 
     virtual void attachToActor(Actor* actor);
