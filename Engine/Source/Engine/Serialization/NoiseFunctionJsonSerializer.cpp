@@ -5,7 +5,7 @@
 
 NoiseFunction* NoiseFunctionJsonSerializer::deserialize(const Json::Value& jsonValue) {
     if (!jsonValue.isObject()) {
-        throw std::runtime_error("Invalid noise std::function JSON.");
+        throw std::runtime_error("Invalid noise function JSON");
     }
 
     std::string typeName = jsonValue["type"].asString();
@@ -76,5 +76,5 @@ NoiseFunction* NoiseFunctionJsonSerializer::deserialize(const Json::Value& jsonV
         return new ConstantValue(jsonValue.get("value", 0.0).asDouble());
     }
 
-    throw std::runtime_error(std::string("Unknown noise type '") + typeName + "'.");
+    throw std::runtime_error("Unknown noise type '" + typeName + "'");
 }

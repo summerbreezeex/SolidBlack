@@ -18,6 +18,7 @@ public:
     ComponentTypeData(const std::string& typeName, ComponentFamily::Enum family);
 
     const std::string& getTypeName() const;
+    const std::string getFullTypeName() const;
     ComponentFamily::Enum getFamily() const;
     const std::vector<std::string> getImplementedTypeNames() const;
 

@@ -31,11 +31,11 @@ void VisualComponent::enterScene(Scene* scene) {
 
 void VisualComponent::leaveScene() {
     if (sceneNode->numAttachedObjects() > 0) {
-        getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached objects.");
+        getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached objects");
     }
 
     if (sceneNode->numChildren() > 0) {
-        getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached child nodes.");
+        getScene()->logWarning("Visual component in actor '" + getActor()->getName() + "' has residual attached child nodes");
     }
 
     getScene()->getSceneManager()->destroySceneNode(sceneNode);

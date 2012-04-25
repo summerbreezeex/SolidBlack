@@ -1,29 +1,53 @@
 #pragma once
 
-template <class T>
+template <class ModuleType>
 void ComponentFactory::registerModule() {
-    T module;
+    ModuleType module;
     module.registerComponents(this);
     module.registerCode(scriptInterpreter);
 }
 
-template <class T, class B>
-void ComponentFactory::registerComponent() {
-    registerAbstractComponent<T, B>();
-    constructors[T::typeName] = [this] { return new T(this); };
-}
-
-template <class T>
+template <class ComponentType>
 void ComponentFactory::registerBaseComponent(ComponentFamily::Enum family) {
-    assert(constructors.find(T::typeName) == constructors.end());
+    throwIfRegistered<ComponentType>();
 
-    typeDataMap[T::typeName] = std::make_shared<ComponentTypeData>(T::typeName, family);
+    auto typeData = std::make_shared<ComponentTypeData>(ComponentType::typeName, family);
+    typeDataMap[ComponentType::typeName] = typeData;
+    
+    registeredTypeNames.push_back(ComponentType::typeName);
+    logInfo("Registered base type '" + typeData->getFullTypeName() + "'");
 }
 
-template <class T, class B>
+template <class ComponentType, class SuperType>
 void ComponentFactory::registerAbstractComponent() {
-    assert(constructors.find(T::typeName) == constructors.end());
+    throwIfRegistered<ComponentType>();
+    throwIfNotRegistered<SuperType>();
 
-    auto superTypeData = typeDataMap[B::typeName].get();
-    typeDataMap[T::typeName] = std::make_shared<ComponentTypeData>(T::typeName, superTypeData);
+    auto superTypeData = typeDataMap[SuperType::typeName].get();
+    auto typeData = std::make_shared<ComponentTypeData>(ComponentType::typeName, superTypeData);
+    typeDataMap[ComponentType::typeName] = typeData;
+
+    registeredTypeNames.push_back(ComponentType::typeName);
+    logInfo("Registered type '" + typeData->getFullTypeName() + "'");
+}
+
+template <class ComponentType, class SuperType>
+void ComponentFactory::registerComponent() {
+    registerAbstractComponent<ComponentType, SuperType>();
+
+    constructors[ComponentType::typeName] = [this] { return new ComponentType(this); };
+}
+
+template <class ComponentType>
+void ComponentFactory::throwIfRegistered() {
+    if (std::find(registeredTypeNames.begin(), registeredTypeNames.end(), ComponentType::typeName) != registeredTypeNames.end()) {
+        throw std::runtime_error("Component type '" + ComponentType::typeName + "' is already registered");
+    }
+}
+
+template <class ComponentType>
+void ComponentFactory::throwIfNotRegistered() {
+    if (std::find(registeredTypeNames.begin(), registeredTypeNames.end(), ComponentType::typeName) == registeredTypeNames.end()) {
+        throw std::runtime_error("Component type '" + ComponentType::typeName + "' is not registered");
+    }
 }

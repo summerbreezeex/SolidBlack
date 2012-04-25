@@ -30,7 +30,7 @@ void Actor::enterScene(Scene* scene) {
         scene->addComponent((*component).get());
     }
 
-    scene->logInfo(std::string("Actor '") + getUniqueName() + "' entering scene '" + scene->getName() + "'...");
+    scene->logInfo("Actor '" + getUniqueName() + "' entering scene '" + scene->getName() + "'...");
 }
 
 void Actor::leaveScene() {
@@ -43,7 +43,7 @@ void Actor::leaveScene() {
         scene->removeComponent((*component).get());
     }
 
-    scene->logInfo(std::string("Actor '") + getUniqueName() + "' leaving scene '" + scene->getName() + "'...");
+    scene->logInfo("Actor '" + getUniqueName() + "' leaving scene '" + scene->getName() + "'...");
 
     id = 0;
     scene = nullptr;

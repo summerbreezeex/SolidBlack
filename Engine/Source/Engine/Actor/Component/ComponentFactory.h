@@ -4,7 +4,6 @@
 #include "Engine/Actor/Component/Component.h"
 
 class Scene;
-class ScriptInterpreter;
 
 typedef std::function<Component*()> ComponentConstructor;
 
@@ -13,17 +12,17 @@ class ComponentFactory :
 public:
     ComponentFactory(Scene* scene);
 
-    template <class T>
+    template <class ModuleType>
     void registerModule();
 
-    template <class T, class B>
-    void registerComponent();
-
-    template <class T>
+    template <class ComponentType>
     void registerBaseComponent(ComponentFamily::Enum family);
 
-    template <class T, class B>
+    template <class ComponentType, class SuperType>
     void registerAbstractComponent();
+
+    template <class ComponentType, class SuperType>
+    void registerComponent();
 
     Component* createComponent(const std::string& typeName);
 
@@ -32,9 +31,16 @@ public:
     Scene* getScene();
 
 private:
+    template <class ComponentType>
+    void throwIfRegistered();
+
+    template <class ComponentType>
+    void throwIfNotRegistered();
+
     Scene* scene;
     ScriptInterpreter* scriptInterpreter;
 
+    std::vector<std::string> registeredTypeNames;
     std::map<std::string, ComponentConstructor> constructors;
     std::map<std::string, std::shared_ptr<ComponentTypeData>> typeDataMap;
 };

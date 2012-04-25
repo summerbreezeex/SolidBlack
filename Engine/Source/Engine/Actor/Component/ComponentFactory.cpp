@@ -15,7 +15,7 @@ Scene* ComponentFactory::getScene() {
 Component* ComponentFactory::createComponent(const std::string& typeName) {
     auto it = constructors.find(typeName);
     if (it == constructors.end()) {
-        throw std::runtime_error("No registered component type '" + typeName + "'.");
+        throw std::runtime_error("No registered component type '" + typeName + "'");
     }
 
     auto component = (*it).second();
