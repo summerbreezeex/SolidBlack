@@ -7,8 +7,6 @@
 class ObserverCamera :
             public Camera {
 public:
-    ComponentClass
-
     ObserverCamera(ComponentFactory* factory);
 
     void logicUpdate(Ogre::Real timeStep);

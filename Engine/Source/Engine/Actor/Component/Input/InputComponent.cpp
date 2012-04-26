@@ -4,8 +4,6 @@
 
 #include "InputComponent.h"
 
-ComponentClassDef(InputComponent)
-
 InputComponent::InputComponent(ComponentFactory* factory) :
         Component(factory) {
 }

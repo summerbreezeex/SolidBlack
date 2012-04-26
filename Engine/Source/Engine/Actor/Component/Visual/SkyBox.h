@@ -5,8 +5,6 @@
 class SkyBox :
             public VisualComponent {
 public:
-    ComponentClass
-
     SkyBox(ComponentFactory* factory);
 
     void enterScene(Scene* scene);

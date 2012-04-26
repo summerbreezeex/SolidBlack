@@ -6,8 +6,6 @@
 class Script :
             public LogicalComponent {
 public:
-    ComponentClass
-
     Script(ComponentFactory* factory);
 
     void initializeScript();

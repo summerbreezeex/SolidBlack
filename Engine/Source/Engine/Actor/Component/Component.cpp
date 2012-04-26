@@ -9,7 +9,7 @@ Component::Component(ComponentFactory* factory) :
         factory(factory),
         actor(nullptr),
         scene(nullptr),
-        typeData(nullptr), // Set by ComponentFactory after constructor is invoked.
+        typeInfo(nullptr), // Set by ComponentFactory after constructor is invoked.
         validFlag(true) {
 }
 
@@ -55,12 +55,12 @@ Scene* Component::getScene() const {
     return scene;
 }
 
-ComponentTypeData* Component::getTypeData() {
-    return typeData;
+ComponentTypeInfo* Component::getTypeInfo() {
+    return typeInfo;
 }
 
-const ComponentTypeData* Component::getTypeData() const {
-    return typeData;
+const ComponentTypeInfo* Component::getTypeInfo() const {
+    return typeInfo;
 }
 
 const std::vector<std::string> Component::getAttributeNames() const {
@@ -128,7 +128,7 @@ void Component::resolveDependencies() {
 
         if (!component) {
             validFlag = false;
-            logError("Component type '" + typeData->getTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
+            logError("Component type '" + typeInfo->getTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
         }
     }
 }

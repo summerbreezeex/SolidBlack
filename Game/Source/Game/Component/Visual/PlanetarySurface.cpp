@@ -6,8 +6,6 @@
 
 #include "PlanetarySurface.h"
 
-ComponentClassDef(PlanetarySurface)
-
 PlanetarySurface::PlanetarySurface(ComponentFactory* factory) :
         VisualComponent(factory),
         diameter("diameter", 0),

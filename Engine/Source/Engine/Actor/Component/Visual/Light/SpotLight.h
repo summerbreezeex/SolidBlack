@@ -7,8 +7,6 @@
 class SpotLight :
             public Light {
 public:
-    ComponentClass
-
     SpotLight(ComponentFactory* factory);
 
 private:

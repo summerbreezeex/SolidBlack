@@ -16,10 +16,10 @@ Physics::Physics() :
 
 void Physics::logicUpdate(Ogre::Real timeStep) {
     int subStepCount = 4;
-    Ogre::Real subStepDenominator = subStepCount;
+    Ogre::Real dividedTimeStep = timeStep / Ogre::Real(subStepCount);
 
     for (int i = 0; i < subStepCount; ++i) {
-        dynamicsWorld->stepSimulation(timeStep / subStepDenominator, 0);
+        dynamicsWorld->stepSimulation(dividedTimeStep, 0);
     }
 }
 

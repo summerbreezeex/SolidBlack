@@ -2,7 +2,6 @@
 
 template <typename T>
 ComponentDependency<T>::ComponentDependency() :
-        ComponentDependencyBase(T::typeName),
         component(nullptr) {
 }
 
@@ -24,6 +23,11 @@ const T* ComponentDependency<T>::getComponent() const {
 template <typename T>
 Component* ComponentDependency<T>::getBaseComponent() {
     return component;
+}
+
+template <typename T>
+const std::string ComponentDependency<T>::getTypeName() const {
+    return getComponentTypeName<T>();
 }
 
 template <typename T>

@@ -8,8 +8,6 @@
 class DirectionalLight :
             public Light {
 public:
-    ComponentClass
-
     DirectionalLight(ComponentFactory* factory);
 
     const Ogre::Vector3& getDirection() const;

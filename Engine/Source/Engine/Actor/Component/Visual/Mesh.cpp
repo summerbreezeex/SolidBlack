@@ -6,8 +6,6 @@
 
 #include "Mesh.h"
 
-ComponentClassDef(Mesh)
-
 Mesh::Mesh(ComponentFactory* factory) :
         VisualComponent(factory),
         meshName("meshName", ""),

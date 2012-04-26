@@ -5,8 +5,6 @@
 class LogicalComponent :
             public Component {
 public:
-    ComponentClass
-
     LogicalComponent(ComponentFactory* factory);
     virtual ~LogicalComponent() { }
 };

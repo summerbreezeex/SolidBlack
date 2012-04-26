@@ -50,7 +50,7 @@ private:
     Scene* scene;
 
     std::map<std::string, std::vector<Component*>> componentImplementedTypes;
-    std::vector<ComponentPtr> components;
+    std::vector<std::shared_ptr<Component>> components;
 };
 
 typedef std::shared_ptr<Actor> ActorPtr;

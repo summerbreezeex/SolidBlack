@@ -13,17 +13,26 @@ Scene* ComponentFactory::getScene() {
 }
 
 Component* ComponentFactory::createComponent(const std::string& typeName) {
-    auto it = constructors.find(typeName);
-    if (it == constructors.end()) {
+    auto it = typeInfoMap.find(typeName);
+    if (it == typeInfoMap.end()) {
         throw std::runtime_error("No registered component type '" + typeName + "'");
     }
 
-    auto component = (*it).second();
-    component->typeData = getTypeData(typeName);
-
-    return component;
+    return (*it).second->createComponent();
 }
 
-ComponentTypeData* ComponentFactory::getTypeData(const std::string& typeName) {
-    return typeDataMap[typeName].get();
+ComponentTypeInfo* ComponentFactory::getTypeInfo(const std::string& typeName) {
+    return typeInfoMap[typeName].get();
+}
+
+void ComponentFactory::throwIfRegistered(const std::string& typeName) {
+    if (typeInfoMap.find(typeName) != typeInfoMap.end()) {
+        throw std::runtime_error("Component type '" + typeName + "' is already registered");
+    }
+}
+
+void ComponentFactory::throwIfNotRegistered(const std::string& typeName) {
+    if (typeInfoMap.find(typeName) == typeInfoMap.end()) {
+        throw std::runtime_error("Component type '" + typeName + "' is not registered");
+    }
 }

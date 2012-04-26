@@ -7,8 +7,6 @@
 class PointLight :
             public Light {
 public:
-    ComponentClass
-
     PointLight(ComponentFactory* factory);
 
 private:

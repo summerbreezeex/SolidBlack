@@ -11,8 +11,6 @@ class Transform;
 class VisualComponent :
             public Component {
 public:
-    ComponentClass
-
     VisualComponent(ComponentFactory* factory);
     virtual ~VisualComponent() { }
 

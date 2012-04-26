@@ -9,8 +9,6 @@
 class Light :
             public VisualComponent {
 public:
-    ComponentClass
-
     Light(ComponentFactory* factory);
     virtual ~Light() { }
 

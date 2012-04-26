@@ -7,8 +7,6 @@
 
 #include "ObserverInput.h"
 
-ComponentClassDef(ObserverInput)
-
 ObserverInput::ObserverInput(ComponentFactory* factory) :
         InputComponent(factory) {
     addDependency(&observerCamera);

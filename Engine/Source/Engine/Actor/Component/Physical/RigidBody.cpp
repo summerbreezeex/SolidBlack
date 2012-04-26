@@ -11,8 +11,6 @@
 
 #include "RigidBody.h"
 
-ComponentClassDef(RigidBody)
-
 RigidBody::RigidBody(ComponentFactory* factory) :
         PhysicalComponent(factory),
         mass("mass", 0.0),

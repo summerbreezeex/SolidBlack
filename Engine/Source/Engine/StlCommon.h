@@ -14,4 +14,3 @@
     for (auto var = (container).begin(); \
          var != (container).end(); \
          ++var)
-

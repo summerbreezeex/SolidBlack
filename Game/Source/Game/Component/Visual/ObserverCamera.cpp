@@ -3,8 +3,6 @@
 
 #include "ObserverCamera.h"
 
-ComponentClassDef(ObserverCamera)
-
 ObserverCamera::ObserverCamera(ComponentFactory* factory) :
         Camera(factory),
         localMoveDirection(Ogre::Vector3::ZERO),

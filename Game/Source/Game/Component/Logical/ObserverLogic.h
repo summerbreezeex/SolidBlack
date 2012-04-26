@@ -7,8 +7,6 @@ class ObserverCamera;
 class ObserverLogic :
             public LogicalComponent {
 public:
-    ComponentClass
-
     ObserverLogic(ComponentFactory* factory);
 
     void debugAction1();

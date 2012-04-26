@@ -10,8 +10,6 @@ class InputComponent :
             public OIS::KeyListener,
             public OIS::MouseListener {
 public:
-    ComponentClass
-
     InputComponent(ComponentFactory* factory);
     virtual ~InputComponent() { }
 

@@ -10,8 +10,6 @@
 class PlanetarySurface :
             public VisualComponent {
 public:
-    ComponentClass
-
     PlanetarySurface(ComponentFactory* factory);
 
     void enterScene(Scene* scene);

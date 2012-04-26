@@ -8,8 +8,6 @@ class ObserverLogic;
 class ObserverInput :
             public InputComponent {
 public:
-    ComponentClass
-
     ObserverInput(ComponentFactory* factory);
 
     bool mouseMoved(const OIS::MouseEvent& event);

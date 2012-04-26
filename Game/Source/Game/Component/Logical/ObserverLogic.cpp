@@ -9,8 +9,6 @@
 
 #include "ObserverLogic.h"
 
-ComponentClassDef(ObserverLogic)
-
 ObserverLogic::ObserverLogic(ComponentFactory* factory) :
         LogicalComponent(factory) {
     addDependency(&observerCamera);

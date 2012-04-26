@@ -4,8 +4,6 @@
 
 #include "SpotLight.h"
 
-ComponentClassDef(SpotLight)
-
 SpotLight::SpotLight(ComponentFactory* factory) :
         Light(factory),
         innerAngle("innerAngle", 25.0),

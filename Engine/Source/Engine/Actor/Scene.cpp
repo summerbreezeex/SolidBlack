@@ -117,16 +117,16 @@ void Scene::removeAllActors() {
 }
 
 void Scene::addComponent(Component* component) {
-    auto typeData = component->getTypeData();
-    auto it = familyCollections.find(typeData->getFamily());
+    auto typeInfo = component->getTypeInfo();
+    auto it = familyCollections.find(typeInfo->getFamily());
     assert(it != familyCollections.end());
 
     (*it).second->addComponent(component);
 }
 
 void Scene::removeComponent(Component* component) {
-    auto typeData = component->getTypeData();
-    auto it = familyCollections.find(typeData->getFamily());
+    auto typeInfo = component->getTypeInfo();
+    auto it = familyCollections.find(typeInfo->getFamily());
     assert(it != familyCollections.end());
 
     (*it).second->removeComponent(component);
@@ -148,14 +148,9 @@ void Scene::logicUpdate(Ogre::Real timeStep) {
         removeActor(*actor);
     }
 
-    Task<void*>::Function physicsFunc = [this, timeStep]() -> void* {
+    //physicsTask = getEngine()->getTaskPool()->schedule([this, timeStep] {
         physics.logicUpdate(timeStep);
-        return 0;
-    };
-
-    physicsTask = getEngine()->getTaskPool()->schedule([this, timeStep] {
-        physics.logicUpdate(timeStep);
-    });
+    //});
 }
 
 void Scene::frameUpdate(Ogre::Real frameDelta) {

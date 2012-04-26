@@ -8,8 +8,6 @@
 class Transform :
             public SpacialComponent {
 public:
-    ComponentClass
-
     Transform(ComponentFactory* factory);
 
     void enterScene(Scene* scene);

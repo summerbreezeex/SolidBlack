@@ -4,8 +4,6 @@
 
 #include "Script.h"
 
-ComponentClassDef(Script)
-
 Script::Script(ComponentFactory* factory) :
         LogicalComponent(factory),
         scriptName("scriptName", ""),

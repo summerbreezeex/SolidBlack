@@ -9,45 +9,42 @@ void ComponentFactory::registerModule() {
 
 template <class ComponentType>
 void ComponentFactory::registerBaseComponent(ComponentFamily::Enum family) {
-    throwIfRegistered<ComponentType>();
+    auto typeName = getComponentTypeName<ComponentType>();
 
-    auto typeData = std::make_shared<ComponentTypeData>(ComponentType::typeName, family);
-    typeDataMap[ComponentType::typeName] = typeData;
+    throwIfRegistered(typeName);
     
-    registeredTypeNames.push_back(ComponentType::typeName);
-    logInfo("Registered base type '" + typeData->getFullTypeName() + "'");
+    auto typeInfo = std::make_shared<ComponentTypeInfo>(typeName, family);
+    typeInfoMap[typeName] = typeInfo;
+    
+    logInfo("Registered base type '" + typeInfo->getFullTypeName() + "'");
 }
 
 template <class ComponentType, class SuperType>
 void ComponentFactory::registerAbstractComponent() {
-    throwIfRegistered<ComponentType>();
-    throwIfNotRegistered<SuperType>();
+    auto typeName = getComponentTypeName<ComponentType>();
+    auto superTypeName = getComponentTypeName<SuperType>();
 
-    auto superTypeData = typeDataMap[SuperType::typeName].get();
-    auto typeData = std::make_shared<ComponentTypeData>(ComponentType::typeName, superTypeData);
-    typeDataMap[ComponentType::typeName] = typeData;
+    throwIfRegistered(typeName);
+    throwIfNotRegistered(superTypeName);
 
-    registeredTypeNames.push_back(ComponentType::typeName);
-    logInfo("Registered type '" + typeData->getFullTypeName() + "'");
+    auto superTypeInfo = typeInfoMap[superTypeName].get();
+    auto typeInfo = std::make_shared<ComponentTypeInfo>(typeName, superTypeInfo);
+    typeInfoMap[typeName] = typeInfo;
+
+    logInfo("Registered type '" + typeInfo->getFullTypeName() + "'");
 }
 
 template <class ComponentType, class SuperType>
 void ComponentFactory::registerComponent() {
-    registerAbstractComponent<ComponentType, SuperType>();
+    auto typeName = getComponentTypeName<ComponentType>();
+    auto superTypeName = getComponentTypeName<SuperType>();
 
-    constructors[ComponentType::typeName] = [this] { return new ComponentType(this); };
-}
+    throwIfRegistered(typeName);
+    throwIfNotRegistered(superTypeName);
 
-template <class ComponentType>
-void ComponentFactory::throwIfRegistered() {
-    if (std::find(registeredTypeNames.begin(), registeredTypeNames.end(), ComponentType::typeName) != registeredTypeNames.end()) {
-        throw std::runtime_error("Component type '" + ComponentType::typeName + "' is already registered");
-    }
-}
+    auto superTypeInfo = typeInfoMap[superTypeName].get();
+    auto typeInfo = std::make_shared<ComponentTypeInfo>(typeName, superTypeInfo, [this] { return new ComponentType(this); });
+    typeInfoMap[typeName] = typeInfo;
 
-template <class ComponentType>
-void ComponentFactory::throwIfNotRegistered() {
-    if (std::find(registeredTypeNames.begin(), registeredTypeNames.end(), ComponentType::typeName) == registeredTypeNames.end()) {
-        throw std::runtime_error("Component type '" + ComponentType::typeName + "' is not registered");
-    }
+    logInfo("Registered type '" + typeInfo->getFullTypeName() + "'");
 }

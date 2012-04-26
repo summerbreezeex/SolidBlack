@@ -5,8 +5,6 @@
 
 class Scene;
 
-typedef std::function<Component*()> ComponentConstructor;
-
 class ComponentFactory :
             Logged {
 public:
@@ -26,23 +24,18 @@ public:
 
     Component* createComponent(const std::string& typeName);
 
-    ComponentTypeData* getTypeData(const std::string& typeName);
+    ComponentTypeInfo* getTypeInfo(const std::string& typeName);
 
     Scene* getScene();
 
 private:
-    template <class ComponentType>
-    void throwIfRegistered();
-
-    template <class ComponentType>
-    void throwIfNotRegistered();
-
+    void throwIfRegistered(const std::string& typeName);
+    void throwIfNotRegistered(const std::string& typeName);
+    
     Scene* scene;
     ScriptInterpreter* scriptInterpreter;
 
-    std::vector<std::string> registeredTypeNames;
-    std::map<std::string, ComponentConstructor> constructors;
-    std::map<std::string, std::shared_ptr<ComponentTypeData>> typeDataMap;
+    std::map<std::string, std::shared_ptr<ComponentTypeInfo>> typeInfoMap;
 };
 
 #include "ComponentFactory.inl"

@@ -15,8 +15,6 @@ class RigidBody :
             public PhysicalComponent {
     friend class Physics;
 public:
-    ComponentClass
-
     RigidBody(ComponentFactory* factory);
 
     void enterScene(Scene* scene);

@@ -6,8 +6,6 @@
 
 #include "VisualComponent.h"
 
-ComponentClassDef(VisualComponent)
-
 VisualComponent::VisualComponent(ComponentFactory* factory) :
         Component(factory),
         localPosition("localPosition", Ogre::Vector3::ZERO),

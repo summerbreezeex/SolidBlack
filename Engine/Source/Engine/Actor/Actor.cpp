@@ -54,8 +54,7 @@ void Actor::kill() {
 }
 
 void Actor::addComponent(Component* component) {
-    ComponentPtr componentPtr(component);
-    components.push_back(componentPtr);
+    components.push_back(std::shared_ptr<Component>(component));
     registerImplementedTypes(component);
 }
 
@@ -115,7 +114,7 @@ Scene* Actor::getScene() {
 }
 
 void Actor::registerImplementedTypes(Component* component) {
-    auto implementedTypeNames = component->getTypeData()->getImplementedTypeNames();
+    auto implementedTypeNames = component->getTypeInfo()->getImplementedTypeNames();
 
     foreach (typeName, implementedTypeNames) {
         auto it = componentImplementedTypes.find(*typeName);

@@ -7,8 +7,6 @@
 class Camera :
             public VisualComponent {
 public:
-    ComponentClass
-
     Camera(ComponentFactory* factory);
     virtual ~Camera() { }
 

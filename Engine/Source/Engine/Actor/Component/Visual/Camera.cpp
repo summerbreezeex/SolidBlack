@@ -6,8 +6,6 @@
 
 #include "Camera.h"
 
-ComponentClassDef(Camera)
-
 Camera::Camera(ComponentFactory* factory) :
         VisualComponent(factory),
         fov("fov", 70.0),

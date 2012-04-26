@@ -4,8 +4,6 @@
 
 #include "PointLight.h"
 
-ComponentClassDef(PointLight)
-
 PointLight::PointLight(ComponentFactory* factory) :
         Light(factory) {
 }

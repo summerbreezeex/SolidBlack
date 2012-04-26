@@ -2,12 +2,14 @@
 
 template <class T>
 T* Actor::findComponentOfType() {
-    return dynamic_cast<T*>(findComponentOfType(T::typeName));
+    auto typeName = getComponentTypeName<T>();
+    return dynamic_cast<T*>(findComponentOfType(typeName));
 }
 
 template <class T>
 const std::vector<T*> Actor::findComponentsOfType() {
-    auto components = findComponentsOfType(T::typeName);
+    auto typeName = getComponentTypeName<T>();
+    auto components = findComponentsOfType(typeName);
 
     std::vector<T*> resultingComponents;
     foreach (component, components) {

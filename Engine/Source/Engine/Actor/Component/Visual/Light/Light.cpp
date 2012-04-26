@@ -4,8 +4,6 @@
 
 #include "Light.h"
 
-ComponentClassDef(Light)
-
 Light::Light(ComponentFactory* factory) :
         VisualComponent(factory),
         enabled("enabled", true),

@@ -7,8 +7,6 @@
 class Mesh :
             public VisualComponent {
 public:
-    ComponentClass
-
     Mesh(ComponentFactory* factory);
 
     void enterScene(Scene* scene);

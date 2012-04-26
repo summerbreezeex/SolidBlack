@@ -4,8 +4,6 @@
 
 #include "Transform.h"
 
-ComponentClassDef(Transform)
-
 Transform::Transform(ComponentFactory* factory) :
         SpacialComponent(factory),
         position("position", Ogre::Vector3::ZERO),

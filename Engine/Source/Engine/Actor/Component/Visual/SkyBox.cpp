@@ -4,8 +4,6 @@
 
 #include "SkyBox.h"
 
-ComponentClassDef(SkyBox)
-
 SkyBox::SkyBox(ComponentFactory* factory) :
         VisualComponent(factory),
         materialName("materialName", "") {
