@@ -19,20 +19,20 @@ private:
     std::string name;
 };
 
-template <typename T>
+template <typename AttributeType>
 class ComponentAttribute :
             public ComponentAttributeBase {
 public:
-    ComponentAttribute(const std::string& name, const T& value);
+    ComponentAttribute(const std::string& name, const AttributeType& value);
 
     void serializeToJson(Json::Value* jsonValue) const;
     void deserializeFromJson(const Json::Value& jsonValue);
 
-    const T& getValue() const;
-    void setValue(const T& value);
+    const AttributeType& getValue() const;
+    void setValue(const AttributeType& value);
 
 private:
-    T value;
+    AttributeType value;
 };
 
 #include "ComponentAttribute.inl"

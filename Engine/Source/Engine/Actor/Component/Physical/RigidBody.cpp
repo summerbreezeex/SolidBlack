@@ -17,6 +17,7 @@ RigidBody::RigidBody(ComponentFactory* factory) :
         linearVelocity("linearVelocity", Ogre::Vector3::ZERO),
         angularVelocity("angularVelocity", Ogre::Vector3::ZERO),
         collisionShape("collisionShape", "ConvexHull"),
+        physics(nullptr),
         shape(nullptr),
         rigidBody(nullptr),
         initialized(false) {
@@ -30,6 +31,7 @@ RigidBody::RigidBody(ComponentFactory* factory) :
 void RigidBody::enterScene(Scene* scene) {
     PhysicalComponent::enterScene(scene);
     
+    physics = scene->getPhysics();
     initializeRigidBody();
 }
 
@@ -37,16 +39,23 @@ void RigidBody::leaveScene() {
     if (initialized) {
         deinitializeRigidBody();
     }
+    physics = nullptr;
 
     PhysicalComponent::leaveScene();
 }
 
 void RigidBody::logicUpdate(Ogre::Real timeStep) {
-    if (initialized) {
-        auto transformComponent = transform.getComponent();
-        transformComponent->setPosition(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getOrigin()));
-        transformComponent->setOrientation(BtOgre::Convert::toOgre(rigidBody->getWorldTransform().getRotation()));
+    PhysicalComponent::logicUpdate(timeStep);
+
+    if (!initialized) {
+        return;
     }
+
+    const btTransform& worldTransform = rigidBody->getWorldTransform();
+
+    auto transformComponent = transform.getComponent();
+    transformComponent->setPosition(BtOgre::Convert::toOgre(worldTransform.getOrigin()));
+    transformComponent->setOrientation(BtOgre::Convert::toOgre(worldTransform.getRotation()));
 }
 
 Ogre::Real RigidBody::getMass() const {
@@ -68,10 +77,6 @@ const Ogre::Vector3& RigidBody::getAngularVelocity() const {
 void RigidBody::initializeRigidBody() {
     initialized = true;
 
-    btVector3 localInertia(0.0, 0.0, 0.0);
-
-    auto transformComponent = transform.getComponent();
-
     BtOgre::StaticMeshToShapeConverter converter;
     auto meshComponents = getActor()->findComponentsOfType<Mesh>();
     foreach (meshComponent, meshComponents) {
@@ -90,6 +95,7 @@ void RigidBody::initializeRigidBody() {
         throw std::runtime_error("Unknown collision shape '" + collisionShape.getValue() + "'");
     }
 
+    btVector3 localInertia(0.0, 0.0, 0.0);
     if (getMass() > 0.0) {
         shape->calculateLocalInertia(getMass(), localInertia);
     }
@@ -102,19 +108,21 @@ void RigidBody::initializeRigidBody() {
         rigidBody->setFriction(1.0);
     }
 
-    btTransform transformation;
-    transformation.setOrigin(BtOgre::Convert::toBullet(transformComponent->getPosition()));
-    transformation.setRotation(BtOgre::Convert::toBullet(transformComponent->getOrientation()));
-    rigidBody->setWorldTransform(transformation);
+    auto transformComponent = transform.getComponent();
+
+    btTransform worldTransform;
+    worldTransform.setOrigin(BtOgre::Convert::toBullet(transformComponent->getPosition()));
+    worldTransform.setRotation(BtOgre::Convert::toBullet(transformComponent->getOrientation()));
+    rigidBody->setWorldTransform(worldTransform);
 
     rigidBody->setLinearVelocity(BtOgre::Convert::toBullet(getLinearVelocity()));
     rigidBody->setAngularVelocity(BtOgre::Convert::toBullet(getAngularVelocity()));
 
-    getScene()->getPhysics()->addRigidBody(this);
+    physics->addRigidBody(this);
 }
 
 void RigidBody::deinitializeRigidBody() {
-    getScene()->getPhysics()->removeRigidBody(this);
+    physics->removeRigidBody(this);
 
     delete shape;
     delete rigidBody;

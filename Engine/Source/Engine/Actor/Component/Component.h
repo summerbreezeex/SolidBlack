@@ -34,24 +34,20 @@ public:
     ComponentTypeInfo* getTypeInfo();
     const ComponentTypeInfo* getTypeInfo() const;
 
-    const std::vector<std::string> getAttributeNames() const;
+    bool isValid() const;
+    
+    template <typename AttributeType>
+    const AttributeType* getAttributeValue(const std::string& name) const;
 
-    template <typename T>
-    bool attributeIsType(const std::string& name) const;
-
-    template <typename T>
-    void setAttributeValue(const std::string& name, const T& value);
-
-    template <typename T>
-    const T* getAttributeValue(const std::string& name) const;
+    template <typename AttributeType>
+    void setAttributeValue(const std::string& name, const AttributeType& value);
 
     ComponentAttributeBase* getAttribute(const std::string& name);
     const ComponentAttributeBase* getAttribute(const std::string& name) const;
 
-    const std::vector<ComponentAttributeBase*> getAttributes() const;
+    const std::vector<ComponentAttributeBase*> getAttributes();
+    const std::vector<const ComponentAttributeBase*> getAttributes() const;
 
-    bool isValid() const;
-    
 protected:
     void addAttribute(ComponentAttributeBase* attribute);
     void addDependency(ComponentDependencyBase* dependency);
@@ -62,12 +58,11 @@ private:
     void resolveDependencies();
     void unresolveDependencies();
 
-    ComponentFactory* factory;
-
     Actor* actor;
     Scene* scene;
 
     ComponentTypeInfo* typeInfo;
+    ComponentFactory* factory;
 
     std::map<std::string, ComponentAttributeBase*> attributes;
     std::vector<ComponentDependencyBase*> dependencies;

@@ -1,5 +1,3 @@
-#include "Engine/Actor/Actor.h"
-#include "Engine/Actor/Scene.h"
 #include "Engine/Actor/Component/Component.h"
 
 #include "ComponentCollection.h"

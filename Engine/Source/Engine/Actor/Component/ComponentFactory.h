@@ -2,6 +2,7 @@
 
 #include "Engine/StlCommon.h"
 #include "Engine/Actor/Component/Component.h"
+#include "Engine/Core/Logged.h"
 
 class Scene;
 
@@ -35,7 +36,7 @@ private:
     Scene* scene;
     ScriptInterpreter* scriptInterpreter;
 
-    std::map<std::string, std::shared_ptr<ComponentTypeInfo>> typeInfoMap;
+    std::map<std::string, std::shared_ptr<ComponentTypeInfo>> registeredTypeInfo;
 };
 
 #include "ComponentFactory.inl"

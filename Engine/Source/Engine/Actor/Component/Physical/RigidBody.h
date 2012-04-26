@@ -9,7 +9,6 @@ class btCollisionShape;
 class btRigidBody;
 
 class Transform;
-class Mesh;
 
 class RigidBody :
             public PhysicalComponent {
@@ -38,6 +37,8 @@ private:
     ComponentAttribute<std::string> collisionShape;
 
     ComponentDependency<Transform> transform;
+
+    Physics* physics;
 
     btCollisionShape* shape;
     btRigidBody* rigidBody;

@@ -5,20 +5,23 @@
 ComponentTypeInfo::ComponentTypeInfo(const std::string& typeName, const ComponentTypeInfo* superTypeInfo) :
         typeName(typeName),
         superTypeInfo(superTypeInfo),
-        family(superTypeInfo->getFamily()) {
+        family(superTypeInfo->getFamily()),
+        abstractFlag(true) {
 }
 
 ComponentTypeInfo::ComponentTypeInfo(const std::string& typeName, const ComponentTypeInfo* superTypeInfo, const ComponentConstructor& constructor) :
         typeName(typeName),
         superTypeInfo(superTypeInfo),
         family(superTypeInfo->getFamily()),
-        constructor(constructor) {
+        constructor(constructor),
+        abstractFlag(false) {
 }
 
 ComponentTypeInfo::ComponentTypeInfo(const std::string& typeName, ComponentFamily::Enum family) :
         typeName(typeName),
         superTypeInfo(nullptr),
-        family(family) {
+        family(family),
+        abstractFlag(true) {
 }
 
 Component* ComponentTypeInfo::createComponent() {
@@ -47,10 +50,6 @@ const std::string ComponentTypeInfo::getFullTypeName() const {
     return ss.str();
 }
 
-ComponentFamily::Enum ComponentTypeInfo::getFamily() const {
-    return family;
-}
-
 const std::vector<std::string> ComponentTypeInfo::getImplementedTypeNames() const {
     std::vector<std::string> implementedTypeNames;
 
@@ -60,4 +59,12 @@ const std::vector<std::string> ComponentTypeInfo::getImplementedTypeNames() cons
 
     implementedTypeNames.push_back(typeName);
     return implementedTypeNames;
+}
+
+ComponentFamily::Enum ComponentTypeInfo::getFamily() const {
+    return family;
+}
+
+bool ComponentTypeInfo::isAbstract() const {
+    return abstractFlag;
 }

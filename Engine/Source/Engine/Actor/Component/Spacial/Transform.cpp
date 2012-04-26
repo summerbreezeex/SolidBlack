@@ -111,9 +111,7 @@ void Transform::setOrientation(const Ogre::Quaternion& orientation) {
 
 Ogre::Quaternion Transform::interpolate(const Ogre::Quaternion& a, const Ogre::Quaternion& b, Ogre::Real delta) {
     Ogre::Real w1, w2;
-
     Ogre::Real dotProduct = a.Dot(b);
-
     Ogre::Quaternion b1;
 
     if (dotProduct < 0.0f) {
@@ -125,11 +123,11 @@ Ogre::Quaternion Transform::interpolate(const Ogre::Quaternion& a, const Ogre::Q
     dotProduct = a.Dot(b1);
 
     Ogre::Real theta = (Ogre::Real)acos(dotProduct);
-    Ogre::Real sindoubleheta = (Ogre::Real)sin(theta);
+    Ogre::Real sinTheta = (Ogre::Real)sin(theta);
 
-    if (sindoubleheta > 0.01f) {
-        w1 = Ogre::Math::Sin((1.0f - delta) * theta) / sindoubleheta;
-        w2 = Ogre::Math::Sin(delta * theta) / sindoubleheta;
+    if (sinTheta > 0.01f) {
+        w1 = Ogre::Math::Sin((1.0f - delta) * theta) / sinTheta;
+        w2 = Ogre::Math::Sin(delta * theta) / sinTheta;
     } else {
         w1 = 1.0f - delta;
         w2 = delta;

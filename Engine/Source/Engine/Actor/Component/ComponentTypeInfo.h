@@ -25,8 +25,11 @@ public:
 
     const std::string& getTypeName() const;
     const std::string getFullTypeName() const;
-    ComponentFamily::Enum getFamily() const;
     const std::vector<std::string> getImplementedTypeNames() const;
+
+    ComponentFamily::Enum getFamily() const;
+    
+    bool isAbstract() const;
 
 private:
     std::string typeName;
@@ -34,12 +37,12 @@ private:
     
     ComponentFamily::Enum family;
     ComponentConstructor constructor;
+
+    bool abstractFlag;
 };
 
 template <class T>
 const std::string getComponentTypeName() {
     std::string typeName(typeid(T).name());
-    typeName = typeName.substr(6, typeName.length() - 1);
-
-    return typeName;
+    return typeName.substr(6, typeName.length() - 1);
 }

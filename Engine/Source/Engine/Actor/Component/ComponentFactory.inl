@@ -14,7 +14,7 @@ void ComponentFactory::registerBaseComponent(ComponentFamily::Enum family) {
     throwIfRegistered(typeName);
     
     auto typeInfo = std::make_shared<ComponentTypeInfo>(typeName, family);
-    typeInfoMap[typeName] = typeInfo;
+    registeredTypeInfo[typeName] = typeInfo;
     
     logInfo("Registered base type '" + typeInfo->getFullTypeName() + "'");
 }
@@ -27,11 +27,11 @@ void ComponentFactory::registerAbstractComponent() {
     throwIfRegistered(typeName);
     throwIfNotRegistered(superTypeName);
 
-    auto superTypeInfo = typeInfoMap[superTypeName].get();
+    auto superTypeInfo = registeredTypeInfo[superTypeName].get();
     auto typeInfo = std::make_shared<ComponentTypeInfo>(typeName, superTypeInfo);
-    typeInfoMap[typeName] = typeInfo;
+    registeredTypeInfo[typeName] = typeInfo;
 
-    logInfo("Registered type '" + typeInfo->getFullTypeName() + "'");
+    logInfo("Registered abstract type '" + typeInfo->getFullTypeName() + "'");
 }
 
 template <class ComponentType, class SuperType>
@@ -42,9 +42,9 @@ void ComponentFactory::registerComponent() {
     throwIfRegistered(typeName);
     throwIfNotRegistered(superTypeName);
 
-    auto superTypeInfo = typeInfoMap[superTypeName].get();
+    auto superTypeInfo = registeredTypeInfo[superTypeName].get();
     auto typeInfo = std::make_shared<ComponentTypeInfo>(typeName, superTypeInfo, [this] { return new ComponentType(this); });
-    typeInfoMap[typeName] = typeInfo;
+    registeredTypeInfo[typeName] = typeInfo;
 
     logInfo("Registered type '" + typeInfo->getFullTypeName() + "'");
 }

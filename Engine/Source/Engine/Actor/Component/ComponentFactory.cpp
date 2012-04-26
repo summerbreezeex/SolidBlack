@@ -13,26 +13,27 @@ Scene* ComponentFactory::getScene() {
 }
 
 Component* ComponentFactory::createComponent(const std::string& typeName) {
-    auto it = typeInfoMap.find(typeName);
-    if (it == typeInfoMap.end()) {
-        throw std::runtime_error("No registered component type '" + typeName + "'");
+    auto typeInfo = getTypeInfo(typeName);
+    if (typeInfo->isAbstract()) {
+        throw std::runtime_error("Cannot create instance of abstract component type '" + typeName + "'");
     }
 
-    return (*it).second->createComponent();
+    return typeInfo->createComponent();
 }
 
 ComponentTypeInfo* ComponentFactory::getTypeInfo(const std::string& typeName) {
-    return typeInfoMap[typeName].get();
+    throwIfNotRegistered(typeName);
+    return registeredTypeInfo[typeName].get();
 }
 
 void ComponentFactory::throwIfRegistered(const std::string& typeName) {
-    if (typeInfoMap.find(typeName) != typeInfoMap.end()) {
+    if (registeredTypeInfo.find(typeName) != registeredTypeInfo.end()) {
         throw std::runtime_error("Component type '" + typeName + "' is already registered");
     }
 }
 
 void ComponentFactory::throwIfNotRegistered(const std::string& typeName) {
-    if (typeInfoMap.find(typeName) == typeInfoMap.end()) {
+    if (registeredTypeInfo.find(typeName) == registeredTypeInfo.end()) {
         throw std::runtime_error("Component type '" + typeName + "' is not registered");
     }
 }

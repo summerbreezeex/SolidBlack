@@ -57,7 +57,7 @@ void ObserverLogic::debugAction2() {
         actor->addComponent(mesh);
 
         Component* rigidBody = factory->createComponent("RigidBody");
-        rigidBody->setAttributeValue("mass", 100.0);
+        rigidBody->setAttributeValue("mass", 1000.0);
         rigidBody->setAttributeValue("linearVelocity", observerCameraComponent->getDirection() * 10.0);
         rigidBody->setAttributeValue("collisionShape", std::string("Box"));
         actor->addComponent(rigidBody);

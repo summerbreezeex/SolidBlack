@@ -6,10 +6,10 @@
 
 Component::Component(ComponentFactory* factory) :
         Logged("Component"),
-        factory(factory),
         actor(nullptr),
         scene(nullptr),
-        typeInfo(nullptr), // Set by ComponentFactory after constructor is invoked.
+        typeInfo(nullptr), // Set by ComponentTypeInfo when constructing component.
+        factory(factory),
         validFlag(true) {
 }
 
@@ -63,14 +63,8 @@ const ComponentTypeInfo* Component::getTypeInfo() const {
     return typeInfo;
 }
 
-const std::vector<std::string> Component::getAttributeNames() const {
-    std::vector<std::string> attributeNames;
-
-    foreach (attributePair, attributes) {
-        attributeNames.push_back((*attributePair).first);
-    }
-
-    return attributeNames;
+bool Component::isValid() const {
+    return validFlag;
 }
 
 ComponentAttributeBase* Component::getAttribute(const std::string& name) {
@@ -79,7 +73,7 @@ ComponentAttributeBase* Component::getAttribute(const std::string& name) {
     if (it != attributes.end()) {
         return (*it).second;
     } else {
-        return 0;
+        return nullptr;
     }
 }
 
@@ -89,22 +83,28 @@ const ComponentAttributeBase* Component::getAttribute(const std::string& name) c
     if (it != attributes.end()) {
         return (*it).second;
     } else {
-        return 0;
+        return nullptr;
     }
 }
 
-const std::vector<ComponentAttributeBase*> Component::getAttributes() const {
-    std::vector<ComponentAttributeBase*> resultAttributes;
+const std::vector<ComponentAttributeBase*> Component::getAttributes() {
+    std::vector<ComponentAttributeBase*> resultingAttributes;
 
     foreach (attributePair, attributes) {
-        resultAttributes.push_back((*attributePair).second);
+        resultingAttributes.push_back((*attributePair).second);
     }
 
-    return resultAttributes;
+    return resultingAttributes;
 }
 
-bool Component::isValid() const {
-    return validFlag;
+const std::vector<const ComponentAttributeBase*> Component::getAttributes() const {
+    std::vector<const ComponentAttributeBase*> resultingAttributes;
+
+    foreach (attributePair, attributes) {
+        resultingAttributes.push_back((*attributePair).second);
+    }
+
+    return resultingAttributes;
 }
 
 void Component::addAttribute(ComponentAttributeBase* attribute) {
@@ -122,19 +122,19 @@ ComponentFactory* Component::getFactory() {
 void Component::resolveDependencies() {
     foreach (dependency, dependencies) {
         auto typeName = (*dependency)->getTypeName();
-
-        Component* component = actor->findComponentOfType(typeName);
-        (*dependency)->setComponent(component);
-
+        auto component = actor->findComponentOfType(typeName);
+        
         if (!component) {
             validFlag = false;
             logError("Component type '" + typeInfo->getTypeName() + "' in actor '" + actor->getUniqueName() + "' requires component of type '" + typeName + "'");
         }
+
+        (*dependency)->resolve(component);
     }
 }
 
 void Component::unresolveDependencies() {
     foreach (dependency, dependencies) {
-        (*dependency)->setComponent(nullptr);
+        (*dependency)->unresolve();
     }
 }

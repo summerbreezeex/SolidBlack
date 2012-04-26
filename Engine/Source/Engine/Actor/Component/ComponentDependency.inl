@@ -1,36 +1,41 @@
 #pragma once
 
-template <typename T>
-ComponentDependency<T>::ComponentDependency() :
+template <typename ComponentType>
+ComponentDependency<ComponentType>::ComponentDependency() :
         component(nullptr) {
 }
 
-template <typename T>
-void ComponentDependency<T>::setComponent(Component* component) {
-    this->component = (T*)component;
+template <typename ComponentType>
+void ComponentDependency<ComponentType>::resolve(Component* component) {
+    this->component = (ComponentType*)component;
 }
 
-template <typename T>
-T* ComponentDependency<T>::getComponent() {
-    return (T*)component;
+template <typename ComponentType>
+void ComponentDependency<ComponentType>::unresolve() {
+    this->component = nullptr;
 }
 
-template <typename T>
-const T* ComponentDependency<T>::getComponent() const {
-    return (T*)component;
+template <typename ComponentType>
+const std::string ComponentDependency<ComponentType>::getTypeName() const {
+    return getComponentTypeName<ComponentType>();
 }
 
-template <typename T>
-Component* ComponentDependency<T>::getBaseComponent() {
+template <typename ComponentType>
+ComponentType* ComponentDependency<ComponentType>::getComponent() {
+    return (ComponentType*)component;
+}
+
+template <typename ComponentType>
+const ComponentType* ComponentDependency<ComponentType>::getComponent() const {
+    return (ComponentType*)component;
+}
+
+template <typename ComponentType>
+Component* ComponentDependency<ComponentType>::getBaseComponent() {
     return component;
 }
 
-template <typename T>
-const std::string ComponentDependency<T>::getTypeName() const {
-    return getComponentTypeName<T>();
-}
-
-template <typename T>
-ComponentDependency<T>::operator bool() const {
+template <typename ComponentType>
+ComponentDependency<ComponentType>::operator bool() const {
     return component != nullptr;
 }
