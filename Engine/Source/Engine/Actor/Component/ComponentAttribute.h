@@ -28,6 +28,7 @@ public:
     void serializeToJson(Json::Value* jsonValue) const;
     void deserializeFromJson(const Json::Value& jsonValue);
 
+    AttributeType& getValue();
     const AttributeType& getValue() const;
     void setValue(const AttributeType& value);
 

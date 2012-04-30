@@ -7,6 +7,11 @@ ComponentAttribute<AttributeType>::ComponentAttribute(const std::string& name, c
 }
 
 template <typename AttributeType>
+AttributeType& ComponentAttribute<AttributeType>::getValue() {
+    return value;
+}
+
+template <typename AttributeType>
 const AttributeType& ComponentAttribute<AttributeType>::getValue() const {
     return value;
 }

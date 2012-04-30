@@ -56,26 +56,28 @@ Scene::~Scene() {
 void Scene::saveActorsToFile(const std::string& fileName) {
     logInfo("Saving actors to '" + fileName + "'");
 
-    Json::Value jsonValue;
+    Json::Value sceneValue;
 
     foreach (actorPair, actors) {
-        Json::Value actorRoot;
-        ActorJsonSerializer::serialize((*actorPair).second.get(), &actorRoot);
+        auto actor = (*actorPair).second.get();
+        Json::Value actorValue;        
 
-        jsonValue["actors"].append(actorRoot);
+        ActorJsonSerializer::serialize(actor, &actorValue);
+
+        sceneValue["actors"].append(actorValue);
     }
 
-    JsonUtils::writeValueToFile(jsonValue, fileName);
+    JsonUtils::writeValueToFile(sceneValue, fileName);
 }
 
 void Scene::loadActorsFromFile(const std::string& fileName) {
     logInfo("Loading actors from '" + fileName + "'");
     removeAllActors();
 
-    Json::Value jsonValue;
-    JsonUtils::readValueFromFile(fileName, &jsonValue);
+    Json::Value sceneValue;
+    JsonUtils::readValueFromFile(fileName, &sceneValue);
 
-    Json::Value actors = jsonValue["actors"];
+    Json::Value actors = sceneValue["actors"];
     for (int i = 0; i < (int)actors.size(); ++i) {
         auto actor = ActorJsonSerializer::deserialize(getComponentFactory(), actors[i]);
         addActor(actor);

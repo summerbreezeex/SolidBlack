@@ -32,7 +32,7 @@ const ComponentType* ComponentDependency<ComponentType>::getComponent() const {
 
 template <typename ComponentType>
 Component* ComponentDependency<ComponentType>::getBaseComponent() {
-    return component;
+    return (Component*)component;
 }
 
 template <typename ComponentType>

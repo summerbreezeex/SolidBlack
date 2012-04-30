@@ -39,12 +39,35 @@ void CoreComponentModule::registerCode(ScriptInterpreter* interpreter) {
     using namespace luabind;
 
     module(interpreter->getLuaState()) [
-        class_<Script, Component>("ScriptWrapper"),
+        // LogicalComponent
+        class_<LogicalComponent, Component>("LogicalComponent"),
 
-        class_<Transform, Component>("Transform")
+        // ScriptWrapper
+        class_<Script, LogicalComponent>("ScriptWrapper"),
+
+        // SpacialComponent
+        class_<SpacialComponent, Component>("SpacialComponent"),
+
+        // Transform
+        class_<Transform, SpacialComponent>("Transform")
             .def("rotate", (void(Transform::*)(const Ogre::Vector3&, const Ogre::Radian&))&Transform::rotate),
         class_<ComponentDependency<Transform>, ComponentDependencyBase>("TransformDependency")
+            .def(constructor<>()),
+
+        // VisualComponent
+        class_<VisualComponent, Component>("VisualComponent"),
+
+        // Light
+        class_<Light, VisualComponent>("Light")
+            .property("diffuseColour", (Ogre::ColourValue&(Light::*)())&Light::getDiffuseColour, &Light::setDiffuseColour)
+            .property("specularColour", (Ogre::ColourValue&(Light::*)())&Light::getSpecularColour, &Light::setSpecularColour)
+            .property("enabled", &Light::isEnabled, &Light::setEnabled),
+        class_<ComponentDependency<Light>, ComponentDependencyBase>("LightDependency")
+            .def(constructor<>()),
+
+        // PointLight
+        class_<PointLight, Light>("PointLight"),
+        class_<ComponentDependency<PointLight>, ComponentDependencyBase>("PointLightDependency")
             .def(constructor<>())
-            .property("component", &ComponentDependency<Transform>::getBaseComponent)
     ];
 }

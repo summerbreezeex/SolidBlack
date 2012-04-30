@@ -10,6 +10,8 @@ public:
     virtual void unresolve() = 0;
 
     virtual const std::string getTypeName() const = 0;
+
+    virtual Component* getBaseComponent() = 0;
 };
 
 template <typename ComponentType>
